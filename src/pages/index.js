@@ -26,7 +26,7 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch('https://dummyjson.com/products/category/automotive')
+  const products = await fetch('https://fakestoreapi.com/products')
   .then((res) => res.json())
   //.then((json) => console.log(json));
 
@@ -37,3 +37,5 @@ export async function getServerSideProps(context) {
   },
  }
 }
+
+//https://dummyjson.com/products/category/automotive
