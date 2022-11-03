@@ -27,7 +27,7 @@ function Product({id, title, price, description, category, image}) {
       {Array(rating)
        .fill()
        .map((_,i) => (
-         <StarIcon className='h-5 text-yellow-500' />
+         <StarIcon key={i} className='h-5 text-yellow-500' />
        ))}
 
      </div>
@@ -47,10 +47,12 @@ function Product({id, title, price, description, category, image}) {
         </div>
      )}
 
-     <button className='mt-auto button text-white'>Add to Basket</button>
+     <button className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>
 
     </div>
   )
 }
 
 export default Product
+
+//flex-1 bg-tribal bg-no-repeat bg-cover bg-center bg-fixed
