@@ -70,12 +70,12 @@ function Header() {
           <p className='link'>Collaborations</p>
           <p className='link'>Rewards</p>
           <p className='link'>Today's Deals</p>
-          <p className='link hidden lg:inline-flex'>Fasteners</p>
-          <p className='link hidden lg:inline-flex'>Reinforced Products</p>
-          <p className='link hidden lg:inline-flex'>Trusses</p>
-          <p className='link hidden lg:inline-flex'>Fencing</p>
-          <p className='link hidden lg:inline-flex'>Brick Layering</p>
-          <p className='link hidden lg:inline-flex'>Interior</p>
+          <p className='link hidden lg:inline-flex'>Construction</p>
+          <p className='link hidden lg:inline-flex'>Government Info</p>
+          <p className='link hidden lg:inline-flex'>Motor Parts</p>
+          <p className='link hidden lg:inline-flex'>Sole Traders</p>
+          <p className='link hidden lg:inline-flex'>Contractors/Service Providers</p>
+          <p className='link hidden lg:inline-flex'>Car Dealers</p>
         </div>
     </header>
 
