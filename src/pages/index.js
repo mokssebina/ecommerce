@@ -40,7 +40,7 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch('https://fakestoreapi.com/products')
+  const products = await fetch('https://raw.githubusercontent.com/mokssebina/MMNT/master/products')
   .then((res) => res.json())
   //.then((json) => console.log(json));
 
