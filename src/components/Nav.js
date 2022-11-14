@@ -1,7 +1,7 @@
 import React from 'react'
 import XIcon from '@heroicons/react/outline/XIcon'
 
-function Nav({isOpen, closeNav}) {
+function Nav({isOpen, goHome, closeNav, pickTools, pickFoundation, pickAdhesive, pickFencing, pickGeyser, pickPaint}) {
     
   return (
     <>    
@@ -23,28 +23,32 @@ function Nav({isOpen, closeNav}) {
 
       </div>  
 
-      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Fasteners</p>
+      <div onClick={goHome} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Home</p>
       </div>
 
-      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Reinforced Products</p>
+      <div onClick={pickTools} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Tools</p>
       </div>
 
-      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Trusses</p>
+      <div onClick={pickFoundation} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Foundation</p>
       </div>
 
-      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Fences</p>
+      <div onClick={pickAdhesive} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Adhesives</p>
       </div>
 
-      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Brick Layering</p>
+      <div onClick={pickFencing} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Fencing</p>
       </div>
 
-      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Interior</p>
+      <div onClick={pickGeyser} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Geysers</p>
+      </div>
+
+      <div onClick={pickPaint} className='p-3 hover:bg-gray-800 cursor-pointer'>
+        <p className='text-white'>Paint</p>
       </div>
 
       <hr className=' border text-white' />

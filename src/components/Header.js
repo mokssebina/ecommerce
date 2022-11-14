@@ -5,13 +5,13 @@ import  SearchIcon from "@heroicons/react/outline/SearchIcon"
 import MenuIcon from "@heroicons/react/outline/MenuIcon"
 import ShoppingCartIcon from "@heroicons/react/outline/ShoppingCartIcon"
 import Nav from './Nav';
+import { signIn, signOut, useSession } from 'next-auth/client'
 
-function Header() {
+function Header({goHome, menu, openMenu, closeNav, pickTools, pickFoundation, pickAdhesive, pickFencing, pickGeyser, pickPaint}) {
 
   const [isOpen, setIsOpen] = useState(false)
-
+/*
   const openNav = () => {
-    setIsOpen(true)
     document.body.style.overflow = 'hidden';
   }
 
@@ -19,15 +19,26 @@ function Header() {
     setIsOpen(false)
     document.body.style.overflow = 'auto';
   }
-
+*/
   return (
     <>
     {/*Navbar*/}
-    <Nav isOpen={isOpen} closeNav={closeNav} />
+    <Nav
+     isOpen={menu? false: true}
+     closeNav={closeNav} 
+     goHome={goHome}
+     pickTools={pickTools} 
+     pickFoundation={pickFoundation} 
+     pickAdhesive={pickAdhesive} 
+     pickFencing={pickFencing} 
+     pickGeyser={pickGeyser} 
+     pickPaint={pickPaint}
+    />
+
     <header className='relative'>
         {/*Top div*/}
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
-            <div className='mt-2 flex items-center flex-grow sm:flex-grow-0'>
+            <div onClick={goHome} className='mt-2 flex items-center flex-grow sm:flex-grow-0'>
               <Image 
                 src="https://raw.githubusercontent.com/mokssebina/MMNT/master/jobber-logo.png"
                 width={150}
@@ -63,7 +74,7 @@ function Header() {
 
         {/*Bottom div*/}
         <div className='flex items-center space-x-3 p-2 pl-6 text-white bg-amazon_blue-light text-sm'>
-          <p onClick={openNav} className='link flex items-center'>
+          <p onClick={openMenu} className='link flex items-center'>
            <MenuIcon className='h-6 mr-1' />
            All
           </p>  
