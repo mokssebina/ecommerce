@@ -9,6 +9,7 @@ import RealEstateHeader from "../../components/RealEstateHeader";
 import Footer from "../../components/Footer";
 import { baseUrl, fetchApi } from "../../utils/fetchApi";
 import ImageScrollbar from "../../components/ImageScrollbar";
+/*---*/
 
 const PropertyDetails = ({
   propertyDetails: {
