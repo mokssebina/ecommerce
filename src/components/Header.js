@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Image from "next/image";
+import Link from "next/link";
 //import { MenuIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline"
 import  SearchIcon from "@heroicons/react/outline/SearchIcon"
 import MenuIcon from "@heroicons/react/outline/MenuIcon"
@@ -86,7 +87,9 @@ function Header({goHome, menu, openMenu, closeNav, pickTools, pickFoundation, pi
           <p className='link hidden lg:inline-flex'>Motor Parts</p>
           <p className='link hidden lg:inline-flex'>Sole Traders</p>
           <p className='link hidden lg:inline-flex'>Contractors/Service Providers</p>
-          <p className='link hidden lg:inline-flex'>Car Dealers</p>
+          <Link href={"/real-estate"}>
+            <p className='link hidden lg:inline-flex'>Real Estate</p>
+          </Link>
         </div>
     </header>
 

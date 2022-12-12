@@ -5,6 +5,7 @@ import Banner from "../components/Banner";
 import ProductFeed from "../components/ProductFeed";
 import Footer from "../components/Footer";
 import FilterFeed from '../components/FilterFeed';
+import { baseUrl, fetchApi } from "../utils/fetchApi";
 
 
 export default function Home({ products }) {
@@ -108,10 +109,15 @@ export async function getServerSideProps(context) {
   .then((res) => res.json())
   //.then((json) => console.log(json));
 
-  //console.log("products",products)
+  //console.log("products: ",products)
+
+  //const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale`)
+
+  //console.log("properties: ",propertyForSale)
 
   return { props: {
-    products,
+    products
+    //propertiesForSale: propertyForSale?.hits,
   },
  }
 }

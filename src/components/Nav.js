@@ -18,7 +18,7 @@ function Nav({isOpen, goHome, closeNav, pickTools, pickFoundation, pickAdhesive,
        </div>
 
        <div className='w-2/12 p-5'>
-        <XIcon onClick={closeNav} className='h-5 text-white cursor-pointer hover:border rounded-sm' />
+        <XIcon onClick={closeNav} className='absolute right-1 h-5 text-white cursor-pointer hover:border rounded-sm' />
        </div>
 
       </div>  
