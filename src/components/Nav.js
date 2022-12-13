@@ -54,7 +54,9 @@ function Nav({isOpen, goHome, closeNav, pickTools, pickFoundation, pickAdhesive,
       <hr className=' border text-white' />
 
       <div className='p-3 hover:bg-gray-800 cursor-pointer'>
-        <p className='text-white'>Motor Parts</p>
+        <Link href={"/real-estate"}>
+          <p className='text-white'>Real Estate</p>
+        </Link>
       </div>
 
       <div className='p-3 hover:bg-gray-800 cursor-pointer'>
