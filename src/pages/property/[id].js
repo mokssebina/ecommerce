@@ -8,7 +8,7 @@ import millify from "millify";
 import RealEstateHeader from "../../components/RealEstateHeader";
 import Footer from "../../components/Footer";
 import { baseUrl, fetchApi } from "../../utils/fetchApi";
-import ImageScrollbar from "../../components/ImageScrollbar";
+import ImageScrollBar from "../../components/ImageScrollBar";
 
 const PropertyDetails = ({
   propertyDetails: {
@@ -52,7 +52,7 @@ const PropertyDetails = ({
     <div className="h-full w-full">
       <RealEstateHeader menu={menu} closeNav={closeNav} openMenu={openNav} />
       <Box maxWidth="1000px" margin="auto" p="4">
-        {photos && <ImageScrollbar data={photos} />}
+        {photos && <ImageScrollBar data={photos} />}
         <Box w="full" p="6">
           <Flex paddingTop="2" alignItems="center">
             <Box paddingRight="3" color="green.400">
