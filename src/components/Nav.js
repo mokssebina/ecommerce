@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link";
 import XIcon from '@heroicons/react/outline/XIcon'
 
 function Nav({isOpen, goHome, closeNav, pickTools, pickFoundation, pickAdhesive, pickFencing, pickGeyser, pickPaint}) {
