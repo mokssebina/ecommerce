@@ -71,7 +71,6 @@ export default function Properties({ propertiesForSale, propertiesForRent }) {
 
   return (
     <div className="h-full w-full mx-auto">
-      <RealEstateHeader menu={menu} closeNav={closeNav} openMenu={openNav} />
       <Box>
         <Banner
           imageUrl="https://bayut-production.s3.eu-central-1.amazonaws.com/image/145426814/33973352624c48628e41f2ec460faba4"
@@ -105,8 +104,6 @@ export default function Properties({ propertiesForSale, propertiesForRent }) {
         </Flex>
       </Box>
       
-      <Footer goToTop={goToTop} />
-
     </div>
   );
 }

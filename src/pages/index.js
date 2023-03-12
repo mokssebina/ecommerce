@@ -1,14 +1,26 @@
 import React, {useState} from 'react';
 import Head from "next/head";
-import Header from "../components/Header";
+import Header from "../components/AppLayout";
 import Banner from "../components/Banner";
 import ProductFeed from "../components/ProductFeed";
 import Footer from "../components/Footer";
 import FilterFeed from '../components/FilterFeed';
 import { baseUrl, fetchApi } from "../utils/fetchApi";
+import { useSession } from 'next-auth/client';
+
 
 
 export default function Home({ products }) {
+  /*
+  const [session] = useSession();
+
+  if(!session) {
+    console.log("There is no ongoing session")
+  }
+  else {
+    console.log("There is a session")
+  }
+  */
 
   const goToTop = () => {
     window.scrollTo({
@@ -69,12 +81,12 @@ export default function Home({ products }) {
 
 
   return (
-    <div className="h-full w-full bg-backdrop-image">
+    <div className="h-full w-full overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
       <Head>
         <title>Jobber</title>
       </Head>
 
-      {/* Header */}
+      {/* Header 
       <Header 
        goHome={goHome}
        menu={menu}
@@ -85,9 +97,10 @@ export default function Home({ products }) {
        pickAdhesive={pickAdhesive}
        pickFencing={pickFencing}
        pickGeyser={pickGeyser}
-       pickPaint={pickPaint} />
+       pickPaint={pickPaint} />*/}
 
-      <main className="max-w-screen-2xl mx-auto" style={{backgroundColor: "rgba(209, 194, 184, 0.4)"}}>
+      <main className="relative w-full max-w-screen-2xl mx-auto" style={{backgroundColor: "rgba(209, 194, 184, 0.4)"}}>
+        
       {/*Banner*/}  
       <Banner />
 
@@ -99,7 +112,7 @@ export default function Home({ products }) {
 
       </main>
 
-      <Footer goToTop={goToTop} />
+      {/*<Footer goToTop={goToTop} />*/}
     </div>
   );
 }

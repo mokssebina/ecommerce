@@ -148,8 +148,6 @@ const PropertyDetails = ({
         </Box>
       </Box>
 
-      <Footer goToTop={goToTop} />
-
   </div>
   )
   

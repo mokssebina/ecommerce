@@ -10,7 +10,7 @@ function Nav({isOpen, goHome, closeNav, pickTools, pickFoundation, pickAdhesive,
     {isOpen && 
 
     <div>
-     <nav className='fixed bg-amazon_blue h-screen w-4/5 overflow-y-auto z-50'>
+     <nav className='fixed bg-amazon_blue h-screen sm:w-4/5 lg:w-2/5 overflow-y-auto z-50'>
 
       <div className='flex border-b mb-3'>
 
@@ -19,36 +19,36 @@ function Nav({isOpen, goHome, closeNav, pickTools, pickFoundation, pickAdhesive,
        </div>
 
        <div className='w-2/12 p-5'>
-        <XIcon onClick={closeNav} className='absolute right-1 h-5 text-white cursor-pointer hover:border rounded-sm' />
+        <XIcon className='absolute right-1 h-5 text-white cursor-pointer hover:border rounded-sm' />
        </div>
 
       </div>  
 
-      <div onClick={goHome} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Home</p>
       </div>
 
-      <div onClick={pickTools} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Tools</p>
       </div>
 
-      <div onClick={pickFoundation} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Foundation</p>
       </div>
 
-      <div onClick={pickAdhesive} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Adhesives</p>
       </div>
 
-      <div onClick={pickFencing} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Fencing</p>
       </div>
 
-      <div onClick={pickGeyser} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Geysers</p>
       </div>
 
-      <div onClick={pickPaint} className='p-3 hover:bg-gray-800 cursor-pointer'>
+      <div className='p-3 hover:bg-gray-800 cursor-pointer'>
         <p className='text-white'>Paint</p>
       </div>
 

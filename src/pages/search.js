@@ -37,7 +37,6 @@ const Search = ({ properties }) => {
 
   return (
     <div className="h-full w-full mx-auto">
-      <RealEstateHeader menu={menu} closeNav={closeNav} openMenu={openNav} />
       <Box>
         <Flex
           onClick={() => setSearchFilters(!searchFilters)}
@@ -93,8 +92,6 @@ const Search = ({ properties }) => {
           </Flex>
         )}
       </Box>
-
-      <Footer goToTop={goToTop} />
 
     </div>
   );

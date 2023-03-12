@@ -31,8 +31,8 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
   });
 */
   return (
-    <CacheProvider value={emotionCache}>
-     <AuthContextProvider>
+    <AuthContextProvider>
+     <CacheProvider value={emotionCache}>
       <Head>
       <link
         rel="stylesheet"
@@ -52,10 +52,18 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
         </PageLayout>
        </Provider>
       </ThemeProvider>
-     </AuthContextProvider>  
-    </CacheProvider> 
+     </CacheProvider> 
+    </AuthContextProvider>  
 
   )
 }
 
 export default MyApp
+
+
+<div className='w-9/12 h-6'>
+                     <input type={'file'} accept='image/png, image/jpeg' className='w-full h-full m-2 bg-gray-100' />   
+                    </div>
+                    <div className='w-2/12 h-6'>
+                     <input placeholder='Units' type={'number'} className='w-full h-full bg-gray-100' />   
+                    </div>

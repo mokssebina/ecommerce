@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Footer({goToTop}) {
   return (
-    <div className='w-full absolute z-50'>
+    <div className=' absolute w-full bottom-0 z-30'>
      <div onClick={goToTop} className='bg-gray-400 h-10 text-center p-2 cursor-pointer hover:bg-gray-300'>
       <p className=' text-gray-900'>Back to top</p>
      </div>   

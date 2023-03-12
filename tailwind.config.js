@@ -14,6 +14,9 @@ module.exports = {
         },
         nude: {
           lightbrown: "rgba(209, 194, 184, 0.4)"
+        },
+        dark: {
+          disabled: "rgba(0, 0, 0, 0.85)"
         }
       },
       backgroundImage: {
