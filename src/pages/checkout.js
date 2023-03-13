@@ -17,6 +17,7 @@ function Checkout() {
   const total = useSelector(selectTotal)
 
   const { user } = useAuth()
+
   /*const [session] = useSession();
 
   if(!session) {
@@ -25,7 +26,6 @@ function Checkout() {
   */
 
   return (
-    <ProtectedRoute>
       <div className='w-full h-screen bg-gray-50 pt-5 px-4 overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden'>
 
         <main className='lg:flex max-w-screen-2xl mx-auto bg-white'>
@@ -71,7 +71,6 @@ function Checkout() {
           }
         </main>
       </div>
-    </ProtectedRoute>
   )
 }
 
