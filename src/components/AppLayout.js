@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 //import { MenuIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline"
@@ -13,7 +13,7 @@ import { signIn, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
-import { useAuth } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import { REAL_ESTATE, SELLER_PANEL } from '../utils/constant/routesConstants';
 import Footer from './Footer';
 
@@ -23,7 +23,7 @@ function AppLayout({ children }) {
 
   const [session] = useSession();
 
-  const { user } = useAuth()
+  const { user } = useContext(AuthContext)
   const router = useRouter();
   const items = useSelector(selectItems);
   

@@ -1,28 +1,43 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { LOGIN } from "../../utils/constant/routesConstants";
+import React, { useEffect, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { LOGIN, HOME } from "../../utils/constant/routesConstants";
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-const ProtectedRoute = ({ children }) => {
-	const router = useRouter();
-	const { user } = useAuth();
+export const withPublic = (Component) => {
+	return function withPublic(props) {
+          const router = useRouter();
+          const { auth, user } = useContext(AuthContext);
+          
+          if (user) {
+            router.replace(HOME);
 
-	useEffect(() => {
+            return <h1>Loading...</h1>
 
-     const unsubscribe = () => {
-        if (user) {
-            console.log("user exist")  
-           } else {
-            router.push(LOGIN);
-           }
-     }   
+          }
+     
+          return <Component auth={auth} {...props}/>;
 
-     return () => unsubscribe
-	}, [router, user]);
+     }
 
-	return <div>{user ? children : <CircularProgress/>}</div>;
 };
 
-export default ProtectedRoute;
+export const withProtected = (Component) => {
+	return function withProtected(props) {
+          const router = useRouter();
+          const { auth, user } = useContext(AuthContext);
+          
+          if (!user) {
+               router.replace(LOGIN);
+   
+               return <h1>Loading...</h1>
+   
+          }
+     
+          return <Component auth={auth} {...props}/>;
+
+     }
+
+};
+

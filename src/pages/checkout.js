@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Header from '../components/AppLayout'
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { selectItems, selectTotal } from '../slices/basketSlice';
 import CheckoutProduct from '../components/CheckoutProduct';
-import { useAuth } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import Currency from 'react-currency-formatter';
 import Footer from '../components/Footer';
-import ProtectedRoute from '../components/protected-route';
+import { withProtected } from '../components/protected-route';
 
 
 function Checkout() {
@@ -16,7 +16,7 @@ function Checkout() {
   const items = useSelector(selectItems)
   const total = useSelector(selectTotal)
 
-  const { user } = useAuth()
+  const { user } = useContext(AuthContext)
 
   /*const [session] = useSession();
 
@@ -74,5 +74,5 @@ function Checkout() {
   )
 }
 
-export default Checkout
+export default withProtected(Checkout)
 

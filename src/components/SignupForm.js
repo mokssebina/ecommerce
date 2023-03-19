@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormInput } from "../components/form-components/FormInput";
 import SubmitButton from "../components/form-components/SubmitButton";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-hot-toast";
 import { signupSchema } from "../validation/signupValidation";
 import { useRouter } from "next/router";
-import { HOME, LOGIN } from "../utils/constant/routesConstants";
+//import { HOME, LOGIN } from "../utils/constant/routesConstants";
 import { onSnapshot, doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
@@ -17,8 +17,12 @@ function classNames(...classes) {
 
 function SignupForm() {
 
-    const { signUp, user } = useAuth();
-    const router = useRouter();
+    const { signUp, user } = useContext(AuthContext)
+
+    
+    const displayPicture = "";
+    const account = "customer";
+    const status = ""
 
     const methods = useForm({ mode: "onBlur", resolver: yupResolver(signupSchema) });
 
@@ -36,31 +40,12 @@ function SignupForm() {
       try {
         console.log("sign up started")
 
-        await signUp(data.email, data.password)
-        .then((userCredentials) => {
-            const payload = {
-                name: data.displayName,
-                email: data.email,
-                displayPicture: '',
-                account: "customer",
-                userId: userCredentials.user.uid,
-                status: null
-            }
-
-            console.log("payload: ",payload)
-
-            let docRef = doc(db, "users", `${userCredentials.user.uid}`);
-
-            const postRef = setDoc(docRef, payload)
-
-            console.log("Doc ID")
-            console.log("User is created: ",postRef)
-        });
+        await signUp(data.firstName, data.lastName, data.email, data.password, displayPicture, account, status)
 
         console.log("User is created")
+        console.log("user details: ",user)
   
         toast.success("Successfully signed up!", { id: toastId });
-        router.push(HOME);
          
       } catch (error) {
         toast.error(error.message, { id: toastId });
@@ -75,12 +60,21 @@ function SignupForm() {
            action=""
            className="w-11/12 mx-auto pb-12"
            onSubmit={handleSubmit(onSubmit)}>
+
             <FormInput
-             label="Your name"
-             name="displayName"
+             label="Your First Name"
+             name="firstName"
              type="text"
-             formOptions={signupSchema.fields.displayName}
-             errors={errors.displayName}
+             formOptions={signupSchema.fields.firstName}
+             errors={errors.firstName}
+            />
+
+            <FormInput
+             label="Your Last Name"
+             name="lastName"
+             type="text"
+             formOptions={signupSchema.fields.lastName}
+             errors={errors.lastName}
             />
 
              <FormInput

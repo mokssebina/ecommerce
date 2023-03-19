@@ -1,18 +1,18 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { UserIcon } from '@heroicons/react/outline'
+import React, { useState, useEffect, Fragment, useContext } from "react";
+import { UserIcon, FolderAddIcon } from '@heroicons/react/outline'
 import OrderItem from "../components/OrderItem";
 import AccountUpdate from "../components/AccountUpdate";
-import { useAuth } from "../context/AuthContext";
-import ProtectedRoute from "../components/protected-route";
+import { AuthContext } from "../context/AuthContext";
+import { withProtected } from "../components/protected-route";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 
-export default function Profile({ children }) {
+function Profile({ children }) {
   
   const [isOpen, setIsOpen] = useState(false)
 
-  const { user } = useAuth()
+  const { user } = useContext(AuthContext)
 
   const openModal = () => {
     setIsOpen(true)
@@ -24,8 +24,8 @@ export default function Profile({ children }) {
 
 
   return (
-     <ProtectedRoute>
-      <AccountUpdate isOpen={isOpen} Fragment={Fragment} closeModal={closeModal} />
+    <>
+     <AccountUpdate isOpen={isOpen} Fragment={Fragment} closeModal={closeModal} />
       <div className='w-full h-screen bg-white overflow-hidden'>
         
         <header className='fixed w-full shadow-md z-20 bg-white'>
@@ -35,7 +35,7 @@ export default function Profile({ children }) {
             <input placeholder='Search' className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-1 border-0' />
             </div> 
             <div className='w-3/12 p-2'>
-            
+             
             </div> 
           </div> 
           </div>  
@@ -74,8 +74,8 @@ export default function Profile({ children }) {
      <div onClick={openModal} className="fixed w-11 h-11 rounded-full left-3 bottom-3 bg-gray-300 cursor-pointer hover:bg-gray-400 shadow-md">
       <UserIcon className="w-5 h-5 mx-auto mt-3" />
      </div>
-    </ProtectedRoute> 
+    </> 
   );
 }
 
-
+export default withProtected(Profile)

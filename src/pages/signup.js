@@ -3,6 +3,7 @@ import { HOME, LOGIN } from "../utils/constant/routesConstants";
 import { Tab } from '@headlessui/react'
 import SignupForm from "../components/SignupForm";
 import MerchantSignupForm from "../components/MerchantSignupForm";
+import { withPublic } from "../components/protected-route";
 
 
 function classNames(...classes) {
@@ -77,4 +78,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default withPublic(Signup)

@@ -7,10 +7,11 @@ import Footer from "../components/Footer";
 import FilterFeed from '../components/FilterFeed';
 import { baseUrl, fetchApi } from "../utils/fetchApi";
 import { useSession } from 'next-auth/client';
+import { withPublic } from '../components/protected-route';
 
 
 
-export default function Home({ products }) {
+function Home({ products }) {
   /*
   const [session] = useSession();
 
@@ -139,3 +140,5 @@ export async function getServerSideProps(context) {
 //https://raw.githubusercontent.com/mokssebina/MMNT/master/products
 
 //https://dummyjson.com/products/category/automotive
+
+export default Home

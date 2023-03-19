@@ -1,21 +1,22 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { FormInput } from '../components/form-components/FormInput';
 import SubmitButton from '../components/form-components/SubmitButton';
-import { useAuth } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import { HOME, SIGN_UP } from '../utils/constant/routesConstants';
 import { loginSchema } from '../validation/loginValidation';
 import { toast } from "react-hot-toast";
+import { withPublic } from '../components/protected-route';
 
 
 
 function Login() {
 
 
-  const { logIn } = useAuth();
+  const { user, logIn } = useContext(AuthContext);
   const router = useRouter();  
 
   const methods = useForm({ mode: "onBlur", resolver: yupResolver(loginSchema) });
@@ -34,7 +35,7 @@ function Login() {
       
         await logIn(data.email, data.password);
         toast.success("Successfully logged in!", { id: toastId });
-        router.push(HOME);
+        await router.push(HOME);
 
     } catch (error) {
         toast.error(error.message, { id: toastId });
@@ -95,4 +96,4 @@ function Login() {
   )
 }
 
-export default Login
+export default withPublic(Login)

@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext} from 'react';
 import { getUserByUserId } from "../../services/firebase";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 
 export default function useUser() {
 
     const [activeUser, setActiveUser] = useState({});
-    const { user } = useAuth()
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
 

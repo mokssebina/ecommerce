@@ -1,10 +1,12 @@
-import React from 'react'
+import React,{ useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
 
+function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, setItem, image, 
+  setImage, units, setUnits, price, setPrice, category, setCategory, description, setDescription}) {
 
-function ListingsUpload({ isOpen, Fragment, createListing, closeModal}) {
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-30" onClose={closeModal}>
@@ -31,7 +33,7 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal}) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md h-80 transform overflow-hidden rounded-2xl bg-gray-50 pt-6 px-2 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md h-96 transform overflow-hidden rounded-2xl bg-gray-50 pt-6 px-2 text-left align-middle shadow-xl transition-all">
                   <div className='w-full h-6 flex px-2'>
                    <div className='w-10/12'>
                     <Dialog.Title
@@ -47,33 +49,40 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal}) {
                   </div>  
                   <div className="w-full h-64 mt-2 p-1">
 
-                   <div className='w-full h-14 flex'>
+                   <div className='w-full h-14 flex mb-1'>
                     <div className='w-9/12 pl-1 pr-2 text-xs font-semibold'>
                      <span>Image</span>  
-                     <input type={'file'} accept='image/png, image/jpeg' className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' />   
+                     <input type={'file'} accept='image/png, image/jpeg' className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' image={image} onChange={setImage} />   
                     </div>
                     <div className='w-3/12 px-1 text-xs font-semibold'>
                      <span>Units</span>  
-                     <input placeholder='Units' type={'number'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' />   
+                     <input placeholder='Units' type={'number'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={units} onChange={setUnits} />   
                     </div>
                    </div>  
 
-                   <div className='w-full h-14 flex mt-1 text-xs font-semibold'>
+                   <div className='w-full h-14 flex mt-1 text-xs font-semibold mb-1 p-1'>
                     <div className='w-9/12 pl-1 pr-2 text-xs font-semibold'>
                      <span>Item</span>  
-                     <input placeholder='Item' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' />   
+                     <input placeholder='Item' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={item} onChange={setItem} />   
                     </div>
                     <div className='w-3/12 px-1 text-xs font-semibold'>
                      <span>Price(BWP)</span>  
-                     <input placeholder='Price' type={'number'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' />   
+                     <input placeholder='Price' type={'number'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={price} onChange={setPrice} />   
                     </div>
                    </div>   
 
-                   <div className='w-full h-20 px-1 text-xs font-semibold mt-1'>
+                   <div className='w-full h-14 mt-1 text-xs font-semibold mb-1 p-1'>
+                    <div className='w-full pl-1 pr-2 text-xs font-semibold'>
+                     <span>Category</span>  
+                     <input placeholder='Category' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={category} onChange={setCategory} />   
+                    </div>
+                   </div> 
+
+                   <div className='w-full h-20 px-1 text-xs font-semibold mt-1 p-1'>
                      <span>Description</span>  
-                     <textarea placeholder='Describe the listing' type={'text'} className='w-full h-16 p-2 mt-1 bg-gray-200 rounded-md' />
+                     <textarea placeholder='Describe the listing' type={'text'} className='w-full h-16 p-2 mt-1 bg-gray-200 rounded-md' value={description} onChange={setDescription} />
                    </div>  
-                   <div className='w-full h-10 p-1'>
+                   <div className='w-full h-14 p-2'>
                     <button onClick={createListing} className='w-full h-full mt-2 rounded-md text-xs text-gray-50 bg-amazon_blue'>Create New Listing</button>
                    </div> 
                   </div>

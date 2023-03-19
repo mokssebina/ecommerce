@@ -7,6 +7,7 @@ import { baseUrl, fetchApi } from "../utils/fetchApi";
 import RealEstateHeader from "../components/RealEstateHeader";
 import Property from "../components/Property";
 import Footer from "../components/Footer";
+import { withPublic } from '../components/protected-route';
 
 
 const Banner = ({
@@ -48,7 +49,7 @@ const Banner = ({
   );
 };
 
-export default function Properties({ propertiesForSale, propertiesForRent }) {
+function Properties({ propertiesForSale, propertiesForRent }) {
 
   const [menu, setMenu] = useState(true)
 
@@ -123,3 +124,5 @@ export async function getStaticProps() {
     },
   };
 }
+
+export default withPublic(Properties)

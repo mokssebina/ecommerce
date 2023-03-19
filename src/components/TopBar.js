@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import {
   MenuIcon,
   UserIcon,
@@ -14,14 +14,15 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
 import { CHECKOUT, HOME, LOGIN, ACCOUNT } from "../utils/constant/routesConstants";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 function TopBar({ showNav, setShowNav }) {
 
     const items = useSelector(selectItems);
     const router = useRouter();
 
-    const { user, logOut } = useAuth()
+    const { user, logOut } = useContext(AuthContext)
+
 
     const signOut = () => {
       try {
@@ -39,7 +40,7 @@ function TopBar({ showNav, setShowNav }) {
   return (
     <header className="sticky top-0 z-30 bg-amazon_blue w-full">
     <div
-      className="w-full h-16 pr-4 bg-amazon_blue flex flex-grow justify-between items-center"
+      className="w-full lg:w-9/12 max-w-screen-2xl mx-auto h-16 pr-4 bg-amazon_blue flex flex-grow justify-between items-center"
     >
 
       <div className="flex justify-center mt-6 mb-8">
@@ -80,10 +81,10 @@ function TopBar({ showNav, setShowNav }) {
           </Popover.Button>
          </Popover>
          <Popover as="div" className="relative inline-block text-left">
-            <Popover.Button onClick={() => router.push(LOGIN)} className="outline-none mr-5 md:mr-8 cursor-pointer flex items-center text-gray-50">
+            <Popover.Button onClick={user? null : () => router.push(LOGIN)} className="outline-none mr-5 md:mr-8 cursor-pointer flex items-center text-gray-50">
               <UserCircleIcon className='relative h-6 w-6 mr-1 mx-auto' />
               <span className="hidden md:block font-medium ">
-                Sign in
+                {user? user?.displayName : "Sign in"}
               </span>   
             </Popover.Button>
          </Popover>
@@ -133,7 +134,7 @@ function TopBar({ showNav, setShowNav }) {
 
     </div>
 
-    <div className='w-full flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden md:hidden text-white bg-amazon_blue text-sm'>
+    <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden md:hidden text-white bg-amazon_blue text-sm'>
 
        <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-yellow-700 hover:bg-yellow-500'>
         <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text" />
@@ -142,7 +143,7 @@ function TopBar({ showNav, setShowNav }) {
 
     </div>
 
-    <div className="flex items-center space-x-3 p-2 pl-6 text-white bg-amazon_blue text-sm">
+    <div className="w-full lg:w-9/12 max-w-screen-2xl mx-auto flex items-center space-x-3 p-2 pl-6 text-white bg-amazon_blue text-sm">
      <p className='link'>Collaborations</p>
      <p className='link'>Rewards</p>
      <p className='link'>Today's Deals</p>

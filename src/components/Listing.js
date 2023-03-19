@@ -1,25 +1,34 @@
 import React from 'react'
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline'
+import { withProtected } from './protected-route'
 
 
-function Listing() {
+function Listing({thumbnail, item, units, price, category, description}) {
   return (
     <div className="w-full mb-2">
       <div className="w-full rounded-lg bg-gray-50 p-1">
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-gray-50 px-4 py-2 text-left text-sm font-medium text-gray-800 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              <Disclosure.Button className="flex w-full h-12 justify-between rounded-lg bg-gray-50 px-4 py-2 text-left text-sm font-medium text-gray-800 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <div className='w-9/12 flex justify-between text-xs text-gray-800'>
-                 <div>
-                  <span>Lasher Shovel</span>
+                 <div className='flex'>
+                  <div className='w-8 h-8 bg-black mr-2'>
+                    <img
+                      className="w-full h-auto"
+                      src={`${thumbnail}`}
+                      objec
+                      alt="listing image"
+                    /> 
+                  </div>
+                  <span className=' mt-2 line-clamp-1'>{item}</span>
                  </div>
                  <div>
-                  <h6>23</h6>
+                  <h6 className=' mt-2'>{units}</h6>
                  </div>
                  <div>
-                  <h6>136.65</h6>
+                  <h6 className=' mt-2'>{price}</h6>
                  </div>
                 </div>
                 <ChevronUpIcon
@@ -29,14 +38,19 @@ function Listing() {
                 />
               </Disclosure.Button>
               <Disclosure.Panel className="px-1 pt-4 pb-2 text-xs text-gray-500 flex">
-                <div className='w-9/12'>
+                <div className='w-2/4 p-1'>
                  <p className=' font-semibold'>Description:</p> 
                  <p className='mt-1 mb-2 line-clamp-2'>
-                  If you're unhappy with your purchase for any reason, email us
-                  within 90 days and we'll refund you in full, no questions asked.
+                  {description}
                  </p> 
                 </div>
-                <div className='w-3/12 flex'>
+                <div className='w-1/4 p-1'>
+                 <p className=' font-semibold'>Category:</p> 
+                 <p className='mt-1 mb-2 line-clamp-2'>
+                  {category}
+                 </p> 
+                </div>
+                <div className='w-1/4 flex'>
                  <div className='w-2/4 items-center p-5'>
                   <PencilIcon className='h-5 w-5 mx-auto my-auto cursor-pointer' />
                  </div>
@@ -53,4 +67,4 @@ function Listing() {
   )
 }
 
-export default Listing
+export default withProtected(Listing)

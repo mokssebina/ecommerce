@@ -1,26 +1,20 @@
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 import Link from "next/link";
 import {
   MenuIcon
 } from "@heroicons/react/outline";
 import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import useUser from "../hooks/use-user";
+import { AuthContext } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 
 const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
 
-  const { 
-    user: { account, name, userId } 
-  } = useUser();
+  const { user } = useContext(AuthContext)
 
   const router = useRouter();
-
-  console.log("username: ",name);
-  console.log("account: ",account);
-  console.log("user ID: ",userId)
 
 
   return (
@@ -85,7 +79,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
-        {account === "merchant" &&
+        {user?.account === "merchant" &&
          <Link href="/listings">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${

@@ -5,8 +5,10 @@ import { LOWERCASE_REGEX, NUMERIC_REGEX, UPPERCASE_REGEX } from "../utils/consta
 const emailAddresses = ["test@gmail.com", "test1@gmail.com", "test2@gmail.com"];
 
 export const signupSchema = Yup.object({
-    displayName: Yup.string()
+    firstName: Yup.string()
         .required("Your name is required"),   
+	lastName: Yup.string()
+        .required("Your name is required"),	
 	email: Yup.string()
 		.email("Email must be a valid email address.")
 		.notOneOf(emailAddresses, "Email address is already taken.")

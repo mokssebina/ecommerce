@@ -32,7 +32,7 @@ export default function Layout({ children }) {
  
   return (
     <>
-      <div hidden={!showNav} onClick={()=> setShowNav(!showNav)} className="fixed w-screen h-screen bg-dark-disabled z-50 overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden"></div>
+      <div hidden={!showNav} onClick={()=> setShowNav(!showNav)} className="fixed w-screen h-screen bg-dark-disabled z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden"></div>
       <Transition
         as={Fragment}
         show={showNav}
@@ -47,7 +47,7 @@ export default function Layout({ children }) {
       </Transition>
       <TopBar showNav={showNav} setShowNav={setShowNav} />
       <main
-        className={`relative overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden`}
+        className={`relative md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden`}
       >
         {children}
       </main>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FormProvider, useForm } from "react-hook-form";
 import { FormInput } from "../components/form-components/FormInput";
 import SubmitButton from "../components/form-components/SubmitButton";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-hot-toast";
 import { sellerSignupSchema } from '../validation/sellerSignupValidation';
@@ -13,8 +13,12 @@ import { db } from "../config/firebase";
 
 function MerchantSignupForm() {
 
-    const { signUp, user } = useAuth();
+    const { merchantSignUp, user } = useContext(AuthContext)
     const router = useRouter();
+
+    const displayPicture = "";
+    const account = "merchant";
+    const status = "pending"
 
     const methods = useForm({ mode: "onBlur", resolver: yupResolver(sellerSignupSchema) });
 
@@ -32,28 +36,9 @@ function MerchantSignupForm() {
     try {
       console.log("merchant sign up started")
 
-      await signUp(data.sellerEmail, data.sellerPassword)
-      .then((userCredentials) => {
-          const payload = {
-              name: data.sellerCompanyName,
-              email: data.sellerEmail,
-              displayPicture: '',
-              account: "merchant",
-              userId: userCredentials.user.uid,
-              status: "pending"
-          }
-
-          console.log("payload: ",payload)
-
-          let docRef = doc(db, "users", `${userCredentials.user.uid}`);
-
-          const postRef = setDoc(docRef, payload)
-
-          console.log("Doc ID")
-          console.log("User is created: ",postRef)
-        });
+      await merchantSignUp(data.sellerCompanyName, data.sellerEmail, data.sellerPassword, displayPicture, account, status)
       
-        console.log("User is created")
+        console.log("Merchant user is created")
 
         toast.success("Successfully signed up!", { id: toastId });
         router.push(HOME);

@@ -34,9 +34,16 @@ function OrderItem() {
                  <div className='w-full flex pl-1'>
 
                   <div className='w-9/12'>
-                   <p className=' font-semibold'>OrderItem:</p> 
+                   <p className=' font-semibold'>Order Item:</p> 
                    <p className='mt-1 mb-2 line-clamp-2'>
                     Lasher Shovel black
+                   </p> 
+                  </div>
+
+                  <div className='w-9/12'>
+                   <p className=' font-semibold'>Categories:</p> 
+                   <p className='mt-1 mb-2 line-clamp-2'>
+                    Tools
                    </p> 
                   </div>
 

@@ -10,6 +10,7 @@ import { baseUrl, fetchApi } from "../utils/fetchApi";
 //import noresult from "../assets/images/noresult.svg";
 import RealEstateHeader from "../components/RealEstateHeader";
 import Footer from "../components/Footer";
+import { withPublic } from "../components/protected-route";
 
 
 const Search = ({ properties }) => {
@@ -120,4 +121,4 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-export default Search;
+export default withPublic(Search);

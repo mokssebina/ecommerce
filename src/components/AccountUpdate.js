@@ -1,23 +1,72 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Image from 'next/image'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import useUser from '../hooks/use-user'
+import {
+  addDoc,
+  arrayUnion,
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  query, 
+  where,
+  collection,
+  onSnapshot
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { AuthContext } from '../context/AuthContext';
+import { db, storage } from '../config/firebase'
+
 
 
 function AccountUpdate({isOpen, Fragment, closeModal}) {
 
   const [image, setImage] = useState('');
 
-  const { 
-    user: { name, email } 
-  } = useUser();
+  const { user } = useContext(AuthContext);
 
-  const getImage = (event) => {
-    if(event.target.value[0]){
-       setImage(event.target.value[0]) 
+  const getImage = (e) => {
+    if(event.target.values[0]){
+       setImage(event.target.values[0]) 
     }
   } 
+
+  const uploadPicture = async () => {
+
+    try {
+
+      const storageRef = ref(storage, `${user?.uid}/display_pictures/${image.name}`); 
+
+      const uploadTask = uploadBytesResumable(
+        storageRef,
+        image
+      );
+      uploadTask.on(
+        "state_changed",
+        (snap) => {
+          console.log(snap);
+        },
+        (err) => console.log(err),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(
+            async (downloadURL) => { 
+              console.log("File available at", downloadURL);
+              await setDoc(doc(db, `users/${user?.uid}`), {
+                  displayPicture: downloadURL,
+                });
+            }
+          );
+        }
+      );
+
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+
+  }
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -61,17 +110,25 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
                   </div>  
                   <div className="w-full h-64 mt-2 p-1">
 
-                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' value={image} onChange={getImage} />
+                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' value={image} onChange={(e) => setImage(e.target.files[0])} />
 
                     <div className='relative w-24 h-24 rounded-full mx-auto mt-2 bg-black'>
-                     <Image src='https://raw.githubusercontent.com/mokssebina/MMNT/master/jobber-logo.png' width={96} height={96} objectFit='contain' />
+                     {user.displayPicture ?
+                      <Image src={`${user?.displayPicture}`} width={96} height={96} objectFit='contain' />
+                      :
+                      null
+                    }
                     </div>
 
                     <div className='w-7/12 mt-4 items-center text-gray-800'>
-                     <p className='font-semibold text-lg'>{name}</p>
-                     <p className='text-xs'>{email}</p>
+                     <p className='font-semibold text-lg'>{user?.displayName}</p>
+                     <p className='text-xs'>{user?.email}</p>
                     </div>
 
+                  </div>
+
+                  <div className='w-full h-14 p-2'>
+                   <button onClick={uploadPicture} className='w-full h-full mt-2 rounded-md text-xs text-gray-50 bg-amazon_blue'>Upload Picture</button>
                   </div>
                   
                 </Dialog.Panel>
