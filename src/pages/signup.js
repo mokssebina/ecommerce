@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { HOME, LOGIN } from "../utils/constant/routesConstants";
 import { Tab } from '@headlessui/react'
 import SignupForm from "../components/SignupForm";
@@ -12,6 +13,8 @@ function classNames(...classes) {
 
 
 function Signup() {
+
+  const router = useRouter();  
     
 
   return (

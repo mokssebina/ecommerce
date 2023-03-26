@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
@@ -65,7 +66,7 @@ function TopBar({ showNav, setShowNav }) {
         </div>*/}
       </div>  
 
-      <div className='hidden w-1/4 sm:flex items-center h-10 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-yellow-700 hover:bg-yellow-500'>
+      <div className='hidden w-1/4 sm:flex items-center h-10 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-purple-900 hover:bg-purple-500'>
        <input
         className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4`" type="text" />
        <SearchIcon className='h-12 p-4 text-white' />  
@@ -74,7 +75,7 @@ function TopBar({ showNav, setShowNav }) {
       <div className="flex items-center md:pr-16 text-gray-50">
          <Popover as="div" className="relative">
           <Popover.Button onClick={() => router.push(CHECKOUT)} className="outline-none mr-5 md:mr-8 cursor-pointer flex item-center">
-            <span className='md:right-10 h-4 w-4 bg-yellow-700 text-center rounded-full text-white text-xs font-bold'>
+            <span className='md:right-10 h-4 w-4 bg-purple-900 text-center rounded-full text-white text-xs font-bold'>
              {items.length}
             </span>
             <ShoppingCartIcon className="h-6 w-6" />
@@ -82,8 +83,11 @@ function TopBar({ showNav, setShowNav }) {
          </Popover>
          <Popover as="div" className="relative inline-block text-left">
             <Popover.Button onClick={user? null : () => router.push(LOGIN)} className="outline-none mr-5 md:mr-8 cursor-pointer flex items-center text-gray-50">
-              <UserCircleIcon className='relative h-6 w-6 mr-1 mx-auto' />
-              <span className="hidden md:block font-medium ">
+              {user?.displayPicture ?
+              <Image src={`${user?.displayPicture}`} className="rounded-full relative mr-1 mx-auto" width={24} height={24} objectFit='contain' />
+              :
+              <UserCircleIcon className='relative h-6 w-6 mr-1 mx-auto' />}
+              <span className="hidden md:block font-medium ml-1">
                 {user? user?.displayName : "Sign in"}
               </span>   
             </Popover.Button>
@@ -107,7 +111,7 @@ function TopBar({ showNav, setShowNav }) {
                 <div className="mt-4 grid gap-4 grid-cols-1 overflow-hidden">
                   <div onClick={() => router.push(ACCOUNT)} className="flex cursor-pointer hover:bg-amazon_blue-light rounded-lg">
                     <div className="rounded-full shrink-0 h-8 w-8 flex items-center justify-center">
-                      <UserIcon className="h-4 w-4 text-gray-50" />
+                       <UserIcon className="h-4 w-4 text-gray-50" />
                     </div>
                     <div className="ml-4">
                       <p className="font-medium text-gray-50 p-1">
@@ -134,7 +138,7 @@ function TopBar({ showNav, setShowNav }) {
 
     </div>
 
-    <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden md:hidden text-white bg-amazon_blue text-sm'>
+    <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden text-white bg-amazon_blue text-sm'>
 
        <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-yellow-700 hover:bg-yellow-500'>
         <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text" />

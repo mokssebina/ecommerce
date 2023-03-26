@@ -71,7 +71,7 @@ function Profile({ children }) {
         </main>
       </div>
 
-     <div onClick={openModal} className="fixed w-11 h-11 rounded-full left-3 bottom-3 bg-gray-300 cursor-pointer hover:bg-gray-400 shadow-md">
+     <div onClick={() => setIsOpen(true)} className="fixed w-11 h-11 rounded-full left-3 bottom-3 bg-gray-300 cursor-pointer hover:bg-gray-400 shadow-md">
       <UserIcon className="w-5 h-5 mx-auto mt-3" />
      </div>
     </> 

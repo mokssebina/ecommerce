@@ -18,6 +18,7 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../config/firebase'
+import { uploadPicture } from '../../services/firebase';
 
 
 
@@ -26,18 +27,22 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
   const [image, setImage] = useState('');
 
   const { user } = useContext(AuthContext);
+  console.log("display name: ",user.displayName)
+  console.log("display email: ",user.email)
+  console.log("display pic: ",user.displayPicture)
 
-  const getImage = (e) => {
-    if(event.target.values[0]){
-       setImage(event.target.values[0]) 
-    }
-  } 
+  const createPicUpload = () => {
+    uploadPicture(user,image)
+  }
 
-  const uploadPicture = async () => {
+  function uploadPicture(user, image) {
+
+
+    const docRef = doc(db, "users", `${user?.uid}`)
 
     try {
 
-      const storageRef = ref(storage, `${user?.uid}/display_pictures/${image.name}`); 
+      const storageRef = ref(storage, `${user?.uid}/display_picture/${image.name}`); 
 
       const uploadTask = uploadBytesResumable(
         storageRef,
@@ -53,9 +58,12 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
           getDownloadURL(uploadTask.snapshot.ref).then(
             async (downloadURL) => { 
               console.log("File available at", downloadURL);
-              await setDoc(doc(db, `users/${user?.uid}`), {
-                  displayPicture: downloadURL,
-                });
+
+              const payload = {
+                displayPicture: downloadURL,
+              }
+
+              await updateDoc(docRef, payload);
             }
           );
         }
@@ -110,11 +118,11 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
                   </div>  
                   <div className="w-full h-64 mt-2 p-1">
 
-                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' value={image} onChange={(e) => setImage(e.target.files[0])} />
+                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' image={image} onChange={(e) => setImage(e.target.files[0])} />
 
                     <div className='relative w-24 h-24 rounded-full mx-auto mt-2 bg-black'>
-                     {user.displayPicture ?
-                      <Image src={`${user?.displayPicture}`} width={96} height={96} objectFit='contain' />
+                     {user?.displayPicture ?
+                      <Image src={`${user?.displayPicture}`} className="rounded-full" width={96} height={96} objectFit='contain' />
                       :
                       null
                     }
@@ -128,7 +136,7 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
                   </div>
 
                   <div className='w-full h-14 p-2'>
-                   <button onClick={uploadPicture} className='w-full h-full mt-2 rounded-md text-xs text-gray-50 bg-amazon_blue'>Upload Picture</button>
+                   <button onClick={createPicUpload} className='w-full h-full mt-2 rounded-md text-xs text-gray-50 bg-amazon_blue'>Upload Picture</button>
                   </div>
                   
                 </Dialog.Panel>

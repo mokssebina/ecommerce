@@ -5,7 +5,7 @@ import { FaBed, FaBath } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
 import { GoVerified } from "react-icons/go";
 import millify from "millify";
-import RealEstateHeader from "../../components/RealEstateHeader";
+//import RealEstateHeader from "../../components/RealEstateHeader";
 import Footer from "../../components/Footer";
 import { baseUrl, fetchApi } from "../../utils/fetchApi";
 import ImageScrollBar from "../../components/ImageScrollBar";
@@ -50,7 +50,6 @@ const PropertyDetails = ({
 
   return (
     <div className="h-full w-full">
-      <RealEstateHeader menu={menu} closeNav={closeNav} openMenu={openNav} />
       <Box maxWidth="1000px" margin="auto" p="4">
         {photos && <ImageScrollBar data={photos} />}
         <Box w="full" p="6">
@@ -157,6 +156,10 @@ export default PropertyDetails;
 
 export async function getServerSideProps({ params: { id } }) {
   const data = await fetchApi(`${baseUrl}/properties/detail?externalID=${id}`);
+
+  console.log("real estate: ",data)
+
+  console.log("ID: ",id)
 
   return {
     props: {

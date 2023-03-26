@@ -6,6 +6,7 @@ import {
   addDoc,
   arrayUnion,
   doc,
+  deleteDoc,
   getDoc,
   serverTimestamp,
   setDoc,
@@ -17,7 +18,7 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { AuthContext } from '../context/AuthContext';
-import { db, storage } from '../config/firebase'
+import { db, storage } from '../config/firebase';
 
 
 function Listings() {
@@ -33,8 +34,22 @@ function Listings() {
 
   const { user } = useContext(AuthContext)
 
+  
+  function closeModal() {
+    setIsOpen(false);
+    setImage("");
+    setUnits(0);
+    setItem("");
+    setPrice(0);
+    setCategory("");
+    setDescription("");
+  }
 
-  const createListing = async () => {
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function createListing() {
 
     try {
 
@@ -54,43 +69,37 @@ function Listings() {
           getDownloadURL(uploadTask.snapshot.ref).then(
             async (downloadURL) => { 
               console.log("File available at", downloadURL);
-              await setDoc(doc(db, "posts", "listings"), {
-                  photoURL: downloadURL,
-                  units: units,
-                  item: item,
-                  price: price,
-                  category: category,
-                  description: description,
-                  userId: user?.uid,
-                  store: user?.displayName
-                });
+              
+              await addDoc(collection(db, "listings"), {
+                photoURL: downloadURL,
+                units: units,
+                item: item,
+                price: price,
+                category: category,
+                description: description,
+                userId: user?.uid,
+                store: user?.displayName
+              });
             }
           );
         }
       );
 
-      setIsOpen(false)
+      //closeModal()
 
     } catch (error) {
       console.log(error);
+      //closeModal()
+
       return error;
     }
 
   }
 
-  function closeModal() {
-    setIsOpen(false)
-  }
-
-  function openModal() {
-    setIsOpen(true)
-  }
-
-  
 
   useEffect(() => {
     const getListings = async () => {
-      const ref = collection(db, "posts")
+      const ref = collection(db, "listings")
       const q = query(ref, where("userId", "==", `${user?.uid}`))
       onSnapshot(q, (snapshot) => {
        setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
@@ -157,9 +166,24 @@ function Listings() {
 
         <div className='w-full h-full mt-32 px-1 pb-2'>
 
-          {listings.map((listing) => 
-            <Listing thumbnail={listing.photoURL} item={listing.item} units={listing.units} price={listing.price} category={listing.category} description={listing.description} />
-          )}  
+          {listings.length > 0 ?
+           listings.map((listing) => 
+            <Listing 
+             deleteListing={() => {
+              deleteDoc(doc(db, `listings`, listing.id))
+             }}
+             thumbnail={listing.photoURL} 
+             item={listing.item} 
+             units={listing.units} 
+             price={listing.price} 
+             category={listing.category} 
+             description={listing.description} />
+          )
+           :
+           <div className='relative w-full h-48 items-center my-auto'>
+            <p className='text-base mt-2 mb-2 text-center'>Create listings and start selling</p>
+           </div>
+          }  
 
         </div> 
 

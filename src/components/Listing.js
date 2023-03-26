@@ -4,7 +4,7 @@ import { ChevronUpIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline'
 import { withProtected } from './protected-route'
 
 
-function Listing({thumbnail, item, units, price, category, description}) {
+function Listing({thumbnail, item, units, price, category, description, deleteListing}) {
   return (
     <div className="w-full mb-2">
       <div className="w-full rounded-lg bg-gray-50 p-1">
@@ -52,10 +52,10 @@ function Listing({thumbnail, item, units, price, category, description}) {
                 </div>
                 <div className='w-1/4 flex'>
                  <div className='w-2/4 items-center p-5'>
-                  <PencilIcon className='h-5 w-5 mx-auto my-auto cursor-pointer' />
+                  {/*<PencilIcon className='h-5 w-5 mx-auto my-auto cursor-pointer' />*/}
                  </div>
                  <div className='w-2/4 items-center p-5'>
-                  <TrashIcon className='h-5 w-5 mx-auto cursor-pointer' />
+                  <TrashIcon onClick={deleteListing} className='h-5 w-5 mx-auto cursor-pointer' />
                  </div>
                 </div>
               </Disclosure.Panel>

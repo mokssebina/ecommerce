@@ -142,7 +142,7 @@ const AuthContextProvider = ({ children }) => {
         companyName: companyName,  
         email: user?.email,
         userId: user?.uid,
-        displayPicture: displayPicture, 
+        displayPicture: "", 
         account: account, 
         status: status,
         createdDate: serverTimestamp()

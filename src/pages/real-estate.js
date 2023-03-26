@@ -125,4 +125,4 @@ export async function getStaticProps() {
   };
 }
 
-export default withPublic(Properties)
+export default Properties
