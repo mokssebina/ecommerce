@@ -80,7 +80,7 @@ const ProductDetails = () => {
             </div>
         )}
 
-        <button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>
+        <button onClick={addItemToBasket} className='mt-auto button bg-purple-900 text-white'>Add to Basket</button>
 
       </div>
      </main>   

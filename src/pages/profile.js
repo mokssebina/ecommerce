@@ -40,7 +40,7 @@ function Profile({ children }) {
           </div> 
           </div>  
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto h-14 bg-white relative z-10 mb-2'>
-          
+           <p className='text-md mt-2 mb-2 text-center'>Orders</p>
           <div className='w-9/12 h-full flex justify-between items-center text-sm font-semibold text-gray-800'>
             
             <div className='items-center ml-2'>

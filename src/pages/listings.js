@@ -82,10 +82,9 @@ function Listings() {
               });
             }
           );
-        }
+        },
+        closeModal()
       );
-
-      //closeModal()
 
     } catch (error) {
       console.log(error);

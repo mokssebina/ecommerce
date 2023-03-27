@@ -66,7 +66,9 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
               await updateDoc(docRef, payload);
             }
           );
-        }
+        },
+
+        closeModal
       );
 
     } catch (error) {
