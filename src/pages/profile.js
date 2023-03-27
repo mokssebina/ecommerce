@@ -60,7 +60,7 @@ function Profile({ children }) {
         
         <main className='w-full lg:w-9/12 max-w-screen-2xl pt-2 mx-auto bg-white'>
 
-        <div className='w-full h-full mt-32 px-1 pb-2'>
+        <div className='w-full h-full mt-34 px-1 pb-2'>
           
           <OrderItem />    
           <OrderItem />       
