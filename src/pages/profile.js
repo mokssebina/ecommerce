@@ -30,7 +30,6 @@ function Profile({ children }) {
         
         <header className='fixed w-full shadow-md z-20 bg-white'>
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
-           <p className='text-md mt-2 mb-2 text-center'>Orders</p>
           <div className='w-full h-10 flex mt-2'>
             <div className='w-9/12 px-1 py-1'>
             <input placeholder='Search' className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-1 border-0' />
@@ -58,9 +57,9 @@ function Profile({ children }) {
           </div>
         </header>
         
-        <main className='w-full lg:w-9/12 max-w-screen-2xl pt-2 mx-auto bg-white'>
+        <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
 
-        <div className='w-full h-full mt-34 px-1 pb-2'>
+        <div className='w-full h-full mt-32 px-1 pb-2'>
           
           <OrderItem />    
           <OrderItem />       
