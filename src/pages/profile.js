@@ -4,13 +4,32 @@ import OrderItem from "../components/OrderItem";
 import AccountUpdate from "../components/AccountUpdate";
 import { AuthContext } from "../context/AuthContext";
 import { withProtected } from "../components/protected-route";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
+import {
+  addDoc,
+  arrayUnion,
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  query, 
+  where,
+  collection,
+  onSnapshot
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { db, storage } from '../config/firebase'
+import { uploadPicture } from '../../services/firebase';
+import { ThreeCircles } from  'react-loader-spinner'
+
 
 
 function Profile({ children }) {
   
   const [isOpen, setIsOpen] = useState(false)
+  const [image, setImage] = useState('');
+  const [hideLoading, setHideLoading] = useState(true);
+
 
   const { user } = useContext(AuthContext)
 
@@ -22,10 +41,82 @@ function Profile({ children }) {
     setIsOpen(false)
   }
 
+  const pickImage = (e) => {
+    setImage(e.target.files[0])
+  }
+
+  const createPicUpload = () => {
+    uploadPicture(user,image)
+  }
+
+  function uploadPicture(user, image) {
+
+    setIsOpen(false)
+
+    setHideLoading(false)
+
+    const docRef = doc(db, "users", `${user?.uid}`)
+
+    try {
+
+      const storageRef = ref(storage, `${user?.uid}/display_picture/${image.name}`); 
+
+      const uploadTask = uploadBytesResumable(
+        storageRef,
+        image
+      );
+      uploadTask.on(
+        "state_changed",
+        (snap) => {
+          console.log(snap);
+        },
+        (err) => console.log(err),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(
+            async (downloadURL) => { 
+              console.log("File available at", downloadURL);
+
+              const payload = {
+                displayPicture: downloadURL,
+              }
+
+              await updateDoc(docRef, payload);
+            },
+            setHideLoading(true)
+          );
+        },
+
+      );
+
+    } catch (error) {
+      console.log(error);
+      setHideLoading(true)
+      return error;
+    }
+
+  }
+
+
 
   return (
     <>
-     <AccountUpdate isOpen={isOpen} Fragment={Fragment} closeModal={closeModal} />
+     <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
+      <div className="relative w-20 h-20 mx-auto mt-60 z-50">
+        <ThreeCircles
+          height="80"
+          width="80"
+          color="#131921"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="three-circles-rotating"
+          outerCircleColor=""
+          innerCircleColor=""
+          middleCircleColor=""
+        />
+      </div> 
+     </div>
+     <AccountUpdate isOpen={isOpen} Fragment={Fragment} image={image} pickImage={pickImage} createPicUpload={createPicUpload} closeModal={closeModal} />
       <div className='w-full h-screen bg-white overflow-hidden'>
         
         <header className='fixed w-full shadow-md z-20 bg-white'>

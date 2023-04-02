@@ -10,13 +10,18 @@ import { useRouter } from "next/router";
 //import { HOME, LOGIN } from "../utils/constant/routesConstants";
 import { onSnapshot, doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { ThreeCircles } from  'react-loader-spinner'
+
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-function SignupForm() {
+function SignupForm(props) {
 
+    const [hideLoading, setHideLoading] = useState(true);
+    
     const { signUp, user } = useContext(AuthContext)
 
     
@@ -36,6 +41,7 @@ function SignupForm() {
 
 		  const toastId = toast.loading("Signing up...");
       console.log("signup started")
+      props.showLoader
     
       try {
         console.log("sign up started")
@@ -44,12 +50,13 @@ function SignupForm() {
 
         console.log("User is created")
         console.log("user details: ",user)
-  
+        props.hideLoader
         toast.success("Successfully signed up!", { id: toastId });
          
       } catch (error) {
         toast.error(error.message, { id: toastId });
         console.log("error: ",error.message)
+        props.hideLoader
       }
 
 	};
@@ -103,7 +110,7 @@ function SignupForm() {
               */}              
               <SubmitButton buttonText={"Sign up"} />
           </form>
-         </FormProvider>   
+         </FormProvider> 
   )
 }
 

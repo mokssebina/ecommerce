@@ -1,4 +1,4 @@
-import React,{ useContext } from 'react'
+import React,{ useContext, useState } from 'react'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
@@ -6,15 +6,17 @@ import * as Yup from "yup";
 import { FormInput } from '../components/form-components/FormInput';
 import SubmitButton from '../components/form-components/SubmitButton';
 import { AuthContext } from '../context/AuthContext';
-import { HOME, SIGN_UP } from '../utils/constant/routesConstants';
+import { HOME, SIGN_UP, FORGOT_PASSWORD } from '../utils/constant/routesConstants';
 import { loginSchema } from '../validation/loginValidation';
 import { toast } from "react-hot-toast";
 import { withPublic } from '../components/protected-route';
+import { ThreeCircles } from  'react-loader-spinner'
 
 
 
 function Login() {
 
+  const [hideLoading, setHideLoading] = useState(true);
 
   const { user, logIn } = useContext(AuthContext);
   const router = useRouter();  
@@ -29,21 +31,41 @@ function Login() {
   
   const onSubmit = async (data) => {
     const toastId = toast.loading("Logging in...");
+    setHideLoading(false)
     try {
 
         console.log("login in started")
       
         await logIn(data.email, data.password);
         toast.success("Successfully logged in!", { id: toastId });
+        setHideLoading(true)
         await router.push(HOME);
 
     } catch (error) {
         toast.error(error.message, { id: toastId });
         console.log("login error: ",error.message)
+        setHideLoading(true)
     }
-};
+  };
 
   return (
+    <>
+    <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
+    <div className="relative w-20 h-20 mx-auto mt-60 z-50">
+     <ThreeCircles
+      height="80"
+      width="80"
+      color="#131921"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="three-circles-rotating"
+      outerCircleColor=""
+      innerCircleColor=""
+      middleCircleColor=""
+     />
+    </div> 
+    </div>
     <div className='w-full bg-white pt-14 overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden'>
      <h2 className="px-12 mt-4 mb-6 text-center text-2xl font-semibold text-amazon_blue">Log In</h2>
      <main className='grid grid-flow-row-dense md:grid-cols-2 w-11/12 mx-auto bg-white'>
@@ -88,11 +110,17 @@ function Login() {
           >
             Don't have an account yet? Click here to Sign up.
           </p>
+          <p className="mt-6 text-sm text-center text-amazon_blue-light hover:text-blue-900 cursor-pointer"
+              onClick={() => router.push(FORGOT_PASSWORD)}   
+          >
+            Forgot Password?
+          </p>
          </div>
        </div>
       </div>
      </main> 
     </div>
+    </>
   )
 }
 

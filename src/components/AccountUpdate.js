@@ -22,61 +22,19 @@ import { uploadPicture } from '../../services/firebase';
 
 
 
-function AccountUpdate({isOpen, Fragment, closeModal}) {
+function AccountUpdate({isOpen, Fragment, closeModal, image, pickImage, createPicUpload}) {
 
-  const [image, setImage] = useState('');
 
   const { user } = useContext(AuthContext);
   console.log("display name: ",user.displayName)
   console.log("display email: ",user.email)
   console.log("display pic: ",user.displayPicture)
 
-  const createPicUpload = () => {
-    uploadPicture(user,image)
-  }
+  
 
-  function uploadPicture(user, image) {
-
-
-    const docRef = doc(db, "users", `${user?.uid}`)
-
-    try {
-
-      const storageRef = ref(storage, `${user?.uid}/display_picture/${image.name}`); 
-
-      const uploadTask = uploadBytesResumable(
-        storageRef,
-        image
-      );
-      uploadTask.on(
-        "state_changed",
-        (snap) => {
-          console.log(snap);
-        },
-        (err) => console.log(err),
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(
-            async (downloadURL) => { 
-              console.log("File available at", downloadURL);
-
-              const payload = {
-                displayPicture: downloadURL,
-              }
-
-              await updateDoc(docRef, payload);
-            }
-          );
-        },
-
-        closeModal
-      );
-
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
-
-  }
+  useEffect(() => {
+    console.log("image has changed")
+  },[user.displayPicture])
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -120,7 +78,7 @@ function AccountUpdate({isOpen, Fragment, closeModal}) {
                   </div>  
                   <div className="w-full h-64 mt-2 p-1">
 
-                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' image={image} onChange={(e) => setImage(e.target.files[0])} />
+                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' image={image} onChange={pickImage} />
 
                     <div className='relative w-24 h-24 rounded-full mx-auto mt-2 bg-black'>
                      {user?.displayPicture ?

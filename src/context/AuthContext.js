@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { onAuthStateChanged,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 	signOut
 } from "firebase/auth";
 import {
@@ -172,13 +173,22 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  const resetPassword = async (email) => {
+    try {
+      return sendPasswordResetEmail(auth, email)
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
   const logOut = async () => {
     setUser(null);
     await signOut(auth);
   };
 
   return (
-    <AuthContext.Provider value={{ user, merchantSignUp, signUp, logIn, logOut }}>
+    <AuthContext.Provider value={{ user, merchantSignUp, signUp, logIn, resetPassword, logOut }}>
       {loading ? null : children}
     </AuthContext.Provider>
   );

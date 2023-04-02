@@ -10,8 +10,10 @@ import { useRouter } from "next/router";
 import { HOME, LOGIN } from "../utils/constant/routesConstants";
 import { onSnapshot, doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { ThreeCircles } from  'react-loader-spinner'
 
-function MerchantSignupForm() {
+
+function MerchantSignupForm(props) {
 
     const { merchantSignUp, user } = useContext(AuthContext)
     const router = useRouter();
@@ -32,6 +34,7 @@ function MerchantSignupForm() {
 
     const toastId = toast.loading("Signing up...");
     console.log("seller signup started")
+    props.showSignUpLoader
   
     try {
       console.log("merchant sign up started")
@@ -39,14 +42,13 @@ function MerchantSignupForm() {
       await merchantSignUp(data.sellerCompanyName, data.sellerEmail, data.sellerPassword, displayPicture, account, status)
       
         console.log("Merchant user is created")
-
+        props.hideSignUpLoader
         toast.success("Successfully signed up!", { id: toastId });
-        router.push(HOME);
-
       
     } catch (error) {
       toast.error(error.message, { id: toastId });
       console.log("error: ",error.message)
+      props.hideSignUpLoader
     }
 
 };

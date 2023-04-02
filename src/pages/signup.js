@@ -5,6 +5,8 @@ import { Tab } from '@headlessui/react'
 import SignupForm from "../components/SignupForm";
 import MerchantSignupForm from "../components/MerchantSignupForm";
 import { withPublic } from "../components/protected-route";
+import { ThreeCircles } from  'react-loader-spinner'
+
 
 
 function classNames(...classes) {
@@ -14,10 +16,45 @@ function classNames(...classes) {
 
 function Signup() {
 
+  const [hideLoading, setHideLoading] = useState(true);
+
   const router = useRouter();  
     
+  const showLoader = () => {
+    setHideLoading(false)
+  } 
+
+  const hideLoader = () => {
+    setHideLoading(true)
+  }
+
+  const showSignUpLoader = () => {
+    setHideLoading(false)
+  }
+
+  const hideSignUpLoader = () => {
+    setHideLoading(true)
+  }
 
   return (
+  
+    <>
+     <div hidden={hideLoading} className="fixed w-11/12 h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
+      <div className="relative w-20 h-20 mx-auto mt-60 z-50">
+       <ThreeCircles
+        height="80"
+        width="80"
+        color="#131921"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+        ariaLabel="three-circles-rotating"
+        outerCircleColor=""
+        innerCircleColor=""
+        middleCircleColor=""
+        />
+       </div> 
+      </div>
     <div className='w-full h-screen bg-white pt-14 overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden'>
      <h2 className="px-12 mt-4 mb-6 text-center text-2xl font-semibold text-amazon_blue">Sign Up</h2>
      <main className='grid grid-flow-row-dense md:grid-cols-2 w-11/12 mx-auto bg-white'> 
@@ -52,10 +89,10 @@ function Signup() {
             </Tab.List>
           <Tab.Panels>
            <Tab.Panel>
-            <SignupForm />    
+            <SignupForm showLoader={showLoader} hideLoader={hideLoader} />    
            </Tab.Panel>
            <Tab.Panel>
-            <MerchantSignupForm />         
+            <MerchantSignupForm showSignUpLoader={showSignUpLoader} hideSignUpLoader={hideSignUpLoader} />         
            </Tab.Panel>
           </Tab.Panels>
           </Tab.Group>
@@ -78,6 +115,7 @@ function Signup() {
        </div>
       </main>
      </div> 
+    </>
   )
 }
 

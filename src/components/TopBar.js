@@ -140,7 +140,7 @@ function TopBar({ showNav, setShowNav }) {
 
     <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden text-white bg-amazon_blue text-sm'>
 
-       <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover bg-purple-500'>
+       <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover:bg-purple-500'>
         <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text" />
         <SearchIcon className='h-12 p-4 text-white' />  
        </div>   

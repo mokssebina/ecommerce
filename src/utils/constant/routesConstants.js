@@ -2,6 +2,7 @@ export const DASHBOARD = "/dashboard";
 export const LOGIN = "/login";
 export const HOME = "/";
 export const SIGN_UP = "/signup";
+export const FORGOT_PASSWORD = "/forgot_password";
 export const REAL_ESTATE = "/real-estate";
 export const CHECKOUT = "/checkout";
 export const SEARCH = "/search";

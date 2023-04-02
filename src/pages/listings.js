@@ -19,6 +19,8 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../config/firebase';
+import { ThreeCircles } from  'react-loader-spinner'
+
 
 
 function Listings() {
@@ -31,9 +33,18 @@ function Listings() {
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [hideLoading, setHideLoading] = useState(true);
 
   const { user } = useContext(AuthContext)
 
+  function clearPayload() {
+    setImage("");
+    setUnits(0);
+    setItem("");
+    setPrice(0);
+    setCategory("");
+    setDescription("");
+  }
   
   function closeModal() {
     setIsOpen(false);
@@ -52,6 +63,8 @@ function Listings() {
   function createListing() {
 
     try {
+      setIsOpen(false)
+      setHideLoading(false)
 
       const storageRef = ref(storage, `${user?.uid}/listings/${image.name}`); 
 
@@ -80,16 +93,17 @@ function Listings() {
                 userId: user?.uid,
                 store: user?.displayName
               });
-            }
+            },
+            clearPayload,
+            setHideLoading(true)
           );
         },
-        closeModal()
       );
 
     } catch (error) {
       console.log(error);
       //closeModal()
-
+      setHideLoading(true)
       return error;
     }
 
@@ -112,6 +126,22 @@ function Listings() {
     <>
       {user?.account === "merchant"?
       <>
+       <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
+        <div className="relative w-20 h-20 mx-auto mt-60 z-50">
+        <ThreeCircles
+          height="80"
+          width="80"
+          color="#131921"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="three-circles-rotating"
+          outerCircleColor=""
+          innerCircleColor=""
+          middleCircleColor=""
+        />
+        </div> 
+       </div>
        <ListingsUpload isOpen={isOpen}
         image={image}
         setImage={(e) => setImage(e.target.files[0])}

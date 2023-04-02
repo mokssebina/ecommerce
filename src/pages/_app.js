@@ -19,7 +19,7 @@ import createEmotionCache from '../config/createEmotionCache';
 const clientSideEmotionCache = createEmotionCache();
 
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) => {
-/*
+
   NProgress.configure({ showSpinner: false });
 
   Router.events.on("routeChangeStart", () => {
@@ -29,7 +29,7 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
   Router.events.on("routeChangeComplete", () => {
     NProgress.done();
   });
-*/
+
   return (
     <CacheProvider value={emotionCache}>
      <AuthContextProvider>
