@@ -8,3 +8,5 @@ export const CHECKOUT = "/checkout";
 export const SEARCH = "/search";
 export const ACCOUNT= "/profile";
 export const ADMIN = "/admin";
+export const SERVICES = "/services";
+export const LEADS = "/tenders";

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from "react-hook-form";
 import { FormInput } from "../components/form-components/FormInput";
+import { FormDropdown } from './form-components/FormDropdown';
 import SubmitButton from "../components/form-components/SubmitButton";
 import { AuthContext } from "../context/AuthContext";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +11,8 @@ import { useRouter } from "next/router";
 import { HOME, LOGIN } from "../utils/constant/routesConstants";
 import { onSnapshot, doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { ThreeCircles } from  'react-loader-spinner'
+import { ThreeCircles } from  'react-loader-spinner';
+
 
 
 function MerchantSignupForm(props) {
@@ -19,8 +21,20 @@ function MerchantSignupForm(props) {
     const router = useRouter();
 
     const displayPicture = "";
-    const account = "merchant";
-    const status = "pending"
+    const account = "service-provider";
+    const status = "pending";
+
+    const services = [
+      {key:1, value: "agriculture", item: "Agricultural Services"},
+      {key:2, value: "construction", item: "Construction"},
+      {key:3, value: "engineering", item: "Engineering"},
+      {key:4, value: "farming", item: "Farming"},
+      {key:5, value: "food", item: "Food/Produce"},
+      {key:6, value: "ict", item: "IT Services"},
+      {key:7, value: "medical", item: "Medical Services"},
+      {key:8, value: "retail", item: "Retail"},
+      {key:9, value: "supplier", item: "Supplier"},
+    ];
 
     const methods = useForm({ mode: "onBlur", resolver: yupResolver(sellerSignupSchema) });
 
@@ -74,6 +88,14 @@ function MerchantSignupForm(props) {
              type="email"
              formOptions={sellerSignupSchema.fields.sellerEmail}
              errors={errors.sellerEmail}
+            />
+
+            <FormDropdown
+             label="Services"
+             name="sellerService"
+             options={services} 
+             formOptions={sellerSignupSchema.fields.sellerService}
+             errors={errors.sellerService}
             />
 
             <FormInput

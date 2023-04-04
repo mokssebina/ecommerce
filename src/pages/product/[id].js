@@ -41,7 +41,7 @@ const ProductDetails = () => {
 
   return (
     <div className="h-full w-full">
-     <main className='relative w-full h-full bg-gray-400 sm:flex lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
+     <main className='relative w-full h-full sm:flex lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
       <div className='relative w-full sm:w-2/4 my-5 flex flex-col bg-white p-5'>
 
         <h4 className='visible sm:invisible my-3'>{data.title}</h4>

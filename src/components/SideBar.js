@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   MenuIcon
 } from "@heroicons/react/outline";
-import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon } from "@heroicons/react/outline";
+import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
@@ -79,7 +79,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
-        {user?.account === "merchant" &&
+        {user?.account === "service-provider" &&
          <Link href="/listings">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
@@ -109,6 +109,38 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
             <div>
               <p>Real Estate</p>
+            </div>
+          </div>
+        </Link>
+        <Link href="/services">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/real-estate"
+                ? "bg-black text-gray-50"
+                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div className="mr-2">
+              <SwitchHorizontalIcon className="h-5 w-5" />
+            </div>
+            <div>
+              <p>Services</p>
+            </div>
+          </div>
+        </Link>
+        <Link href="/tenders">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/real-estate"
+                ? "bg-black text-gray-50"
+                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div className="mr-2">
+              <ArchiveIcon className="h-5 w-5" />
+            </div>
+            <div>
+              <p>Tenders</p>
             </div>
           </div>
         </Link>

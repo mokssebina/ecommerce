@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import {
   MenuIcon,
   UserIcon,
@@ -14,7 +14,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
-import { CHECKOUT, HOME, LOGIN, ACCOUNT } from "../utils/constant/routesConstants";
+import { CHECKOUT, HOME, LOGIN, ACCOUNT, REAL_ESTATE, SERVICES, LEADS } from "../utils/constant/routesConstants";
 import { AuthContext } from "../context/AuthContext";
 
 function TopBar({ showNav, setShowNav }) {
@@ -37,6 +37,7 @@ function TopBar({ showNav, setShowNav }) {
         console.log("users logged out")
       }
     }
+
 
   return (
     <header className="sticky top-0 z-30 bg-amazon_blue w-full">
@@ -148,9 +149,9 @@ function TopBar({ showNav, setShowNav }) {
     </div>
 
     <div className="w-full lg:w-9/12 max-w-screen-2xl mx-auto flex items-center space-x-3 p-2 pl-6 text-white bg-amazon_blue text-sm">
-     <p className='link'>Collaborations</p>
-     <p className='link'>Rewards</p>
-     <p className='link'>Today's Deals</p>
+     <p onClick={() => router.push(REAL_ESTATE)} className='link'>Real Estate</p>
+     <p onClick={() => router.push(SERVICES)} className='link'>Services</p>
+     <p onClick={() => router.push(LEADS)} className='link'>Leads</p>
     </div>
 
     </header>

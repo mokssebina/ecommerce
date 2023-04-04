@@ -11,6 +11,8 @@ export const sellerSignupSchema = Yup.object({
 		.email("Email must be a valid email address.")
 		.notOneOf(emailAddresses, "Email address is already taken.")
 		.required("Email is required."),
+	sellerService: Yup.string()
+		.required("Service must be selected"),	
 	sellerPassword: Yup.string()
 		.required("Password is required")
 		.matches(LOWERCASE_REGEX, "At least one lowercase letter required.")

@@ -31,11 +31,6 @@ function AccountUpdate({isOpen, Fragment, closeModal, image, pickImage, createPi
   console.log("display pic: ",user.displayPicture)
 
   
-
-  useEffect(() => {
-    console.log("image has changed")
-  },[user.displayPicture])
-
   return (
     <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-30" onClose={closeModal}>

@@ -102,7 +102,7 @@ function Listings() {
 
     } catch (error) {
       console.log(error);
-      //closeModal()
+      clearPayload
       setHideLoading(true)
       return error;
     }
@@ -124,7 +124,7 @@ function Listings() {
 
   return (
     <>
-      {user?.account === "merchant"?
+      {user?.account === "service-provider"?
       <>
        <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
         <div className="relative w-20 h-20 mx-auto mt-60 z-50">

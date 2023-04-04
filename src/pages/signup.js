@@ -84,7 +84,7 @@ function Signup() {
                 : 'text-blue-100 hover:bg-amazon_blue-light hover:text-white'
               )}
              >
-               Merchant
+               Service Provider
              </Tab>
             </Tab.List>
           <Tab.Panels>

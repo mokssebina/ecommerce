@@ -49,12 +49,13 @@ const AuthContextProvider = ({ children }) => {
               status: userRef.data()?.status,
               createdDate: userRef.data()?.createdDate
             });
-           } else if (user?.account === "merchant"){
+           } else if (user?.account === "service-provider"){
             setUser({
               ...user,
               displayName: userRef.data()?.displayName || null,
               companyName: userRef.data()?.displayName || null,
               email: userRef.data()?.email,
+              service: userRef.data()?.service,
               uid: userRef.data()?.userId,
               displayPicture: userRef.data()?.displayPicture,
               account: userRef.data()?.account,
@@ -126,7 +127,7 @@ const AuthContextProvider = ({ children }) => {
           
   };
 
-  const merchantSignUp = async (companyName, email, password, displayPicture, account, status) => {
+  const merchantSignUp = async (companyName, email, service, password, displayPicture, account, status) => {
 
     try {
 
@@ -142,6 +143,7 @@ const AuthContextProvider = ({ children }) => {
         displayName: companyName,
         companyName: companyName,  
         email: user?.email,
+        service: service,
         userId: user?.uid,
         displayPicture: "", 
         account: account, 

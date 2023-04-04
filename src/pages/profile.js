@@ -41,6 +41,10 @@ function Profile({ children }) {
     setIsOpen(false)
   }
 
+  const clearPayload = () => {
+    setImage("");
+  }
+
   const pickImage = (e) => {
     setImage(e.target.files[0])
   }
@@ -82,6 +86,7 @@ function Profile({ children }) {
 
               await updateDoc(docRef, payload);
             },
+            clearPayload,
             setHideLoading(true)
           );
         },
@@ -90,6 +95,7 @@ function Profile({ children }) {
 
     } catch (error) {
       console.log(error);
+      clearPayload
       setHideLoading(true)
       return error;
     }
