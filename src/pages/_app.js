@@ -14,10 +14,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import theme from '../config/theme';
 import createEmotionCache from '../config/createEmotionCache';
+import { createTheme } from '@mui/material/styles';
+
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
-
+/*
+const theme = createTheme({
+  palette: {
+     primary: {
+        main: '#1976d2',
+     },
+  },
+});
+*/
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) => {
 
   NProgress.configure({ showSpinner: false });
@@ -31,7 +41,6 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
   });
 
   return (
-    <CacheProvider value={emotionCache}>
      <AuthContextProvider>
       <Head>
       <link
@@ -46,15 +55,12 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
        <Provider store={store}>
         <PageLayout>
           <ChakraProvider>
-          <CssBaseline />  
           <Component {...pageProps} />
           </ChakraProvider>  
         </PageLayout>
        </Provider>
       </ThemeProvider>
      </AuthContextProvider>  
-    </CacheProvider> 
-
   )
 }
 

@@ -52,7 +52,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/"
                 ? "bg-black text-gray-50"
-                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+                : "text-gray-50 hover:bg-gray-800"
             }`}
           >
             <div className="mr-2 text-gray-50">
@@ -65,10 +65,10 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         </Link>
         <Link href="/profile">
           <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/profile"
                 ? "bg-black text-gray-50"
-                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+                : "text-gray-50 hover:bg-gray-800"
             }`}
           >
             <div className="mr-2">
@@ -82,10 +82,10 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         {user?.account === "service-provider" &&
          <Link href="/listings">
           <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/listings"
                 ? "bg-black text-gray-50"
-                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+                : "text-gray-50 hover:bg-gray-800"
             }`}
           >
             <div className="mr-2">
@@ -98,10 +98,10 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         </Link>}
         <Link href="/real-estate">
           <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/real-estate"
                 ? "bg-black text-gray-50"
-                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+                : "text-gray-50 hover:bg-gray-800"
             }`}
           >
             <div className="mr-2">
@@ -114,10 +114,10 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         </Link>
         <Link href="/services">
           <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/real-estate"
                 ? "bg-black text-gray-50"
-                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+                : "text-gray-50 hover:bg-gray-800"
             }`}
           >
             <div className="mr-2">
@@ -133,7 +133,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/real-estate"
                 ? "bg-black text-gray-50"
-                : "text-gray-50 hover:bg-orange-100 hover:text-orange-500"
+                : "text-gray-50 hover:bg-gray-800"
             }`}
           >
             <div className="mr-2">

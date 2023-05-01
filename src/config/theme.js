@@ -1,7 +1,10 @@
-//import { Roboto } from 'next/font/google';
+//import { Roboto } from 'next/font/google'
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
-
 /*
 export const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -10,7 +13,6 @@ export const roboto = Roboto({
   fallback: ['Helvetica', 'Arial', 'sans-serif'],
 });
 */
-
 // Create a theme instance.
 const theme = createTheme({
   palette: {
@@ -23,16 +25,10 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
+    typography: {
+      //fontFamily: roboto.style.fontFamily,
     },
-  },
+  }  
 });
 
 export default theme;

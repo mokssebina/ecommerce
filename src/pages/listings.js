@@ -1,4 +1,5 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react'
+import React, { useState, useEffect, Fragment, useContext, useMemo } from 'react'
+//import MaterialTable from 'material-table'
 import Listing from '../components/Listing'
 import { FolderAddIcon } from '@heroicons/react/outline'
 import ListingsUpload from '../components/ListingsUpload';
@@ -20,7 +21,25 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../config/firebase';
 import { ThreeCircles } from  'react-loader-spinner'
+import { Table, Pagination } from 'rsuite';
+import { ChevronUpIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline'
+import DataTable, { ExpanderComponentProps } from 'react-data-table-component';
 
+
+const columns = [
+  {
+    name: "Item",
+    selector: row => row.item,
+  },
+  {
+    name: "Units",
+    selector: row => row.units
+  },
+  {
+      name: 'Price',
+      selector: row => row.price,
+  },
+]
 
 
 function Listings() {
@@ -34,8 +53,16 @@ function Listings() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [hideLoading, setHideLoading] = useState(true);
+  const [filterText, setFilterText] = useState('');
+
 
   const { user } = useContext(AuthContext)
+
+  const tableData = {
+    columns,
+    listings
+  };
+
 
   function clearPayload() {
     setImage("");
@@ -82,8 +109,10 @@ function Listings() {
           getDownloadURL(uploadTask.snapshot.ref).then(
             async (downloadURL) => { 
               console.log("File available at", downloadURL);
+
+              const dbRef = collection(db, "listings")
               
-              await addDoc(collection(db, "listings"), {
+              await addDoc(dbRef, {
                 photoURL: downloadURL,
                 units: units,
                 item: item,
@@ -92,6 +121,14 @@ function Listings() {
                 description: description,
                 userId: user?.uid,
                 store: user?.displayName
+              })
+              .then(async (docRef) => {
+                console.log("product ID: ",docRef.id)
+                const listingRef =  doc(db, "listings", `${docRef.id}`)
+
+                await updateDoc(listingRef, {
+                  productId: docRef.id
+                });
               });
             },
             clearPayload,
@@ -109,6 +146,45 @@ function Listings() {
 
   }
 
+  const ExpandedComponent = ({ data }) => {
+    return (
+      <div className='w-full px-1 pt-4 pb-2 text-xs text-gray-500 flex'>
+        <div className='w-1/5 p-1'>
+         <img className='w-3/5 h-auto mx-auto' src={data.photoURL} />
+        </div>
+        <div className='w-2/5 p-1'>
+         <p className=' font-semibold'>Description:</p> 
+         <p className='mt-1 mb-2 line-clamp-2'>
+         {data.description}
+         </p> 
+        </div>
+        <div className='w-1/5 p-1'>
+         <p className=' font-semibold'>Category:</p> 
+         <p className='mt-1 mb-2 line-clamp-2'>
+          {data.category}
+         </p> 
+        </div>
+        <div className='w-1/5 flex'>
+         <div className='w-2/4 items-center p-5'>
+         {/*<PencilIcon className='h-5 w-5 mx-auto my-auto cursor-pointer' />*/}
+         </div>
+         <div className='w-2/4 items-center p-5'>
+          <TrashIcon onClick={() => {
+              deleteDoc(doc(db, `listings`, data.productId))
+            }} 
+           className='h-5 w-5 mx-auto cursor-pointer' />
+         </div>
+        </div>
+      </div>
+    )
+};
+
+  const filteredItems = listings.filter(
+		item => item.item && item.item.toLowerCase().includes(filterText.toLowerCase())
+    ||
+    item.category && item.category.toLowerCase().includes(filterText.toLowerCase()),
+	);
+
 
   useEffect(() => {
     const getListings = async () => {
@@ -122,6 +198,7 @@ function Listings() {
     return getListings()
   },[])
 
+  
   return (
     <>
       {user?.account === "service-provider"?
@@ -161,41 +238,30 @@ function Listings() {
 
         <div className='w-full h-screen bg-white overflow-hidden'>
         
-        <header className='fixed w-full shadow-md z-20 bg-white'>
+        <header className='fixed w-full h-16 bg-white'>
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
             <div className='w-full h-10 flex mt-2'>
               <div className='w-9/12 px-1 py-1'>
-                <input placeholder='Search' className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-1 border-0' />
+                <input
+                 placeholder='Search'
+                 className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-2 border-0'
+                 value={filterText}
+                 onChange={e => setFilterText(e.target.value)}
+                />
               </div> 
               <div className='w-3/12 p-2'>
                 <FolderAddIcon onClick={openModal} className='w-8 h-8 cursor-pointer mx-auto' />
               </div> 
             </div> 
             </div>  
-            <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto h-14 bg-white relative z-10 mb-2'>
             
-            <div className='w-9/12 h-full flex justify-between items-center text-sm font-semibold text-gray-800'>
-              
-              <div className='items-center ml-2'>
-                <span>Item</span>
-              </div>
-              <div className='items-center ml-16'>
-                <span>Unit</span>
-              </div>
-              <div className='items-center'>
-                <span>Price(BWP)</span>
-              </div>
-
-            </div>
-
-          </div>
         </header>
         
         <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
 
-        <div className='w-full h-full mt-32 px-1 pb-2'>
+        <div className='w-full h-full mt-24 px-1 pb-2'>
 
-          {listings.length > 0 ?
+          {/*listings.length > 0 ?
            listings.map((listing) => 
             <Listing 
              deleteListing={() => {
@@ -212,7 +278,17 @@ function Listings() {
            <div className='relative w-full h-48 items-center my-auto'>
             <p className='text-base mt-2 mb-2 text-center'>Create listings and start selling</p>
            </div>
-          }  
+            */}  
+        
+          <DataTable 
+           columns={columns} 
+           data={filterText === ""? listings: filteredItems} 
+           expandableRows 
+           pagination
+           fixedHeader
+           responsive
+           expandableRowsComponent={ExpandedComponent}
+          />  
 
         </div> 
 

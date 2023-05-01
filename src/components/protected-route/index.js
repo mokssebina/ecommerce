@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { LOGIN, HOME } from "../../utils/constant/routesConstants";
-import CircularProgress from '@mui/material/CircularProgress';
 import { ThreeCircles } from  'react-loader-spinner'
 
 export const withPublic = (Component) => {

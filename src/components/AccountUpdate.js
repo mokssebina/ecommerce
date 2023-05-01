@@ -73,7 +73,7 @@ function AccountUpdate({isOpen, Fragment, closeModal, image, pickImage, createPi
                   </div>  
                   <div className="w-full h-64 mt-2 p-1">
 
-                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10' image={image} onChange={pickImage} />
+                    <input type="file" accept=".image/png, image/jpeg, image/jpg" className='h-10 p-1' image={image} onChange={pickImage} />
 
                     <div className='relative w-24 h-24 rounded-full mx-auto mt-2 bg-black'>
                      {user?.displayPicture ?
