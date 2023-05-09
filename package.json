@@ -35,7 +35,7 @@
     "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-currency-formatter": "^1.1.0",
-    "react-data-table-component": "^7.5.3",
+    "react-data-table-component": "^3.5.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^7.43.2",
     "react-horizontal-scrolling-menu": "^3.2.3",
@@ -50,12 +50,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
+    "autoprefixer": "^10.4.14",
     "css-loader": "^6.2.0",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
     "mini-css-extract-plugin": "^2.1.0",
-    "postcss": "^8.2.15",
-    "tailwindcss": "^2.1.2"
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2"
   }
 }

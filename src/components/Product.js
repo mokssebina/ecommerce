@@ -40,42 +40,43 @@ function Product({id, title, price, description, category, image}) {
     }
 
   return (
-    <div onClick={goToDetails} className='relative w-11/12 mx-auto my-5 flex flex-col bg-white z-20 p-5 rounded-md'>
+    <div onClick={goToDetails} className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white z-20 p-3 rounded-sm shadow-sm hover:shadow-lg'>
+     <div className='w-full mx-auto my-5 flex flex-col'>
      <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
-     {image &&
+      {image &&
       <Image src={image} height={200} width={200} objectFit='contain' />
-     }
+      }
 
-     <h4 className='my-3'>{title}</h4>
-
-     <div className='flex'>
+      <h4 className='my-3 line-clamp-1'>{title}</h4>
+      {/*
+      <div className='flex'>
 
       {Array(rating)
-       .fill()
-       .map((_,i) => (
-         <StarIcon key={i} className='h-5 text-yellow-500' />
-       ))}
+        .fill()
+        .map((_,i) => (
+          <StarIcon key={i} className='h-5 text-yellow-500' />
+        ))}
 
-     </div>
+      </div>
 
-     <p className='text-xs my-2 line-clamp-2'>{description}</p> 
-
-     <div className='mb-5'>
+      <p className='text-xs my-2 line-clamp-2'>{description}</p> 
+      */}
+      <div className='mb-5'>
 
       <Currency quantity={price} currency="BWP" />  
 
-     </div>
+      </div>
 
-     {hasPrime && (
+      {/*hasPrime && (
         <div className='flex items-center space-x-2 -mt-5'>
           <img className='w-12' src="https://links.papareact.com/fdw" alt="" />  
           <p className='text-xs text-gray-500'>Free delivery within Gaborone</p>
         </div>
-     )}
+      )*/}
 
-     {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
-
+      {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
+     </div>
     </div>
   )
 }

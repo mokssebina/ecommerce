@@ -44,7 +44,7 @@ const columns = [
 
 function Listings() {
   
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState([{}]);
   const [isOpen, setIsOpen] = useState(false)
   const [image, setImage] = useState("");
   const [units, setUnits] = useState(0);
@@ -57,12 +57,6 @@ function Listings() {
 
 
   const { user } = useContext(AuthContext)
-
-  const tableData = {
-    columns,
-    listings
-  };
-
 
   function clearPayload() {
     setImage("");
@@ -177,7 +171,9 @@ function Listings() {
         </div>
       </div>
     )
-};
+  };
+
+  
 
   const filteredItems = listings.filter(
 		item => item.item && item.item.toLowerCase().includes(filterText.toLowerCase())
@@ -198,12 +194,16 @@ function Listings() {
     return getListings()
   },[])
 
+  const tableData = {
+    columns,
+    listings
+  };
   
   return (
     <>
       {user?.account === "service-provider"?
       <>
-       <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
+       <div hidden={hideLoading} className="w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
         <div className="relative w-20 h-20 mx-auto mt-60 z-50">
         <ThreeCircles
           height="80"
@@ -238,7 +238,7 @@ function Listings() {
 
         <div className='w-full h-screen bg-white overflow-hidden'>
         
-        <header className='fixed w-full h-16 bg-white'>
+        <header className='w-full h-16 bg-white'>
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
             <div className='w-full h-10 flex mt-2'>
               <div className='w-9/12 px-1 py-1'>
@@ -279,17 +279,13 @@ function Listings() {
             <p className='text-base mt-2 mb-2 text-center'>Create listings and start selling</p>
            </div>
             */}  
-        
-          <DataTable 
-           columns={columns} 
-           data={filterText === ""? listings: filteredItems} 
-           expandableRows 
-           pagination
-           fixedHeader
-           responsive
-           expandableRowsComponent={ExpandedComponent}
-          />  
-
+           <DataTable 
+            columns={columns} 
+            data={filterText? filteredItems: listings} 
+            expandableRows 
+            pagination
+            expandableRowsComponent={ExpandedComponent}
+           />
         </div> 
 
         </main>

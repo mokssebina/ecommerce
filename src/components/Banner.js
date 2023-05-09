@@ -4,9 +4,10 @@ import { Carousel } from "react-responsive-carousel"
 
 function Banner() {
   return (
-    <div className='relative'>
-      <div className='absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent bottom-0 z-20' />  
+    <div className='relative w-full h-full md:h-full lg:h-3/5'>
+     
      <Carousel
+      className='w-full h-full'
       autoPlay
       infiniteLoop
       showStatus={false}
@@ -15,18 +16,19 @@ function Banner() {
       interval={5000}
      >
         <div>
-         <img className=' object-cover' loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/46847014_749257868793600_389873852408135680_n.jpg" alt="" />   
+         <img className='object-fill' loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/46847014_749257868793600_389873852408135680_n.jpg" alt="" />   
         </div>
 
         <div>
-         <img className=' object-cover' loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc2.png" alt="" />   
+         <img className='object-fill' loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc2.png" alt="" />   
         </div>
 
         <div>
-         <img className=' object-cover' loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc3.jpg" alt="" />   
+         <img className='object-fill' loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc3.jpg" alt="" />   
         </div>
 
-     </Carousel>   
+     </Carousel>  
+     
     </div>
   )
 }

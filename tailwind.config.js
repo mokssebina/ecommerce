@@ -1,10 +1,9 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
@@ -21,11 +20,17 @@ module.exports = {
       },
       backgroundImage: {
         'backdrop-image': "url('https://raw.githubusercontent.com/mokssebina/MMNT/master/vecteezy_geometric-oriental-tribal-ethnic-pattern-traditional_8570419.jpg')",
+      },
+      aspectRatio: {
+        '3/4': '3 / 4',
+      },
+      height: {
+        custom: {
+          height_banner: "34rem"
+        },
       }
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [require("@tailwindcss/line-clamp")],
-};
+  plugins: [],
+}
+

@@ -1,6 +1,7 @@
 import React,{ useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
+import categories from '../data/categories'
 
 
 function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, setItem, image, 
@@ -74,7 +75,11 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, set
                    <div className='w-full h-14 mt-1 text-xs font-semibold mb-1 p-1'>
                     <div className='w-full pl-1 pr-2 text-xs font-semibold'>
                      <span>Category</span>  
-                     <input placeholder='Category' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={category} onChange={setCategory} />   
+                     <select placeholder='Category' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={category} onChange={setCategory}>
+                      {categories.map(data =>(
+                        <option className="w-full flex text-sm text-gray-900" value={data.item}>{data.item}</option>
+                      ))}
+                     </select>   
                     </div>
                    </div> 
 

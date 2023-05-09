@@ -18,18 +18,18 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
 
 
   return (
-    <div ref={ref} className="fixed w-56 h-screen bg-amazon_blue shadow-sm z-50">
+    <div ref={ref} className="fixed w-64 h-screen bg-amazon_blue shadow-sm z-50">
 
       <div className="absolute top-0 flex justify-center mb-8 z-10">
         <div className="pl-4 pt-4 md:pl-2 md:pt-4">
          <MenuIcon
-          className="h-8 w-8 text-gray-50 cursor-pointer"
+          className="max-h-8 w-8 text-gray-50 cursor-pointer"
           onClick={() => setShowNav(!showNav)}
          /> 
         </div>
         <picture className="cursor-pointer" onClick={() => router.push(HOME)}>
           <img
-            className="w-24 h-auto pl-2 pt-4"
+            className="w-24 max-h-auto pl-2 pt-4"
             src="https://raw.githubusercontent.com/mokssebina/MMNT/master/jobber-logo.png"
             alt="company logo"
           />
@@ -56,7 +56,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             }`}
           >
             <div className="mr-2 text-gray-50">
-              <HomeIcon className="h-5 w-5" />
+              <HomeIcon className="max-h-5 w-5" />
             </div>
             <div className="text-gray-50">
               <p>Home</p>
@@ -72,7 +72,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <UserIcon className="h-5 w-5" />
+              <UserIcon className="max-h-5 w-5" />
             </div>
             <div>
               <p>Profile</p>
@@ -89,7 +89,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <CreditCardIcon className="h-5 w-5" />
+              <CreditCardIcon className="max-h-5 w-5" />
             </div>
             <div>
               <p>Listings</p>
@@ -105,7 +105,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <OfficeBuildingIcon className="h-5 w-5" />
+              <OfficeBuildingIcon className="max-h-5 w-5" />
             </div>
             <div>
               <p>Real Estate</p>
@@ -121,7 +121,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <SwitchHorizontalIcon className="h-5 w-5" />
+              <SwitchHorizontalIcon className="max-h-5 w-5" />
             </div>
             <div>
               <p>Services</p>
@@ -137,7 +137,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <ArchiveIcon className="h-5 w-5" />
+              <ArchiveIcon className="max-h-5 w-5" />
             </div>
             <div>
               <p>Tenders</p>

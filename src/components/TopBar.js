@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import {
   MenuIcon,
   UserIcon,
@@ -16,11 +16,13 @@ import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
 import { CHECKOUT, HOME, LOGIN, ACCOUNT, REAL_ESTATE, SERVICES, LEADS } from "../utils/constant/routesConstants";
 import { AuthContext } from "../context/AuthContext";
+import SearchBar from "./SearchBar";
 
 function TopBar({ showNav, setShowNav }) {
 
     const items = useSelector(selectItems);
     const router = useRouter();
+    const [search, setSearch] = useState("");
 
     const { user, logOut } = useContext(AuthContext)
 
@@ -40,15 +42,16 @@ function TopBar({ showNav, setShowNav }) {
 
 
   return (
-    <header className="sticky top-0 z-30 bg-amazon_blue w-full">
+    <header className="top-0 bg-amazon_blue w-full">
+      
     <div
-      className="w-full lg:w-9/12 max-w-screen-2xl mx-auto h-16 pr-4 bg-amazon_blue flex flex-grow justify-between items-center"
+      className="w-full lg:w-9/12 max-w-screen-2xl mx-auto max-h-16 pr-4 flex flex-grow justify-between items-center"
     >
 
       <div className="flex justify-center mt-6 mb-8">
         <div className="pl-4 pt-4 md:pl-2 md:pt-4">
          <MenuIcon
-          className="h-8 w-8 text-gray-50 cursor-pointer"
+          className="max-h-8 w-8 text-gray-50 cursor-pointer"
           onClick={() => setShowNav(!showNav)}
          /> 
         </div>
@@ -76,10 +79,10 @@ function TopBar({ showNav, setShowNav }) {
       <div className="flex items-center md:pr-16 text-gray-50">
          <Popover as="div" className="relative">
           <Popover.Button onClick={() => router.push(CHECKOUT)} className="outline-none mr-5 md:mr-8 cursor-pointer flex item-center">
-            <span className='md:right-10 h-4 w-4 bg-purple-900 text-center rounded-full text-white text-xs font-bold'>
+            <span className='md:right-10 max-h-4 w-4 bg-purple-900 text-center rounded-full text-white text-xs font-bold'>
              {items.length}
             </span>
-            <ShoppingCartIcon className="h-6 w-6" />
+            <ShoppingCartIcon className="max-h-6 w-6" />
           </Popover.Button>
          </Popover>
          <Popover as="div" className="relative inline-block text-left">
@@ -87,7 +90,7 @@ function TopBar({ showNav, setShowNav }) {
               {user?.displayPicture ?
               <Image src={`${user?.displayPicture}`} className="rounded-full relative mr-1 mx-auto" width={24} height={24} objectFit='contain' />
               :
-              <UserCircleIcon className='relative h-6 w-6 mr-1 mx-auto' />}
+              <UserCircleIcon className='relative max-h-6 w-6 mr-1 mx-auto' />}
               <span className="hidden md:block font-medium ml-1">
                 {user? user?.displayName : "Sign in"}
               </span>   
@@ -96,7 +99,7 @@ function TopBar({ showNav, setShowNav }) {
 
          <Popover as="div" className="relative items-center inline-block ml-2">
            <Popover.Button className="outline-none cursor-pointer flex items-center text-gray-50">
-            <ChevronDownIcon className="h-4 w-4" />
+            <ChevronDownIcon className="max-h-4 w-4" />
            </Popover.Button>
           <Transition
             as={Fragment}
@@ -111,8 +114,8 @@ function TopBar({ showNav, setShowNav }) {
               <div className="relative p-3">
                 <div className="mt-4 grid gap-4 grid-cols-1 overflow-hidden">
                   <div onClick={() => router.push(ACCOUNT)} className="flex cursor-pointer hover:bg-amazon_blue-light rounded-lg">
-                    <div className="rounded-full shrink-0 h-8 w-8 flex items-center justify-center">
-                       <UserIcon className="h-4 w-4 text-gray-50" />
+                    <div className="rounded-full shrink-0 max-h-8 w-8 flex items-center justify-center">
+                       <UserIcon className="max-h-4 w-4 text-gray-50" />
                     </div>
                     <div className="ml-4">
                       <p className="font-medium text-gray-50 p-1">
@@ -121,8 +124,8 @@ function TopBar({ showNav, setShowNav }) {
                     </div>
                   </div>
                   <div onClick={signOut} className="flex cursor-pointer hover:bg-amazon_blue-light rounded-lg">
-                    <div className="rounded-full shrink-0 h-8 w-8 flex items-center justify-center">
-                      <LogoutIcon className="h-4 w-4 text-gray-50" />
+                    <div className="rounded-full shrink-0 max-h-8 w-8 flex items-center justify-center">
+                      <LogoutIcon className="max-h-4 w-4 text-gray-50" />
                     </div>
                     <div className="ml-4">
                       <p className="font-medium text-gray-50 p-1">
@@ -141,10 +144,10 @@ function TopBar({ showNav, setShowNav }) {
 
     <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden text-white bg-amazon_blue text-sm'>
 
-       <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover:bg-purple-500'>
+      <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover:bg-purple-500'>
         <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text" />
         <SearchIcon className='h-12 p-4 text-white' />  
-       </div>   
+      </div>   
 
     </div>
 
