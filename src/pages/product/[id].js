@@ -40,49 +40,42 @@ const ProductDetails = () => {
     }
 
   return (
-    <div className="h-full w-full">
-     <main className='relative w-full h-full sm:flex lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
-      <div className='relative w-full sm:w-2/4 my-5 flex flex-col bg-white p-5'>
+    <div className="h-full w-full bg-gray-200">
+     <main className='relative w-full h-full md:w-10/12 lg:w-9/12 md:space-x-2 flex flex-grow max-w-screen-2xl mx-auto'>
 
-        <h4 className='visible sm:invisible my-3'>{data.title}</h4>
+      <div className='relative w-full md:w-3/4 my-5 flex shadow-md bg-white p-3'>
 
+       <div className='w-full md:w-2/4 aspect-square border-gray-400 md:space-x-2 border-2'>
         {data.image &&
           <Image src={data.image} height={250} width={250} objectFit='contain' />
         }
-      </div>  
-      <div className='relative w-full sm:w-2/4 my-5 flex flex-col bg-white p-5'>
-        <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{data.category}</p>
+       </div>
 
-        <h4 className='invisible sm:visible my-3'>{data.title}</h4>
+       <div className='w-full px-3 md:w-2/4 md ml-4'>
+        <h2 className='font-bold text-sm md:text-lg my-3'>{data.title}</h2>
+
+        <p className='mt-4 text-xs md:text-sm text-blue-800'>Merchant</p>
+
+        <p className='mt-4 text-xs md:text-sm'>You can also animate the skeleton component.</p>
 
         <div className='flex'>
 
-        {Array(rating)
-        .fill()
-        .map((_,i) => (
-            <StarIcon key={i} className='h-5 text-yellow-500' />
-        ))}
+          {Array(rating)
+          .fill()
+          .map((_,i) => (
+              <StarIcon key={i} className='h-5 text-yellow-500' />
+          ))}
 
         </div>
 
-        <p className='text-xs my-2 line-clamp-2'>{data.description}</p> 
-
-        <div className='mb-5'>
-
-        <Currency quantity={data.price} currency="BWP" />  
-
+        <div className='w-full h-11 border-gray-400 border-t-2 border-b-2'>
+         <p className='font-bold text-base md:text-lg'>In Stock</p> 
         </div>
 
-        {hasPrime && (
-            <div className='flex items-center space-x-2 -mt-5'>
-            <img className='w-12' src="https://links.papareact.com/fdw" alt="" />  
-            <p className='text-xs text-gray-500'>Free delivery within Gaborone</p>
-            </div>
-        )}
+       </div>
+        
+      </div>  
 
-        <button onClick={addItemToBasket} className='mt-auto button bg-purple-900 text-white'>Add to Basket</button>
-
-      </div>
      </main>   
     </div>
   )

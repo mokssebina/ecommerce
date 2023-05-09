@@ -50,6 +50,7 @@ function Listings() {
   const [units, setUnits] = useState(0);
   const [item, setItem] = useState("");
   const [price, setPrice] = useState(0);
+  const [summary, setSummary] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [hideLoading, setHideLoading] = useState(true);
@@ -111,6 +112,7 @@ function Listings() {
                 units: units,
                 item: item,
                 price: price,
+                summary: summary,
                 category: category,
                 description: description,
                 userId: user?.uid,
@@ -143,22 +145,28 @@ function Listings() {
   const ExpandedComponent = ({ data }) => {
     return (
       <div className='w-full px-1 pt-4 pb-2 text-xs text-gray-500 flex'>
-        <div className='w-1/5 p-1'>
+        <div className='w-1/6 p-1'>
          <img className='w-3/5 h-auto mx-auto' src={data.photoURL} />
         </div>
-        <div className='w-2/5 p-1'>
+        <div className='w-2/6 p-1'>
+         <p className=' font-semibold'>Summary:</p> 
+         <p className='mt-1 mb-2 line-clamp-2'>
+         {data.summary}
+         </p> 
+        </div>
+        <div className='w-2/6 p-1'>
          <p className=' font-semibold'>Description:</p> 
          <p className='mt-1 mb-2 line-clamp-2'>
          {data.description}
          </p> 
         </div>
-        <div className='w-1/5 p-1'>
+        <div className='w-1/6 p-1'>
          <p className=' font-semibold'>Category:</p> 
          <p className='mt-1 mb-2 line-clamp-2'>
           {data.category}
          </p> 
         </div>
-        <div className='w-1/5 flex'>
+        <div className='w-1/6 flex'>
          <div className='w-2/4 items-center p-5'>
          {/*<PencilIcon className='h-5 w-5 mx-auto my-auto cursor-pointer' />*/}
          </div>
@@ -228,6 +236,8 @@ function Listings() {
         setUnits={(e) => setUnits(e.target.value)}
         price={price}
         setPrice={(e) => setPrice(e.target.value)}
+        summary={summary}
+        setSummary={(e) => setSummary(e.target.value)}
         category={category}
         setCategory={(e) => setCategory(e.target.value)}
         description={description}
@@ -238,7 +248,9 @@ function Listings() {
 
         <div className='w-full h-screen bg-white overflow-hidden'>
         
-        <header className='w-full h-16 bg-white'>
+        <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
+         <header className='w-full h-16 bg-white'>
+          
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
             <div className='w-full h-10 flex mt-2'>
               <div className='w-9/12 px-1 py-1'>
@@ -255,11 +267,9 @@ function Listings() {
             </div> 
             </div>  
             
-        </header>
-        
-        <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
+         </header>
 
-        <div className='w-full h-full mt-24 px-1 pb-2'>
+        <div className='w-full h-full mt-2 px-1 pb-2'>
 
           {/*listings.length > 0 ?
            listings.map((listing) => 

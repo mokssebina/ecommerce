@@ -108,7 +108,7 @@ function Home({ products }) {
         <title>Jobber</title>
       </Head>
 
-      <div className="relative w-full h-52 sm:h-80 md:h-[28rem] lg:h-[32rem]">
+      <div className="relative w-full h-56 sm:h-80 md:h-[28rem] lg:h-[32rem]">
        <div className='w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
 
         <div className='hidden lg:flex lg:w-1/4 lg:px-2'>
@@ -136,11 +136,13 @@ function Home({ products }) {
 
       <div className="w-full bg-gray-200">
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
+
         <div className='relative w-full lg:w-3/4'>
          <ProductFeed products={products} />
         </div>
-        <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'
-        >
+        
+        <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'>
+
          <img className='w-full h-auto' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/small-business-marketing-on-instagram.png'} /> 
 
          <img className='w-full h-auto mt-10' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/creating-online-ads-guide.png'} /> 
