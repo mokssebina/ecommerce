@@ -42,10 +42,10 @@ function Product({id, title, price, description, category, image}) {
   return (
     <div onClick={goToDetails} className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white z-20 p-3 rounded-sm shadow-sm hover:shadow-lg'>
      <div className='w-full mx-auto my-5 flex flex-col'>
-     <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
+     {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
       {image &&
-      <Image src={image} height={200} width={200} objectFit='contain' />
+      <Image className='mx-auto my-auto' src={image} height={200} width={200} objectFit='contain' />
       }
 
       <h4 className='my-3 line-clamp-1'>{title}</h4>

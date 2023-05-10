@@ -65,10 +65,10 @@ function Signup() {
              <Tab
               className={({ selected }) =>
               classNames(
-               'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white',
+               'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
                'ring-white ring-opacity-60 ring-offset-2 ring-offset-amazon_blue-light focus:outline-none focus:ring-2',
                selected
-               ? 'bg-white shadow text-amazon_blue'
+               ? 'bg-white shadow text-gray-700'
                : 'text-blue-100 hover:bg-amazon_blue-light hover:text-white'
               )}
               >
@@ -77,10 +77,10 @@ function Signup() {
              <Tab
                className={({ selected }) =>
                classNames(
-                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white',
+                'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
                 'ring-white ring-opacity-60 ring-offset-2 ring-offset-amazon_blue-light focus:outline-none focus:ring-2',
                 selected
-                ? 'bg-white shadow text-amazon_blue'
+                ? 'bg-white shadow text-gray-700'
                 : 'text-blue-100 hover:bg-amazon_blue-light hover:text-white'
               )}
              >

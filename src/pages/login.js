@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { FormInput } from '../components/form-components/FormInput';
+import { PasswordInput } from '../components/form-components/PasswordInput';
 import SubmitButton from '../components/form-components/SubmitButton';
 import { AuthContext } from '../context/AuthContext';
 import { HOME, SIGN_UP, FORGOT_PASSWORD } from '../utils/constant/routesConstants';
@@ -85,7 +86,7 @@ function Login() {
                 errors={errors.email}
                 />
 
-                <FormInput
+                <PasswordInput
                 label="Password"
                 name="password"
                 type="password"

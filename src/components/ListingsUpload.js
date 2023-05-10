@@ -5,7 +5,7 @@ import categories from '../data/categories'
 
 
 function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, setItem, image, 
-  setImage, units, setUnits, price, setPrice, summary, setSummary, category, setCategory, description, setDescription}) {
+  setImage, units, setUnits, price, setPrice, category, setCategory, description, setDescription}) {
 
 
   return (
@@ -27,14 +27,14 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, set
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
-                enter="ease-out duration-300"
+                enter="ease-out duration-300" 
                 enterFrom="opacity-0 scale-95"
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md h-custom transform overflow-hidden rounded-2xl bg-gray-50 pt-6 px-2 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full sm:w-full md:w-3/4 lg:w-2/4 max-w-xl h-96 transform overflow-hidden rounded-2xl bg-gray-50 pt-6 px-2 text-left align-middle shadow-xl transition-all">
                   <div className='w-full h-6 flex px-2'>
                    <div className='w-10/12'>
                     <Dialog.Title
@@ -69,13 +69,6 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, set
                     <div className='w-3/12 px-1 text-xs font-semibold'>
                      <span>Price(BWP)</span>  
                      <input placeholder='Price' type={'number'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={price} onChange={setPrice} />   
-                    </div>
-                   </div>   
-
-                   <div className='w-full h-14 mt-1 text-xs font-semibold mb-1 p-1'>
-                    <div className='w-full pl-1 pr-2 text-xs font-semibold'>
-                     <span>Summary</span>  
-                     <input placeholder='Item' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={summary} onChange={setSummary} />   
                     </div>
                    </div>   
 

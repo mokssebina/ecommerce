@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormInput } from "../components/form-components/FormInput";
+import { PasswordInput } from "./form-components/PasswordInput";
 import SubmitButton from "../components/form-components/SubmitButton";
 import { AuthContext } from "../context/AuthContext";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -92,10 +93,9 @@ function SignupForm(props) {
               errors={errors.email}
              />
 
-              <FormInput
+              <PasswordInput
                label="Password"
                name="password"
-               type="password"
                formOptions={signupSchema.fields.password}
                errors={errors.password}
               />

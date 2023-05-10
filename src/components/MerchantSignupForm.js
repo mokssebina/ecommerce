@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from "react-hook-form";
 import { FormInput } from "../components/form-components/FormInput";
+import { PasswordInput } from './form-components/PasswordInput';
 import { FormDropdown } from './form-components/FormDropdown';
 import SubmitButton from "../components/form-components/SubmitButton";
 import { AuthContext } from "../context/AuthContext";
@@ -98,10 +99,9 @@ function MerchantSignupForm(props) {
              errors={errors.sellerService}
             />
 
-            <FormInput
+            <PasswordInput
              label="Password"
              name="sellerPassword"
-             type="password"
              formOptions={sellerSignupSchema.fields.sellerPassword}
              errors={errors.sellerPassword}
             />
