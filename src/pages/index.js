@@ -59,48 +59,6 @@ function Home({ products }) {
     };
   }, []);
 
-  const goHome = () => {
-    setFiltered(false)
-    setMenu(true)
-  }
-  
-  const pickTools = () => {
-    setCategory('Tools')
-    setFiltered(true)
-    setMenu(true)
-  }
-
-  const pickFoundation = () => {
-    setCategory('Foundation')
-    setFiltered(true)
-    setMenu(true)
-  }
-
-  const pickAdhesive = () => {
-    setCategory('Adhesive')
-    setFiltered(true)
-    setMenu(true)
-  }
-
-  const pickFencing = () => {
-    setCategory('Fencing')
-    setFiltered(true)
-    setMenu(true)
-  }
-
-  const pickGeyser = () => {
-    setCategory('Geyser')
-    setFiltered(true)
-    setMenu(true)
-  }
-
-  const pickPaint = () => {
-    setCategory('Paint')
-    setFiltered(true)
-    setMenu(true)
-  }
-
-
 
   return (
     <div className="h-full w-full flex flex-col bg-gray-50">

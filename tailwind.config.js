@@ -22,7 +22,7 @@ module.exports = {
         'backdrop-image': "url('https://raw.githubusercontent.com/mokssebina/MMNT/master/vecteezy_geometric-oriental-tribal-ethnic-pattern-traditional_8570419.jpg')",
       },
       aspectRatio: {
-        '3/4': '3 / 4',
+        '3/4': '4 / 5',
       },
       height: {
         custom: {

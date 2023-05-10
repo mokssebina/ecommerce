@@ -30,8 +30,8 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         <picture className="cursor-pointer" onClick={() => router.push(HOME)}>
           <img
             className="w-24 max-h-auto pl-2 pt-4"
-            src="https://raw.githubusercontent.com/mokssebina/MMNT/master/jobber-logo.png"
-            alt="company logo"
+            src=""
+            alt=""
           />
         </picture>
         {/*<div className="pl-4 pt-2 md:pl-2 md:pt-4">

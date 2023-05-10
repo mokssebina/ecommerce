@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
+import { ShoppingCartIcon, HeartIcon } from "@heroicons/react/outline";
 import Image from 'next/image';
 import StarIcon from '@heroicons/react/solid/StarIcon'
 import Currency from 'react-currency-formatter';
@@ -40,43 +41,102 @@ const ProductDetails = () => {
     }
 
   return (
-    <div className="h-full w-full bg-gray-200">
-     <main className='relative w-full h-full md:w-10/12 lg:w-9/12 md:space-x-2 flex flex-grow max-w-screen-2xl mx-auto'>
+    <div className="h-screen w-screen bg-gray-200">
+     <main className="relative w-full lg:flex lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto pt-5 mb-5">
+      <div className='relative w-full md:full lg:w-3/4 pt-1 px-3'>
 
-      <div className='relative w-full md:w-3/4 my-5 flex shadow-md bg-white p-3'>
+       <div className='w-full h-full bg-white sm:flex md:flex lg:flex shadow-md p-4'>
 
-       <div className='w-full md:w-2/4 aspect-square border-gray-400 md:space-x-2 border-2'>
-        {data.image &&
-          <Image src={data.image} height={250} width={250} objectFit='contain' />
-        }
+        <div className='relative w-full md:w-2/4 lg:w-2/4'>
+          <div className='w-9/12 mx-auto aspect-square border-gray-400 md:space-x-2 border-2'>
+            {data.image &&
+              <Image src={data.image} height={250} width={250} objectFit='contain' />
+            }
+          </div>
+        </div>
+        <div className='relative w-full md:w-2/4 lg:w-2/4 p-3'>
+
+          <p className='text-gray-800 text-2xl md:text-3xl lg:text-4xl mb-2'>{data.title}</p>
+
+          <p className='mt-2 text-base md:text-lg text-purple-900'>Merchant</p>
+
+          <p className='mt-2 text-xs md:text-sm'>You can also animate the skeleton component.</p>
+
+          <div className='flex mt-2'>
+
+            {Array(rating)
+            .fill()
+            .map((_,i) => (
+                <StarIcon key={i} className='h-5 text-yellow-500' />
+            ))}
+
+          </div>
+
+          <div className='w-full h-11 border-gray-400 border-t-2 border-b-2 p-1 mt-2'>
+          <p className='font-semibold text-base md:text-lg'>In Stock</p> 
+          </div>
+
+          <div className='w-full lg:hidden  p-2'>
+
+            <div className='relative w-full md:w-1/4 my-5 flex flex-col p-3'>
+              <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
+            </div> 
+            <button className='w-full h-10 flex md:h-16 text-white lg:h-16 bg-purple-900 mt-4 hover:bg-purple-700'>
+            <div className='flex h-5 mx-auto my-auto space-x-1'>
+              <p>+</p> 
+              <ShoppingCartIcon className="h-5 w-5" />
+              <p>Add to Cart</p> 
+            </div>
+            </button>
+            <button className='w-full h-10 flex md:h-16 text-gray-500 lg:h-16 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
+            <div className='flex h-5 mx-auto my-auto space-x-1'>
+              <HeartIcon className="h-5 w-5" />
+              <p>Add to Favourites</p> 
+            </div>
+            </button>
+
+          </div>
+        </div>
        </div>
 
-       <div className='w-full px-3 md:w-2/4 md ml-4'>
-        <h2 className='font-bold text-sm md:text-lg my-3'>{data.title}</h2>
+      </div>
 
-        <p className='mt-4 text-xs md:text-sm text-blue-800'>Merchant</p>
+      <div className='hidden relative w-full lg:flex flex-col lg:w-1/4 pt-1 px-3'>
+       <div className='w-full bg-white shadow-md p-2'>
 
-        <p className='mt-4 text-xs md:text-sm'>You can also animate the skeleton component.</p>
-
-        <div className='flex'>
-
-          {Array(rating)
-          .fill()
-          .map((_,i) => (
-              <StarIcon key={i} className='h-5 text-yellow-500' />
-          ))}
-
-        </div>
-
-        <div className='w-full h-11 border-gray-400 border-t-2 border-b-2'>
-         <p className='font-bold text-base md:text-lg'>In Stock</p> 
-        </div>
+        <div className='relative w-full md:w-1/4 my-5 flex flex-col p-3'>
+          <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
+        </div> 
+        <button className='w-full h-10 flex md:h-16 text-white lg:h-16 bg-purple-900 mt-4 hover:bg-purple-700'>
+         <div className='flex h-5 mx-auto my-auto space-x-1'>
+          <p>+</p> 
+          <ShoppingCartIcon className="h-5 w-5" />
+          <p>Add to Cart</p> 
+         </div>
+        </button>
+        <button className='w-full h-10 flex md:h-16 text-gray-500 lg:h-16 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
+         <div className='flex h-5 mx-auto my-auto space-x-1'>
+          <HeartIcon className="h-5 w-5" />
+          <p>Add to Favourites</p> 
+         </div>
+        </button>
 
        </div>
-        
-      </div>  
+      </div>
 
      </main>   
+     <main className="relative w-full lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
+     {data.description && 
+      <div className='w-full sm:w-full md:w-full lg:w-full py-1 bg-white shadow-md'>
+       <div className='w-full h-12 md:h-10 p-2 mb-4 border-gray-400 border-b'>
+        <p className='font-semibold text-lg text-gray-800'>Description</p> 
+       </div>
+       <div className='w-full p-2 mb-4'>
+        <p className='text-sm sm:text-base md:text-2xl lg:text-2xl text-gray-700'>{data.description}</p>
+       </div> 
+      </div>
+     }
+     </main>
     </div>
   )
 }

@@ -6,7 +6,7 @@ const categories = [
     {item: "Cellphones"},
     {item: "Clothing"},
     {item: "Computers & Electronics"},
-    {item: "Gaming"},
+    {item: "Construction"},
     {item: "Gardening"},
     {item: "Groceries"},
     {item: "Health"},

@@ -16,13 +16,13 @@ import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
 import { CHECKOUT, HOME, LOGIN, ACCOUNT, REAL_ESTATE, SERVICES, LEADS } from "../utils/constant/routesConstants";
 import { AuthContext } from "../context/AuthContext";
-import SearchBar from "./SearchBar";
+
 
 function TopBar({ showNav, setShowNav }) {
 
     const items = useSelector(selectItems);
     const router = useRouter();
-    const [search, setSearch] = useState("");
+    const [searchField, setSearchField] = useState("");
 
     const { user, logOut } = useContext(AuthContext)
 
@@ -38,6 +38,15 @@ function TopBar({ showNav, setShowNav }) {
       catch{
         console.log("users logged out")
       }
+    }
+
+    const goToSearch = () => {
+
+      router.push({
+      pathname: `/search_results/${searchField}`,
+      query: {
+        myData: searchField
+       }})
     }
 
 
@@ -58,8 +67,8 @@ function TopBar({ showNav, setShowNav }) {
         <picture className="cursor-pointer" onClick={() => router.push(HOME)}>
           <img
             className="w-24 h-auto pl-2 pt-4"
-            src="https://raw.githubusercontent.com/mokssebina/MMNT/master/jobber-logo.png"
-            alt="company logo"
+            src=""
+            alt=""
           />
         </picture>
         {/*<div className="pl-4 pt-2 md:pl-2 md:pt-4">
@@ -72,8 +81,11 @@ function TopBar({ showNav, setShowNav }) {
 
       <div className='hidden w-1/4 sm:flex items-center h-10 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-purple-900 hover:bg-purple-500'>
        <input
-        className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4`" type="text" />
-       <SearchIcon className='h-12 p-4 text-white' />  
+        className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4`" type="text"
+        value={searchField}
+        onChange={(e) => setSearchField(e.target.value)}
+       />
+       <SearchIcon onClick={goToSearch} className='h-12 p-4 text-white' />  
       </div>
 
       <div className="flex items-center md:pr-16 text-gray-50">
