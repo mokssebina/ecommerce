@@ -67,7 +67,7 @@ function TopBar({ showNav, setShowNav }) {
         <picture className="cursor-pointer" onClick={() => router.push(HOME)}>
           <img
             className="w-24 h-auto pl-2 pt-4"
-            src=""
+            src="https://raw.githubusercontent.com/mokssebina/MMNT/master/typhoon-logo-02.png"
             alt=""
           />
         </picture>

@@ -9,7 +9,8 @@ import FilterFeed from '../components/FilterFeed';
 import { baseUrl, fetchApi } from "../utils/fetchApi";
 import { useSession } from 'next-auth/client';
 import { withPublic } from '../components/protected-route';
-
+import { collection, getDocs, getDocsFromServer } from "firebase/firestore";
+import { db } from '../config/firebase';
 
 
 function Home({ products }) {
@@ -38,6 +39,8 @@ function Home({ products }) {
   const [isOpen, setIsOpen] = useState(false)
   const [menu, setMenu] = useState(true)
   const [hidden, setHidden] = useState(true)
+
+  //console.log("listings: ",entries)
 
 
   function handleResize() {
@@ -115,6 +118,7 @@ function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
+
   const products = await fetch('https://raw.githubusercontent.com/mokssebina/MMNT/master/project.json')
   .then((res) => res.json())
   //.then((json) => console.log(json));
@@ -123,8 +127,13 @@ export async function getServerSideProps(context) {
 
   //const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale`)
 
-  //console.log("properties: ",propertyForSale)
+  //const docs = collection(db, "/listings")
 
+  //const entries = await getDocs(docs)
+    
+    
+  //console.log("listings: ",entries)
+ 
   return { props: {
     products
     //propertiesForSale: propertyForSale?.hits,
