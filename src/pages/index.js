@@ -25,15 +25,6 @@ function Home({ products }) {
   }
   */
 
-  const goToTop = () => {
-    window.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
-    });
-  }
-
   const [category, setCategory] = useState('')
   const [filtered, setFiltered] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -112,7 +103,6 @@ function Home({ products }) {
        </main> 
       </div>
       
-      {/*<Footer goToTop={goToTop} />*/}
     </div>
   );
 }

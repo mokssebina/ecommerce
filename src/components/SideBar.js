@@ -1,9 +1,6 @@
 import { forwardRef, useContext } from "react";
 import Link from "next/link";
-import {
-  MenuIcon
-} from "@heroicons/react/outline";
-import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon } from "@heroicons/react/outline";
+import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, CollectionIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
@@ -22,8 +19,8 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
 
       <div className="absolute top-0 flex justify-center mb-8 z-10">
         <div className="pl-4 pt-4 md:pl-2 md:pt-4">
-         <MenuIcon
-          className="max-h-8 w-8 text-gray-50 cursor-pointer"
+         <XIcon
+          className="h-6 w-6 text-gray-50 cursor-pointer"
           onClick={() => setShowNav(!showNav)}
          /> 
         </div>
@@ -47,6 +44,24 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
       </div>
 
       <div className="flex flex-col">
+        {user?.account === "admin" && 
+         <Link href="/admin">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/admin"
+                ? "bg-black text-gray-50"
+                : "text-gray-50 hover:bg-gray-800"
+            }`}
+          >
+            <div className="mr-2 text-gray-50">
+              <CollectionIcon className="max-h-5 w-5" />
+            </div>
+            <div className="text-gray-50">
+              <p>Admin</p>
+            </div>
+          </div>
+        </Link>
+        }
         <Link href="/">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${

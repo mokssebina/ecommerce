@@ -60,7 +60,7 @@ function TopBar({ showNav, setShowNav }) {
       <div className="flex justify-center mt-6 mb-8">
         <div className="pl-4 pt-4 md:pl-2 md:pt-4">
          <MenuIcon
-          className="max-h-8 w-8 text-gray-50 cursor-pointer"
+          className="h-6 w-6 text-gray-50 cursor-pointer"
           onClick={() => setShowNav(!showNav)}
          /> 
         </div>

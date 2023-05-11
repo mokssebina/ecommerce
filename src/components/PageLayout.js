@@ -1,11 +1,21 @@
 import { useState, useEffect, Fragment } from "react";
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
+import Footer from "./Footer";
 import { Transition } from "@headlessui/react";
 
 export default function Layout({ children }) {
   const [showNav, setShowNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  }
 
   /*
   function handleResize() {
@@ -47,10 +57,11 @@ export default function Layout({ children }) {
       </Transition>
       <TopBar showNav={showNav} setShowNav={setShowNav} />
       <main
-        className={`relative md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden`}
+        className={`relative mb-16 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden`}
       >
         {children}
       </main>
+      {/*<Footer goToTop={goToTop} />*/}
     </>
   );
 }

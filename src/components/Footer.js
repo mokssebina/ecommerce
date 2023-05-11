@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Footer({goToTop}) {
   return (
-    <div className=' absolute w-full bottom-0 z-30'>
+    <div className=' absolute w-full bottom-0'>
      <div onClick={goToTop} className='bg-gray-400 h-10 text-center p-2 cursor-pointer hover:bg-gray-300'>
       <p className=' text-gray-900'>Back to top</p>
      </div>   
@@ -12,7 +12,7 @@ function Footer({goToTop}) {
       <div className='absolute flex w-4/5 md:w-2/5 mx-auto bottom-2'>
         <div className='mt-2 flex items-center flex-grow sm:flex-grow-0'>
           <Image 
-           src="https://raw.githubusercontent.com/mokssebina/MMNT/master/jobber-logo.png"
+           src="https://raw.githubusercontent.com/mokssebina/MMNT/master/typhoon-logo-02.png"
            width={110}
            height={30}
            objectFit='contain' 
@@ -20,7 +20,7 @@ function Footer({goToTop}) {
            />
         </div>
        <div className='text-white items-center flex-grow p-4 mt-2'>
-        Jobber 2022
+        Typhoon 2023
        </div>
       </div> 
      </div> 
