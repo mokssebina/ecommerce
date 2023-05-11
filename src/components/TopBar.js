@@ -54,7 +54,7 @@ function TopBar({ showNav, setShowNav }) {
     <header className="top-0 bg-amazon_blue w-full">
       
     <div
-      className="w-full lg:w-9/12 max-w-screen-2xl mx-auto max-h-16 pr-4 flex flex-grow justify-between items-center"
+      className="w-full lg:w-9/12 max-w-screen-2xl mx-auto max-h-16 pr-4 flex flex-grow justify-between animate-pulse items-center"
     >
 
       <div className="flex justify-center mt-6 mb-8">
@@ -88,7 +88,7 @@ function TopBar({ showNav, setShowNav }) {
        <SearchIcon onClick={goToSearch} className='h-12 p-4 text-white' />  
       </div>
 
-      <div className="flex items-center md:pr-16 text-gray-50">
+      <div className="flex items-center animate-pulse md:pr-16 text-gray-50">
          <Popover as="div" className="relative">
           <Popover.Button onClick={() => router.push(CHECKOUT)} className="outline-none mr-5 md:mr-8 cursor-pointer flex item-center">
             <span className='md:right-10 max-h-4 w-4 bg-purple-900 text-center rounded-full text-white text-xs font-bold'>
@@ -154,7 +154,7 @@ function TopBar({ showNav, setShowNav }) {
 
     </div>
 
-    <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden text-white bg-amazon_blue text-sm'>
+    <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 animate-pulse sm:hidden text-white bg-amazon_blue text-sm'>
 
       <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover:bg-purple-500'>
         <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text" />
@@ -163,7 +163,7 @@ function TopBar({ showNav, setShowNav }) {
 
     </div>
 
-    <div className="w-full lg:w-9/12 max-w-screen-2xl mx-auto flex items-center space-x-3 p-2 pl-6 text-white bg-amazon_blue text-sm">
+    <div className="w-full lg:w-9/12 max-w-screen-2xl mx-auto flex items-center space-x-3 animate-pulse p-2 pl-6 text-white bg-amazon_blue text-sm">
      <p onClick={() => router.push(REAL_ESTATE)} className='link'>Real Estate</p>
      <p onClick={() => router.push(SERVICES)} className='link'>Services</p>
      <p onClick={() => router.push(LEADS)} className='link'>Leads</p>

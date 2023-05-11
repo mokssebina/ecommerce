@@ -195,26 +195,26 @@ function Profile({ children }) {
         
         <header className='fixed w-full bg-white'>
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
-          <div className='w-full h-10 flex mt-2'>
-            <div className='w-9/12 px-2 py-2'>
-            <input 
-             placeholder='Search' 
-             className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-2 border-0'
-             value={filterText}
-             onChange={e => setFilterText(e.target.value)}             
-            />
+            <div className='w-full h-10 flex mt-2 animate-pulse'>
+              <div className='w-9/12 px-2 py-2'>
+              <input 
+              placeholder='Search' 
+              className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-2 border-0'
+              value={filterText}
+              onChange={e => setFilterText(e.target.value)}             
+              />
+              </div> 
+              <div className='w-3/12 p-2'>
+              
+              </div> 
             </div> 
-            <div className='w-3/12 p-2'>
-             
-            </div> 
-          </div> 
           </div>  
           
         </header>
         
         <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
 
-        <div className='w-full h-full mt-32 px-1 pb-2'>
+        <div className='w-full h-full mt-32 px-1 pb-2 animate-pulse'>
           
          <DataTable 
            columns={columns} 

@@ -41,7 +41,7 @@ function Product({id, title, price, description, category, image}) {
 
   return (
     <div onClick={goToDetails} className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white z-20 p-3 rounded-sm shadow-sm hover:shadow-lg'>
-     <div className='w-full mx-auto my-5 flex flex-col'>
+     <div className='w-full mx-auto my-5 animate-pulse flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
       {image &&

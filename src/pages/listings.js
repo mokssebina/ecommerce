@@ -252,7 +252,7 @@ function Listings() {
          <header className='w-full h-16 bg-white'>
           
           <div className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
-            <div className='w-full h-10 flex mt-2'>
+            <div className='w-full h-10 flex mt-2 animate-pulse'>
               <div className='w-9/12 px-1 py-1'>
                 <input
                  placeholder='Search'

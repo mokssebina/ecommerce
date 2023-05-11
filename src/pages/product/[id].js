@@ -45,7 +45,7 @@ const ProductDetails = () => {
      <main className="relative w-full lg:flex lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto pt-5 mb-5">
       <div className='relative w-full md:full lg:w-3/4 pt-1 px-3'>
 
-       <div className='w-full h-full bg-white sm:flex md:flex lg:flex shadow-md p-4'>
+       <div className='w-full h-full bg-white sm:flex md:flex lg:flex animate-pulse shadow-md p-4'>
 
         <div className='relative w-full md:w-2/4 lg:w-2/4'>
           <div className='w-9/12 mx-auto aspect-square border-gray-400 md:space-x-2 border-2'>
@@ -83,7 +83,7 @@ const ProductDetails = () => {
             <div className='relative w-full my-5 flex flex-col p-3'>
               <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
             </div> 
-            <button className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+            <button onClick={addItemToBasket} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
             <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
               <PlusIcon className="h-4 w-4" /> 
               <ShoppingCartIcon className="h-4 w-4" />
@@ -104,15 +104,15 @@ const ProductDetails = () => {
       </div>
 
       <div className='hidden relative w-full lg:flex flex-col lg:w-1/4 pt-1 px-3'>
-       <div className='w-full bg-white shadow-md p-2'>
+       <div className='w-full bg-white animate-pulse shadow-md p-2'>
 
         <div className='relative w-full my-5 flex flex-col p-3 bg-slate-500'>
           <h3 className='font-semibold text-2xl md:text-3xl lg:text-3xl'>{`P${data.price}`}</h3> 
         </div> 
-        <button className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
-         <div className='flex h-5 mx-auto my-auto space-x-1'>
-          <p>+</p> 
-          <ShoppingCartIcon className="h-5 w-5" />
+        <button onClick={addItemToBasket} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+         <div className='flex h-6 mx-auto my-auto space-x-1'>
+          <PlusIcon className="h-4 w-4" /> 
+          <ShoppingCartIcon className="h-4 w-4" />
           <p>Add to Cart</p> 
          </div>
         </button>
@@ -129,7 +129,7 @@ const ProductDetails = () => {
      </main>   
      <main className="relative w-full lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
      {data.description && 
-      <div className='w-full sm:w-full md:w-full lg:w-full py-1 bg-white shadow-md'>
+      <div className='w-full sm:w-full md:w-full lg:w-full animate-pulse py-1 bg-white shadow-md'>
        <div className='w-full h-12 md:h-10 p-2 mb-4 border-gray-400 border-b'>
         <p className='font-semibold text-lg text-gray-800'>Description</p> 
        </div>
