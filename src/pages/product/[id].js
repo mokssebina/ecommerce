@@ -14,6 +14,26 @@ const ProductDetails = () => {
     const router = useRouter();
     const { myData } = router.query;
     const [data, setData] = useState({})
+    const [hidden, setHidden] = useState(false)
+
+    function handleResize() {
+      if (innerWidth <= 1024) {
+        setHidden(false);
+      } else {
+        setHidden(true);
+      }
+    }
+    
+  
+    useEffect(() => {
+      if (typeof window != undefined) {
+        addEventListener("resize", handleResize);
+      }
+  
+      return () => {
+        removeEventListener("resize", handleResize);
+      };
+    }, []);
 
     const MAX_RATING = 5;
     const MIN_RATING = 1;
@@ -78,7 +98,7 @@ const ProductDetails = () => {
           <p className='font-semibold text-base md:text-lg'>In Stock</p> 
           </div>
 
-          <div className='w-full lg:hidden p-2'>
+          <div hidden={hidden} className='w-full lg:hidden p-2'>
 
             <div className='relative w-full my-5 flex flex-col p-3'>
               <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
@@ -87,13 +107,13 @@ const ProductDetails = () => {
             <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
               <PlusIcon className="h-4 w-4" /> 
               <ShoppingCartIcon className="h-4 w-4" />
-              <p>Add to Cart</p> 
+              <p className='text-sm'>Add to Cart</p> 
             </div>
             </button>
             <button className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
             <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
               <HeartIcon className="h-4 w-4" />
-              <p>Add to Favourites</p> 
+              <p className='text-sm'>Add to Favourites</p> 
             </div>
             </button>
 
@@ -113,13 +133,13 @@ const ProductDetails = () => {
          <div className='flex h-6 mx-auto my-auto space-x-1'>
           <PlusIcon className="h-4 w-4" /> 
           <ShoppingCartIcon className="h-4 w-4" />
-          <p>Add to Cart</p> 
+          <p className='text-sm'>Add to Cart</p> 
          </div>
         </button>
         <button className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
-         <div className='flex h-5 mx-auto my-auto space-x-1'>
-          <HeartIcon className="h-5 w-5" />
-          <p>Add to Favourites</p> 
+         <div className='flex h-6 mx-auto my-auto space-x-1'>
+          <HeartIcon className="h-4 w-4" />
+          <p className='text-sm'>Add to Favourites</p> 
          </div>
         </button>
 

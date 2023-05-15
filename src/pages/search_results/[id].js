@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from "next/head";
+import {
+  addDoc,
+  arrayUnion,
+  doc,
+  deleteDoc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  query, 
+  where,
+  collection,
+  onSnapshot
+} from "firebase/firestore";
+import { db } from '../../config/firebase';
 import Banner from '../../components/Banner';
 import ProductFeed from "../../components/ProductFeed";
 import Categories from '../../components/Categories';
@@ -16,30 +31,42 @@ const SearchPage = ({ products }) => {
     const router = useRouter();
     const { myData } = router.query;
     const [data, setData] = useState("")
+    const [listings, setListings] = useState([{}])
 
     console.log("my data: ",myData)
 
-    console.log("array: ",products)
 
     useEffect(() => {
-      console.log("my data: ",myData)
+      if (myData) setData(myData);
     }, [router.query]);
 
+    useEffect(() => {
+      const getListings = async () => {
+        const ref = collection(db, "listings")
+        const q = query(ref, where("inStock", "==", "yes"))
+        onSnapshot(q, (snapshot) => {
+         setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        })
+      }
+  
+      return getListings()
+    },[])
 
-    const filteredProducts = products.filter((product) => {
+
+
+    const filteredProducts = listings.filter((product) => {
         return (
-          product
-          .title
-          .includes(myData) ||
-          product
-          .category
-          .includes(myData) ||
-          product
-          .description
-          .includes(myData)
+          product.item?.includes(data) 
+          ||
+          product.category?.includes(data) 
+          ||
+          product.description?.includes(data) 
+          ||
+          product.brandName?.includes(data)
         );
       }
-   );
+    );
+    
 
    console.log("filtered: ",filteredProducts)
 
@@ -78,7 +105,7 @@ const SearchPage = ({ products }) => {
 
       <div className="w-full bg-gray-200">
 
-      {converted.includes(myData) && 
+      {listings > 0 && 
         <div className="relative w-full lg:w-10/12 max-w-screen-2xl mx-auto">
           <p className='text-lg md:text-3xl lg:text-5xl font-semibold'>Search Results</p>
         </div> 
@@ -86,8 +113,8 @@ const SearchPage = ({ products }) => {
        
 
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
-        {converted.includes(myData) ?
-        <>
+        {listings > 0 ?
+         <>
           <div className='relative w-full lg:w-3/4'>
           <ProductFeed 
            products={filteredProducts} />
@@ -100,7 +127,7 @@ const SearchPage = ({ products }) => {
           <img className='w-full h-auto mt-10' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/creating-online-ads-guide.png'} /> 
 
           </div>
-        </>  
+         </>  
         :
         <p className='text-lg md:text-3xl lg:text-5xl font-semibold'>Not Found</p>
         }
@@ -111,7 +138,7 @@ const SearchPage = ({ products }) => {
     </div>
     )
 }
-
+/*
 export async function getServerSideProps(context) {
     const products = await fetch('https://raw.githubusercontent.com/mokssebina/MMNT/master/project.json')
     .then((res) => res.json())
@@ -130,6 +157,6 @@ export async function getServerSideProps(context) {
     },
    }
   }
-
+*/
 
 export default SearchPage

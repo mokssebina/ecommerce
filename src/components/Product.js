@@ -44,28 +44,32 @@ function Product({id, title, price, description, category, image}) {
      <div className='w-full mx-auto my-5 animate-pulse flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
-      {image &&
-      <Image className='mx-auto my-auto' src={image} height={200} width={200} objectFit='contain' />
-      }
-
-      <h4 className='my-3 line-clamp-1'>{title}</h4>
-      {/*
-      <div className='flex'>
-
-      {Array(rating)
-        .fill()
-        .map((_,i) => (
-          <StarIcon key={i} className='h-5 text-yellow-500' />
-        ))}
-
+      <div className='w-8/12 aspect-square mx-auto'>
+       {image &&
+        <Image className='mx-auto' src={image} height={200} width={200} objectFit='contain' />
+       } 
       </div>
 
-      <p className='text-xs my-2 line-clamp-2'>{description}</p> 
-      */}
-      <div className='mb-5'>
+      <div className='absolute w-full bottom-0 py-2'>
+       <h4 className='my-1 line-clamp-1'>{title}</h4>
+        {/*
+        <div className='flex'>
 
-      <Currency quantity={price} currency="BWP" />  
+        {Array(rating)
+          .fill()
+          .map((_,i) => (
+            <StarIcon key={i} className='h-5 text-yellow-500' />
+          ))}
 
+        </div>
+
+        <p className='text-xs my-2 line-clamp-2'>{description}</p> 
+        */}
+       <div className='mt-2'>
+
+        <Currency quantity={price} currency="BWP" />  
+
+       </div>
       </div>
 
       {/*hasPrime && (

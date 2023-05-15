@@ -4,7 +4,7 @@ import { XIcon } from '@heroicons/react/outline'
 import categories from '../data/categories'
 
 
-function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, setItem, image, 
+function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, setItem, brand, setBrand, image, 
   setImage, units, setUnits, price, setPrice, category, setCategory, description, setDescription}) {
 
 
@@ -62,18 +62,22 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, set
                    </div>  
 
                    <div className='w-full h-14 flex mt-1 text-xs font-semibold mb-1 p-1'>
-                    <div className='w-9/12 pl-1 pr-2 text-xs font-semibold'>
+                    <div className='w-1/4 pl-1 pr-2 text-xs font-semibold'>
+                     <span>Brand</span>  
+                     <input placeholder='Item' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={brand} onChange={setBrand} />   
+                    </div>
+                    <div className='w-2/4 pl-1 pr-2 text-xs font-semibold'>
                      <span>Item</span>  
                      <input placeholder='Item' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={item} onChange={setItem} />   
                     </div>
-                    <div className='w-3/12 px-1 text-xs font-semibold'>
+                    <div className='w-1/4 px-1 text-xs font-semibold'>
                      <span>Price(BWP)</span>  
                      <input placeholder='Price' type={'number'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={price} onChange={setPrice} />   
                     </div>
                    </div>   
 
-                   <div className='w-full h-14 mt-1 text-xs font-semibold mb-1 p-1'>
-                    <div className='w-full pl-1 pr-2 text-xs font-semibold'>
+                   <div className='w-full flex h-14 mt-1 text-xs font-semibold mb-1 p-1'>
+                    <div className='w-2/3 pl-1 pr-2 text-xs font-semibold'>
                      <span>Category</span>  
                      <select placeholder='Category' type={'text'} className='w-full h-10 p-2 mt-1 bg-gray-200 rounded-md' value={category} onChange={setCategory}>
                       {categories.map(data =>(
@@ -81,6 +85,12 @@ function ListingsUpload({ isOpen, Fragment, createListing, closeModal, item, set
                       ))}
                      </select>   
                     </div>
+                    {category === "Clothing" &&
+                    <div className='w-1/3 pl-1 pr-2 text-xs font-semibold'>
+                     <span>Sizes</span>  
+                        
+                    </div>
+                    }
                    </div> 
 
                    <div className='w-full h-20 px-1 text-xs font-semibold mt-1 p-1'>

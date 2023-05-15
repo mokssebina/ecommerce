@@ -9,11 +9,11 @@ import FilterFeed from '../components/FilterFeed';
 import { baseUrl, fetchApi } from "../utils/fetchApi";
 import { useSession } from 'next-auth/client';
 import { withPublic } from '../components/protected-route';
-import { collection, getDocs, getDocsFromServer } from "firebase/firestore";
+import { collection, getDoc, query, where, onSnapshot, getDocsFromServer } from "firebase/firestore";
 import { db } from '../config/firebase';
 
 
-function Home({ products }) {
+function Home({products}) {
   /*
   const [session] = useSession();
 
@@ -24,7 +24,7 @@ function Home({ products }) {
     console.log("There is a session")
   }
   */
-
+  const [listings, setListings] = useState([{}]);
   const [category, setCategory] = useState('')
   const [filtered, setFiltered] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -53,15 +53,27 @@ function Home({ products }) {
     };
   }, []);
 
+  useEffect(() => {
+    const getListings = async () => {
+      const ref = collection(db, "listings")
+      
+      onSnapshot(ref, (snapshot) => {
+       setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      })
+    }
+
+    return getListings()
+  },[])
+
 
   return (
     <div className="h-full w-full flex flex-col bg-gray-50">
       <Head>
-        <title>Jobber</title>
+        <title>Typhoon</title>
       </Head>
 
       <div className="relative w-full h-56 sm:h-80 md:h-[28rem] lg:h-[32rem]">
-       <div className='w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
+       <div className='relative w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
 
         <div className='hidden lg:flex lg:w-1/4 lg:px-2'>
          <Categories /> 
@@ -86,11 +98,11 @@ function Home({ products }) {
        </div>  
       </div>
 
-      <div className="w-full bg-gray-200">
+      <div className="relative w-full bg-gray-200">
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
 
         <div className='relative w-full lg:w-3/4'>
-         <ProductFeed products={products} />
+         <ProductFeed products={listings} />
         </div>
         
         <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'>
@@ -117,11 +129,6 @@ export async function getServerSideProps(context) {
 
   //const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale`)
 
-  //const docs = collection(db, "/listings")
-
-  //const entries = await getDocs(docs)
-    
-    
   //console.log("listings: ",entries)
  
   return { props: {

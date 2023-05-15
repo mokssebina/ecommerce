@@ -9,7 +9,7 @@ const Categories = () => {
      </div>  
 
      {categories.map(data => (
-      <div className='w-full h-8 text-xs text-gray-900 cursor-pointer hover:bg-amazon_blue hover:text-gray-50 px-2 py-1'>
+      <div key={data.index} className='w-full h-8 text-xs text-gray-900 cursor-pointer hover:bg-amazon_blue hover:text-gray-50 px-2 py-1'>
         <p>{data.item}</p>
       </div>
      ))}

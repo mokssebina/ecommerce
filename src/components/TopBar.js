@@ -82,6 +82,7 @@ function TopBar({ showNav, setShowNav }) {
       <div className='hidden w-1/4 sm:flex items-center h-10 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-purple-900 hover:bg-purple-500'>
        <input
         className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4`" type="text"
+        placeholder="Search"
         value={searchField}
         onChange={(e) => setSearchField(e.target.value)}
        />
@@ -157,8 +158,12 @@ function TopBar({ showNav, setShowNav }) {
     <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 animate-pulse sm:hidden text-white bg-amazon_blue text-sm'>
 
       <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover:bg-purple-500'>
-        <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text" />
-        <SearchIcon className='h-12 p-4 text-white' />  
+        <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text"
+         placeholder="Search"
+         value={searchField}
+         onChange={(e) => setSearchField(e.target.value)}        
+        />
+        <SearchIcon onClick={goToSearch} className='h-12 p-4 text-white' />  
       </div>   
 
     </div>

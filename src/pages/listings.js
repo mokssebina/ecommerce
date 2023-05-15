@@ -28,6 +28,10 @@ import DataTable, { ExpanderComponentProps } from 'react-data-table-component';
 
 const columns = [
   {
+    name: "Brand",
+    selector: row => row.brandName,
+  },
+  {
     name: "Item",
     selector: row => row.item,
   },
@@ -55,6 +59,7 @@ function Listings() {
   const [description, setDescription] = useState("");
   const [hideLoading, setHideLoading] = useState(true);
   const [filterText, setFilterText] = useState('');
+  const [brand, setBrand] = useState("")
 
 
   const { user } = useContext(AuthContext)
@@ -66,6 +71,7 @@ function Listings() {
     setPrice(0);
     setCategory("");
     setDescription("");
+    setBrand("")
   }
   
   function closeModal() {
@@ -76,6 +82,7 @@ function Listings() {
     setPrice(0);
     setCategory("");
     setDescription("");
+    setBrand("")
   }
 
   function openModal() {
@@ -116,7 +123,9 @@ function Listings() {
                 category: category,
                 description: description,
                 userId: user?.uid,
-                store: user?.displayName
+                store: user?.displayName,
+                inStock: "yes",
+                brandName: brand
               })
               .then(async (docRef) => {
                 console.log("product ID: ",docRef.id)
@@ -193,7 +202,7 @@ function Listings() {
   useEffect(() => {
     const getListings = async () => {
       const ref = collection(db, "listings")
-      const q = query(ref, where("userId", "==", `${user?.uid}`))
+      const q = query(ref, where("inStock", "==", "yes"))
       onSnapshot(q, (snapshot) => {
        setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       })
@@ -231,7 +240,9 @@ function Listings() {
         image={image}
         setImage={(e) => setImage(e.target.files[0])}
         item={item}
-        setItem={(e) => setItem(e.target.value)}       
+        setItem={(e) => setItem(e.target.value)}  
+        brand={brand}
+        setBrand={(e) => setBrand(e.target.value)}   
         units={units}
         setUnits={(e) => setUnits(e.target.value)}
         price={price}
