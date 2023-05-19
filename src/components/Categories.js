@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useRouter } from 'next/router';
 import categories from '../data/categories'
 
 const Categories = () => {
+
+  const router = useRouter();
+  const [searchField, setSearchField] = useState("");
+
+
+  const goToSearch = () => {
+
+    router.push({
+    pathname: `/search_results/${searchField}`,
+    query: {
+      myData: searchField
+     }})
+
+  }
+
   return (
     <div className='hidden lg:flex flex-col w-9/12 max-h-full mb-5 mx-auto border border-gray-700'>
      <div className='w-full h-9 bg-amazon_blue text-gray-50 text-sm p-2 mb-1'>

@@ -66,6 +66,13 @@ function Home({products}) {
   },[])
 
 
+  useEffect(() => {
+    if(listings.includes("Cement", 0)){
+      console.log("it includes")
+    }
+  },[])
+
+
   return (
     <div className="h-full w-full flex flex-col bg-gray-50">
       <Head>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { useRouter } from 'next/router';
 import { ShoppingCartIcon, PlusIcon, HeartIcon } from "@heroicons/react/outline";
 import Image from 'next/image';
@@ -6,21 +6,26 @@ import StarIcon from '@heroicons/react/solid/StarIcon'
 import Currency from 'react-currency-formatter';
 import { addToBasket } from '../../slices/basketSlice';
 import { useDispatch } from 'react-redux';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const ProductDetails = () => {
+
+    document.body.style.backgroundColor = "#e5e7eb";
+
+    const { user } = useContext(AuthContext)
 
     const dispatch = useDispatch();
     const router = useRouter();
     const { myData } = router.query;
     const [data, setData] = useState({})
-    const [hidden, setHidden] = useState(false)
+    const [hidden, setHidden] = useState(true)
 
     function handleResize() {
-      if (innerWidth <= 1024) {
-        setHidden(false);
-      } else {
+      if (innerWidth > 1024) {
         setHidden(true);
+      } else {
+        setHidden(false);
       }
     }
     
@@ -61,16 +66,16 @@ const ProductDetails = () => {
     }
 
   return (
-    <div className="h-screen w-screen bg-gray-200">
+    <div className="h-full w-full flex flex-col">
      <main className="relative w-full lg:flex lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto pt-5 mb-5">
       <div className='relative w-full md:full lg:w-3/4 pt-1 px-3'>
 
        <div className='w-full h-full bg-white sm:flex md:flex lg:flex animate-pulse shadow-md p-4'>
 
         <div className='relative w-full md:w-2/4 lg:w-2/4'>
-          <div className='w-9/12 mx-auto aspect-square border-gray-400 md:space-x-2 border-2'>
+          <div className='w-9/12 mx-auto aspect-square border-gray-400 md:space-x-2 border-2 p-2'>
             {data.image &&
-              <Image className='w-64 h-64 mx-auto my-auto' src={data.image} height={250} width={250} objectFit='contain' />
+              <img className='w-full h-full mx-auto' src={data.image} objectFit='cover' />
             }
           </div>
         </div>
@@ -98,7 +103,7 @@ const ProductDetails = () => {
           <p className='font-semibold text-base md:text-lg'>In Stock</p> 
           </div>
 
-          <div hidden={hidden} className='w-full lg:hidden p-2'>
+          <div hidden={hidden} className='w-full p-2'>
 
             <div className='relative w-full my-5 flex flex-col p-3'>
               <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
@@ -129,7 +134,7 @@ const ProductDetails = () => {
         <div className='relative w-full my-5 flex flex-col p-3 bg-slate-500'>
           <h3 className='font-semibold text-2xl md:text-3xl lg:text-3xl'>{`P${data.price}`}</h3> 
         </div> 
-        <button onClick={addItemToBasket} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+        <button onClick={addItemToBasket} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
          <div className='flex h-6 mx-auto my-auto space-x-1'>
           <PlusIcon className="h-4 w-4" /> 
           <ShoppingCartIcon className="h-4 w-4" />

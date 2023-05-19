@@ -1,16 +1,22 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Image from 'next/image';
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import StarIcon from '@heroicons/react/solid/StarIcon'
+import { ShoppingCartIcon, PlusIcon, HeartIcon } from "@heroicons/react/outline";
 import Currency from 'react-currency-formatter';
 import { addToBasket } from '../slices/basketSlice';
 import { useDispatch } from 'react-redux';
+import { AuthContext } from '../context/AuthContext';
 
-function Product({id, title, price, description, category, image}) {
+function SearchProduct({id, title, price, description, category, image}) {
 
     const dispatch = useDispatch();
     const router = useRouter();
+    const [data, setData] = useState({})
+
+    const { user } = useContext(AuthContext)
+
 
     const MAX_RATING = 5;
     const MIN_RATING = 1;
@@ -26,6 +32,25 @@ function Product({id, title, price, description, category, image}) {
       dispatch(addToBasket(product))
     }
 */
+
+    useEffect(() => {
+        if (id) setData(id);
+    }, [router.query]);
+
+    const addItemToBasket = () => {
+
+        const product = {
+        id: data.id, 
+        title: data.title, 
+        price: data.price, 
+        description: data.description, 
+        category: data.category, 
+        image: data.image
+    }
+        
+        //Send the product as an action to the REDUX store
+        dispatch(addToBasket(product))
+    }
     
 
     const goToDetails = () => {
@@ -40,8 +65,8 @@ function Product({id, title, price, description, category, image}) {
     }
 
   return (
-    <div onClick={goToDetails} className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-sm shadow-sm hover:shadow-lg'>
-     <div className='w-full mx-auto my-5 animate-pulse flex flex-col'>
+    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-sm shadow-sm hover:shadow-lg'>
+     <div onClick={goToDetails} className='w-full mx-auto my-5 animate-pulse flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
       <div className='w-8/12 aspect-square mx-auto'>
@@ -50,7 +75,7 @@ function Product({id, title, price, description, category, image}) {
        } 
       </div>
 
-      <div className='absolute w-full bottom-0 py-2'>
+      <div className='w-full p-2'>
        <h4 className='my-1 line-clamp-1'>{title}</h4>
         {/*
         <div className='flex'>
@@ -70,6 +95,7 @@ function Product({id, title, price, description, category, image}) {
         <Currency quantity={price} currency="BWP" />  
 
        </div>
+        
       </div>
 
       {/*hasPrime && (
@@ -81,10 +107,17 @@ function Product({id, title, price, description, category, image}) {
 
       {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
      </div>
+      <button onClick={addItemToBasket} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+       <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
+        <PlusIcon className="h-4 w-4" /> 
+        <ShoppingCartIcon className="h-4 w-4" />
+        <p className='text-sm'>Add to Cart</p> 
+       </div>
+      </button>
     </div>
   )
 }
 
-export default Product
+export default SearchProduct
 
 //flex-1 bg-tribal bg-no-repeat bg-cover bg-center bg-fixed

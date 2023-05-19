@@ -17,6 +17,9 @@ import { ThreeCircles } from  'react-loader-spinner'
 
 function Login() {
 
+  document.body.style.backgroundColor = "#ffffff";
+
+
   const [hideLoading, setHideLoading] = useState(true);
 
   const { user, logIn } = useContext(AuthContext);
