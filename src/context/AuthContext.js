@@ -149,7 +149,7 @@ const AuthContextProvider = ({ children }) => {
         account: account, 
         status: status,
         createdDate: serverTimestamp()
-      })
+      }).then()
 
       await router.push(HOME);
 

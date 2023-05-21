@@ -24,6 +24,9 @@ function Home({products}) {
     console.log("There is a session")
   }
   */
+
+  document.body.style.backgroundColor = "#e5e7eb";
+
   const [listings, setListings] = useState([{}]);
   const [category, setCategory] = useState('')
   const [filtered, setFiltered] = useState(false)
@@ -79,7 +82,7 @@ function Home({products}) {
         <title>Typhoon</title>
       </Head>
 
-      <div className="relative w-full h-56 sm:h-80 md:h-[28rem] lg:h-[32rem]">
+      <div className="relative w-full h-56 sm:h-80 md:h-full lg:h-full">
        <div className='relative w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
 
         <div className='hidden lg:flex lg:w-1/4 lg:px-2'>

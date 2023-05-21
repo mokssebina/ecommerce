@@ -17,8 +17,8 @@ function ProductFeed({ products }) {
        />
        ))*/}
 
-     {products.slice(0, 4).map(({productId, item, price, description, category, photoURL}) => (
-        <Product
+     {products.slice(0, 4).map(({productId, item, price, description, category, photoURL, brandName}) => (
+       <Product
         //key={id} 
         id={productId}
         title={item}
@@ -26,13 +26,15 @@ function ProductFeed({ products }) {
         description={description}
         category={category}
         image={photoURL}
+        productId={productId}
+        brandName={brandName}
        />
        ))}
 
      {/*<img className='w-full col-span-full' src="https://links.papareact.com/dyz" alt="" />*/}   
 
-     {products.slice(4, 5).map(({productId, item, price, description, category, photoURL}) => (
-        <Product
+     {products.slice(4, 5).map(({productId, item, price, description, category, photoURL, brandName}) => (
+       <Product
         //key={id} 
         id={productId}
         title={item}
@@ -40,18 +42,22 @@ function ProductFeed({ products }) {
         description={description}
         category={category}
         image={photoURL}
+        productId={productId}
+        brandName={brandName}
         />
      ))}
 
-     {products.slice(5, products.length).map(({productId, item, price, description, category, photoURL}) => (
+     {products.slice(5, products.length).map(({productId, item, price, description, category, photoURL, brandName}) => (
         <Product
-        //key={id} 
-        id={productId}
-        title={item}
-        price={price}
-        description={description}
-        category={category}
-        image={photoURL}
+         //key={id} 
+         id={productId}
+         title={item}
+         price={price}
+         description={description}
+         category={category}
+         image={photoURL}
+         productId={productId}
+         brandName={brandName}
         />
         ))}
 

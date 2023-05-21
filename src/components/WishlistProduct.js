@@ -8,10 +8,10 @@ import Currency from 'react-currency-formatter';
 import { addToBasket } from '../slices/basketSlice';
 import { useDispatch } from 'react-redux';
 import { AuthContext } from '../context/AuthContext';
-import { addDoc, updateDoc, doc, collection } from 'firebase/firestore';
+import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
-function SearchProduct({id, title, price, description, category, image, productId}) {
+function WishlistProduct({id, title, price, description, category, image, productId, brandName}) {
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -39,32 +39,6 @@ function SearchProduct({id, title, price, description, category, image, productI
         if (id) setData(id);
     }, [router.query]);
 
-    const addItemWishlist = async() => {
-
-      const dbRef = collection(db, `wishlist`)
-              
-      await addDoc(dbRef, {
-        item: title,
-        price: price,
-        photoURL: image,
-        category: category,
-        description: description,
-        userId: user?.uid,
-        store: user?.displayName,
-        inStock: "yes",
-        productId: productId,
-      })
-      .then(async (docRef) => {
-        console.log("product ID: ",docRef.id)
-        const listingRef =  doc(db, "wishlist", `${docRef.id}`)
-
-        await updateDoc(listingRef, {
-          productId: docRef.id
-        });
-      });
-
-    }
-    
 
     const goToDetails = () => {
 
@@ -76,6 +50,7 @@ function SearchProduct({id, title, price, description, category, image, productI
         myData: JSON.stringify(product)
        }})
     }
+
 
   return (
     <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-sm shadow-sm hover:shadow-lg'>
@@ -120,9 +95,9 @@ function SearchProduct({id, title, price, description, category, image, productI
 
       {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
      </div>
-      <button onClick={addItemWishlist} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+      <button onClick={""} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
        <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
-        <p className='text-sm'>Add to Wishlist</p> 
+        <p className='text-sm'>Remove from Wishlist</p> 
        </div>
       </button>
       <p className='hidden'>{productId}</p>
@@ -130,6 +105,6 @@ function SearchProduct({id, title, price, description, category, image, productI
   )
 }
 
-export default SearchProduct
+export default WishlistProduct
 
 //flex-1 bg-tribal bg-no-repeat bg-cover bg-center bg-fixed

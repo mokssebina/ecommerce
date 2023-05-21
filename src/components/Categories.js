@@ -19,13 +19,13 @@ const Categories = () => {
   }
 
   return (
-    <div className='hidden lg:flex flex-col w-9/12 max-h-full mb-5 mx-auto border border-gray-700'>
+    <div className='hidden lg:flex flex-col w-10/12 xl:w-9/12 max-h-full mb-5 mx-auto border border-gray-700'>
      <div className='w-full h-9 bg-amazon_blue text-gray-50 text-sm p-2 mb-1'>
       <p>Categories</p>
      </div>  
 
      {categories.map(data => (
-      <div key={data.index} className='w-full h-8 text-xs text-gray-900 cursor-pointer hover:bg-amazon_blue hover:text-gray-50 px-2 py-1'>
+      <div key={data.index} className='w-full h-8 text-xs text-gray-900 cursor-pointer hover:bg-amazon_blue hover:text-gray-50 px-2 py-2'>
         <p>{data.item}</p>
       </div>
      ))}

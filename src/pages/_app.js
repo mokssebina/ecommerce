@@ -15,6 +15,7 @@ import { CacheProvider } from '@emotion/react';
 import theme from '../config/theme';
 import createEmotionCache from '../config/createEmotionCache';
 import { createTheme } from '@mui/material/styles';
+import { AnimatePresence } from 'framer-motion'
 
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -30,6 +31,7 @@ const theme = createTheme({
 */
 const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) => {
 
+/*
   NProgress.configure({ showSpinner: false });
 
   Router.events.on("routeChangeStart", () => {
@@ -39,8 +41,11 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
   Router.events.on("routeChangeComplete", () => {
     NProgress.done();
   });
+*/
+
 
   return (
+    <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}> 
      <AuthContextProvider>
       <Head>
       <link
@@ -60,7 +65,8 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
         </PageLayout>
        </Provider>
       </ThemeProvider>
-     </AuthContextProvider>  
+     </AuthContextProvider>
+    </AnimatePresence>  
   )
 }
 

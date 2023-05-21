@@ -7,7 +7,7 @@ import Currency from 'react-currency-formatter';
 import { addToBasket } from '../slices/basketSlice';
 import { useDispatch } from 'react-redux';
 
-function Product({id, title, price, description, category, image}) {
+function Product({id, title, price, description, category, image, productId, brandName}) {
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -30,7 +30,7 @@ function Product({id, title, price, description, category, image}) {
 
     const goToDetails = () => {
 
-      const product = {id, title, price, description, category, image}
+      const product = {id, title, price, description, category, image, productId}
 
       router.push({
       pathname: `/product/${id}`,
@@ -41,10 +41,10 @@ function Product({id, title, price, description, category, image}) {
 
   return (
     <div onClick={goToDetails} className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-sm shadow-sm hover:shadow-lg'>
-     <div className='w-full mx-auto my-5 animate-pulse flex flex-col'>
+     <div className='w-full mx-auto my-5 animate-pulse flex flex-coltoast'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
-      <div className='w-8/12 aspect-square mx-auto'>
+      <div className='w-8/12 aspect-square mx-auto bg-gray-100'>
        {image &&
         <img className='w-full h-full mx-auto' src={image} objectFit='cover' />
        } 
@@ -80,6 +80,8 @@ function Product({id, title, price, description, category, image}) {
       )*/}
 
       {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
+      <p className='hidden'>{productId}</p>
+      <p className='hidden'>{brandName}</p>
      </div>
     </div>
   )

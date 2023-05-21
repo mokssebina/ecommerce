@@ -3,6 +3,9 @@ import SideBar from "./SideBar";
 import TopBar from "./TopBar";
 import Footer from "./Footer";
 import { Transition } from "@headlessui/react";
+import { motion } from "framer-motion";
+
+
 
 export default function Layout({ children }) {
   const [showNav, setShowNav] = useState(false);
@@ -41,7 +44,16 @@ export default function Layout({ children }) {
   */
  
   return (
-    <>
+    <motion.div
+    initial={{ x: 300, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 300, opacity: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
+    }}>
+     <>
       <div hidden={!showNav} onClick={()=> setShowNav(!showNav)} className="fixed w-screen h-screen bg-dark-disabled z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden"></div>
       <Transition
         as={Fragment}
@@ -63,5 +75,6 @@ export default function Layout({ children }) {
       </main>
       {/*<Footer goToTop={goToTop} />*/}
     </>
+    </motion.div>
   );
 }

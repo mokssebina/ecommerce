@@ -7,6 +7,8 @@ import Currency from 'react-currency-formatter';
 import { addToBasket } from '../../slices/basketSlice';
 import { useDispatch } from 'react-redux';
 import { AuthContext } from '../../context/AuthContext';
+import { addDoc, updateDoc, doc, collection } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 
 
 const ProductDetails = () => {
@@ -58,11 +60,37 @@ const ProductDetails = () => {
         price: data.price, 
         description: data.description, 
         category: data.category, 
-        image: data.image
+        image: data.image,
     }
       
       //Send the product as an action to the REDUX store
       dispatch(addToBasket(product))
+    }
+
+    const addToWishlist = async() => {
+
+      const dbRef = collection(db, `wishlist`)
+              
+      await addDoc(dbRef, {
+        item: data.title,
+        image: data.image,
+        price: data.price,
+        category: data.category,
+        description: data.description,
+        userId: user?.uid,
+        store: user?.displayName,
+        inStock: "yes",
+        productId: data.productId,
+      })
+      .then(async (docRef) => {
+        console.log("product ID: ",docRef.id)
+        const listingRef =  doc(db, "wishlist", `${docRef.id}`)
+
+        await updateDoc(listingRef, {
+          productId: docRef.id
+        });
+      });
+
     }
 
   return (
@@ -108,17 +136,17 @@ const ProductDetails = () => {
             <div className='relative w-full my-5 flex flex-col p-3'>
               <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
             </div> 
-            <button onClick={addItemToBasket} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+            <button onClick={addItemToBasket} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
             <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
               <PlusIcon className="h-4 w-4" /> 
               <ShoppingCartIcon className="h-4 w-4" />
               <p className='text-sm'>Add to Cart</p> 
             </div>
             </button>
-            <button className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
+            <button  onClick={addToWishlist} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
             <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
               <HeartIcon className="h-4 w-4" />
-              <p className='text-sm'>Add to Favourites</p> 
+              <p className='text-sm'>Add to WishList</p> 
             </div>
             </button>
 
@@ -141,10 +169,10 @@ const ProductDetails = () => {
           <p className='text-sm'>Add to Cart</p> 
          </div>
         </button>
-        <button className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
+        <button onClick={addToWishlist} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
          <div className='flex h-6 mx-auto my-auto space-x-1'>
           <HeartIcon className="h-4 w-4" />
-          <p className='text-sm'>Add to Favourites</p> 
+          <p className='text-sm'>Add to Wishlist</p> 
          </div>
         </button>
 
@@ -163,6 +191,7 @@ const ProductDetails = () => {
        </div> 
       </div>
      }
+     <p className='hidden'>{data.productId}</p>
      </main>
     </div>
   )

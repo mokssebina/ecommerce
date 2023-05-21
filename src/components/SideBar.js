@@ -1,6 +1,6 @@
 import { forwardRef, useContext } from "react";
 import Link from "next/link";
-import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, CollectionIcon } from "@heroicons/react/outline";
+import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, CollectionIcon, HeartIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
@@ -108,6 +108,23 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
             <div>
               <p>Listings</p>
+            </div>
+          </div>
+        </Link>}
+        {user &&
+         <Link href="/wishlist">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/listings"
+                ? "bg-black text-gray-50"
+                : "text-gray-50 hover:bg-gray-800"
+            }`}
+          >
+            <div className="mr-2">
+              <HeartIcon className="max-h-5 w-5" />
+            </div>
+            <div>
+              <p>Wishlist</p>
             </div>
           </div>
         </Link>}
