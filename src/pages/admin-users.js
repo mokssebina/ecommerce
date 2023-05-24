@@ -22,7 +22,7 @@ import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../config/firebase';
 import { ThreeCircles } from  'react-loader-spinner'
 import { Table, Pagination } from 'rsuite';
-import { XIcon, CheckIcon, TrashIcon } from '@heroicons/react/outline'
+import { XIcon, CheckIcon, TrashIcon, PauseIcon } from '@heroicons/react/outline'
 import DataTable, { ExpanderComponentProps } from 'react-data-table-component';
 
 
@@ -98,6 +98,10 @@ function Users() {
          </p> 
         </> 
         }
+         <p className=' font-semibold mt-2'>Service:</p> 
+         <p className='mt-1 mb-2 line-clamp-2'>
+          {data.service}
+         </p> 
         </div>
         <div className='w-2/6 p-1'>
          <p className=' font-semibold'>UID:</p> 
@@ -105,15 +109,9 @@ function Users() {
          {data.userId}
          </p> 
 
-         <p className=' font-semibold'>status:</p> 
+         <p className=' font-semibold'>Status:</p> 
          <p className='mt-1 mb-2 line-clamp-2'>
          {data.status}
-         </p> 
-        </div>
-        <div className='w-1/6 p-1'>
-         <p className=' font-semibold mt-2'>Service:</p> 
-         <p className='mt-1 mb-2 line-clamp-2'>
-          {data.service}
          </p> 
         </div>
         <div className='w-1/6 flex'>
@@ -121,7 +119,7 @@ function Users() {
           {data.status === "pending"?
            <CheckIcon onClick={approveUser(data.userId)} className='h-5 w-5 mx-auto my-auto cursor-pointer' />
            :
-           <XIcon onClick={rejectUser(data.userId)} className='h-5 w-5 mx-auto my-auto cursor-pointer' />
+           <PauseIcon onClick={rejectUser(data.userId)} className='h-5 w-5 mx-auto my-auto cursor-pointer' />
           }  
          </div>
          <div className='w-2/4 items-center p-5'>
@@ -155,10 +153,7 @@ function Users() {
     return getUsers()
   },[])
 
-  const tableData = {
-    columns,
-    users
-  };
+  
   
   return (
     <>
