@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import SideBar from "./SideBar";
-import AltSideBar from "./AltSideBar";
 import TopBar from "./TopBar";
 import Footer from "./Footer";
 import { Transition } from "@headlessui/react";
@@ -57,8 +56,6 @@ export default function Layout({ children }) {
       stiffness: 260,
       damping: 20,
     }}>
-    {user.account === "customer"?
-     <>
       <div hidden={!showNav} onClick={()=> setShowNav(!showNav)} className="fixed w-screen h-screen bg-dark-disabled z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden"></div>
       <Transition
         as={Fragment}
@@ -79,31 +76,6 @@ export default function Layout({ children }) {
         {children}
       </main>
       {/*<Footer goToTop={goToTop} />*/}
-    </>
-    :
-    <>
-     <div hidden={!showNav} onClick={()=> setShowNav(!showNav)} className="fixed w-screen h-screen bg-dark-disabled z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden"></div>
-     <Transition
-       as={Fragment}
-       show={showNav}
-       enter="transform transition duration-[400ms]"
-       enterFrom="-translate-x-full"
-       enterTo="translate-x-0"
-       leave="transform duration-[400ms] transition ease-in-out"
-       leaveFrom="translate-x-0"
-       leaveTo="-translate-x-full"
-     >
-        <AltSideBar showNav={showNav} setShowNav={() => setShowNav(!showNav)} />
-     </Transition>
-     <TopBar showNav={showNav} setShowNav={setShowNav} />
-     <main
-       className={`relative mb-16 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden`}
-     >
-      {children}
-     </main>
-     {/*<Footer goToTop={goToTop} />*/}
-    </>
-    }
-    </motion.div>
+  </motion.div>
   );
 }

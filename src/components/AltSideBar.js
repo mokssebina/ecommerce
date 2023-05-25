@@ -47,10 +47,10 @@ const AltSideBar = forwardRef(({ showNav, setShowNav }, ref) => {
 
       <div className="flex flex-col">
         
-        <Link href="/">
+        <Link href="/dashboard">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/"
+              router.pathname == "/dashboard"
                 ? "bg-black text-gray-50"
                 : "text-gray-50 hover:bg-gray-800"
             }`}
@@ -63,10 +63,10 @@ const AltSideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/profile">
+        <Link href="/seller-profile">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/profile"
+              router.pathname == "/seller-profile"
                 ? "bg-black text-gray-50"
                 : "text-gray-50 hover:bg-gray-800"
             }`}
@@ -111,10 +111,10 @@ const AltSideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/services">
+        <Link href="/seller-services">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/real-estate"
+              router.pathname == "/seller-services"
                 ? "bg-black text-gray-50"
                 : "text-gray-50 hover:bg-gray-800"
             }`}
@@ -127,10 +127,10 @@ const AltSideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/tenders">
+        <Link href="/seller-tenders">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/tenders"
+              router.pathname == "/seller-tenders"
                 ? "bg-black text-gray-50"
                 : "text-gray-50 hover:bg-gray-800"
             }`}
