@@ -61,6 +61,8 @@ const ProductDetails = () => {
         description: data.description, 
         category: data.category, 
         image: data.image,
+        store: data.store,
+        userId: data.userId
     }
       
       //Send the product as an action to the REDUX store
@@ -78,7 +80,7 @@ const ProductDetails = () => {
         category: data.category,
         description: data.description,
         userId: user?.uid,
-        store: user?.displayName,
+        store: data.store,
         inStock: "yes",
         productId: data.productId,
       })
@@ -111,7 +113,13 @@ const ProductDetails = () => {
 
           <p className='text-gray-800 text-2xl md:text-3xl lg:text-4xl mb-2'>{data.title}</p>
 
-          <p className='mt-2 text-base md:text-lg text-purple-900'>Merchant</p>
+          <p onClick={() =>
+            router.push({
+              pathname: `/store/${data.store}`,
+              query: {
+                myData: data.store
+               }})
+           } className='mt-2 text-base md:text-lg text-purple-900 cursor-pointer'>{data.store}</p>
 
           <p className='mt-2 text-sm md:text-base text-gray-700'>{data.category}</p>
 
@@ -119,11 +127,11 @@ const ProductDetails = () => {
 
           <div className='flex mt-2'>
 
-            {Array(rating)
+            {/*Array(rating)
             .fill()
             .map((_,i) => (
                 <StarIcon key={i} className='h-5 text-yellow-500' />
-            ))}
+            ))*/}
 
           </div>
 
@@ -192,6 +200,7 @@ const ProductDetails = () => {
       </div>
      }
      <p className='hidden'>{data.productId}</p>
+     <p className='hidden'>{data.userId}</p>
      </main>
     </div>
   )

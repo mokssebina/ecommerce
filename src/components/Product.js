@@ -7,7 +7,7 @@ import Currency from 'react-currency-formatter';
 import { addToBasket } from '../slices/basketSlice';
 import { useDispatch } from 'react-redux';
 
-function Product({id, title, price, description, category, image, productId, brandName}) {
+function Product({id, title, price, description, category, image, productId, store, brandName, userId}) {
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -30,7 +30,7 @@ function Product({id, title, price, description, category, image, productId, bra
 
     const goToDetails = () => {
 
-      const product = {id, title, price, description, category, image, productId}
+      const product = {id, title, price, description, category, image, productId, store, userId}
 
       router.push({
       pathname: `/product/${id}`,
@@ -82,6 +82,8 @@ function Product({id, title, price, description, category, image, productId, bra
       {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
       <p className='hidden'>{productId}</p>
       <p className='hidden'>{brandName}</p>
+      <p className='hidden'>{store}</p>
+      <p className='hidden'>{userId}</p>
      </div>
     </div>
   )
