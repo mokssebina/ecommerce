@@ -69,6 +69,7 @@ function Home({products}) {
     }
 
     return getListings()
+    
   },[])
 
 

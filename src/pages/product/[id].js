@@ -13,7 +13,7 @@ import { db } from '../../config/firebase';
 
 const ProductDetails = () => {
 
-    document.body.style.backgroundColor = "#e5e7eb";
+    //document.body.style.backgroundColor = "#fffff";
 
     const { user } = useContext(AuthContext)
 
@@ -22,6 +22,7 @@ const ProductDetails = () => {
     const { myData } = router.query;
     const [data, setData] = useState({})
     const [hidden, setHidden] = useState(true)
+    const [counter, setCounter] = useState(1)
 
     function handleResize() {
       if (innerWidth > 1024) {
@@ -50,9 +51,14 @@ const ProductDetails = () => {
     const [hasPrime] = useState(Math.random() < 0.5)
 
     useEffect(() => {
-        if (myData) setData(JSON.parse(myData));
+        const getDetails = async() => {
+          if (myData) setData(JSON.parse(myData));
 
-        console.log("product data: ",myData)
+          console.log("product data: ",myData)
+        }
+
+        return getDetails()
+        
     }, [router.query]);
     
 
@@ -101,20 +107,27 @@ const ProductDetails = () => {
   return (
     <div className="h-full w-full flex flex-col">
      <main className="relative w-full lg:flex lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto pt-5 mb-5">
-      <div className='relative w-full md:full lg:w-3/4 pt-1 px-3'>
+      <div className='relative w-full md:full lg:w-11/12 pt-1 px-3'>
 
-       <div className='w-full h-full bg-white sm:flex md:flex lg:flex animate-pulse shadow-md p-4'>
+       <div className='w-full h-full bg-white sm:flex md:flex lg:flex shadow-md p-4'>
 
         <div className='relative w-full md:w-2/4 lg:w-2/4'>
-          <div className='w-9/12 mx-auto aspect-square border-gray-400 md:space-x-2 border-2 p-2'>
+          <div className='w-11/12 mx-auto aspect-square bg-gray-200 hover:bg-red-600 rounded-lg md:space-x-2'>
             {data.image &&
               <img className='w-full h-full mx-auto' src={data.image} objectFit='cover' />
             }
           </div>
+          <div className='w-full p-2'>
+            <div className='w-1/6 mt-2 aspect-square hover:bg-red-600 rounded-lg md:space-x-2'>
+              {data.image &&
+                <img className='w-full h-full' src={data.image} objectFit='cover' />
+              }
+            </div> 
+          </div>
         </div>
-        <div className='relative w-full md:w-2/4 lg:w-2/4 p-3'>
+        <div className='relative w-full md:w-2/4 lg:w-2/4 px-3'>
 
-          <p className='text-gray-800 text-2xl md:text-3xl lg:text-4xl mb-2'>{data.title}</p>
+          <p className='font-bold text-gray-800 text-2xl md:text-3xl lg:text-3xl mb-4'>{data.title}</p>
 
           <p onClick={() =>
             router.push({
@@ -122,78 +135,58 @@ const ProductDetails = () => {
               query: {
                 myData: JSON.stringify(data.userId)
                }})
-           } className='mt-2 text-base md:text-lg text-purple-900 cursor-pointer'>{data.store}</p>
+           } className='mt-2 text-base md:text-lg text-red-600 cursor-pointer mb-4'>{data.store}</p>
 
           <p className='mt-2 text-sm md:text-base text-gray-700'>{data.category}</p>
 
-          <p className='mt-2 text-xs md:text-sm line-clamp-1 md:line-clamp-2'>You can also animate the skeleton component.</p>
 
           <div className='flex mt-2'>
 
-            {/*Array(rating)
-            .fill()
-            .map((_,i) => (
-                <StarIcon key={i} className='h-5 text-yellow-500' />
-            ))*/}
-
           </div>
 
-          <div className='w-full h-11 border-gray-400 border-t-2 border-b-2 p-1 mt-2'>
-          <p className='font-semibold text-base md:text-lg'>In Stock</p> 
+          <div className='w-full flex h-12 p-1 mt-2'>
+           <p className='font-semibold text-gray-800 text-base md:text-base mb-4'>Quantity:</p>
+           <div className='h-full w-32 ml-3 flex border border-gray-900'>
+            <button disabled={counter === 1? true: false} onClick={setCounter(counter-1)} className='w-2/6 h-full cursor-pointer'>
+             <p className='text-2xl text-red-600'>-</p> 
+            </button>
+            <div className='w-2/6 h-full'>{counter}</div>
+            <button onClick={setCounter(counter+1)} className='w-2/6 h-full cursor-pointer'>
+             <p className='text-2xl text-green-700'>+</p> 
+            </button>
+           </div>
           </div>
 
-          <div hidden={hidden} className='w-full p-2'>
+          <div className='w-full p-2'>
 
             <div className='relative w-full my-5 flex flex-col p-3'>
-              <h3 className='font-bold text-2xl md:text-3xl lg:text-5xl'>{`P${data.price}`}</h3> 
+              <h3 className='font-bold text-2xl md:text-3xl'>{`P${data.price}`}</h3> 
             </div> 
-            <button onClick={addItemToBasket} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
-            <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
-              <PlusIcon className="h-4 w-4" /> 
-              <ShoppingCartIcon className="h-4 w-4" />
-              <p className='text-sm'>Add to Cart</p> 
+            <div className='w-full h-11 flex p-1'>
+              <button onClick={addItemToBasket} disabled={user? false: true} className='w-2/4 h-9 flex md:h-11 text-red-600 hover:text-white lg:h-12 border border-red-600 mt-4 hover:bg-red-600'>
+                <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
+                  <PlusIcon className="h-4 w-4" /> 
+                  <ShoppingCartIcon className="h-4 w-4" />
+                  <p className='text-sm'>Add to Cart</p> 
+                </div>
+              </button>
+              <button  onClick={addToWishlist} disabled={user? false: true} className='w-2/4 h-9 flex md:h-11 text-white lg:h-12 bg-red-600 mt-4 mb-4 hover:bg-red-400'>
+                <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
+                  <HeartIcon className="h-4 w-4" />
+                  <p className='text-sm'>Add to WishList</p> 
+                </div>
+              </button>
             </div>
-            </button>
-            <button  onClick={addToWishlist} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
-            <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
-              <HeartIcon className="h-4 w-4" />
-              <p className='text-sm'>Add to WishList</p> 
-            </div>
-            </button>
-
           </div>
         </div>
        </div>
 
       </div>
 
-      <div className='hidden relative w-full lg:flex flex-col lg:w-1/4 pt-1 px-3'>
-       <div className='w-full bg-white animate-pulse shadow-md p-2'>
-
-        <div className='relative w-full my-5 flex flex-col p-3 bg-slate-500'>
-          <h3 className='font-semibold text-2xl md:text-3xl lg:text-3xl'>{`P${data.price}`}</h3> 
-        </div> 
-        <button onClick={addItemToBasket} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
-         <div className='flex h-6 mx-auto my-auto space-x-1'>
-          <PlusIcon className="h-4 w-4" /> 
-          <ShoppingCartIcon className="h-4 w-4" />
-          <p className='text-sm'>Add to Cart</p> 
-         </div>
-        </button>
-        <button onClick={addToWishlist} disabled={user? false: true} className='w-full h-9 flex md:h-11 text-gray-500 lg:h-12 bg-gray-200 mt-4 mb-4 hover:bg-gray-400'>
-         <div className='flex h-6 mx-auto my-auto space-x-1'>
-          <HeartIcon className="h-4 w-4" />
-          <p className='text-sm'>Add to Wishlist</p> 
-         </div>
-        </button>
-
-       </div>
-      </div>
-
      </main>   
      <main className="relative w-full lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
      {data.description && 
-      <div className='w-full sm:w-full md:w-full lg:w-full animate-pulse py-1 bg-white shadow-md'>
+      <div className='w-full sm:w-full md:w-full lg:w-full py-1 bg-white shadow-md'>
        <div className='w-full h-12 md:h-10 p-2 mb-4 border-gray-400 border-b'>
         <p className='font-semibold text-lg text-gray-800'>Description</p> 
        </div>
