@@ -7,7 +7,7 @@ import Currency from 'react-currency-formatter';
 import { addToBasket } from '../slices/basketSlice';
 import { useDispatch } from 'react-redux';
 
-function Product({id, title, price, description, category, image, productId, store, brandName, userId}) {
+function Product({id, title, price, description, category, image, store, productId, brandName, userId}) {
 
     const dispatch = useDispatch();
     const router = useRouter();

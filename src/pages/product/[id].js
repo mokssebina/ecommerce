@@ -51,7 +51,10 @@ const ProductDetails = () => {
 
     useEffect(() => {
         if (myData) setData(JSON.parse(myData));
+
+        console.log("product data: ",myData)
     }, [router.query]);
+    
 
     const addItemToBasket = () => {
       const product = {
@@ -115,9 +118,9 @@ const ProductDetails = () => {
 
           <p onClick={() =>
             router.push({
-              pathname: `/store/${data.store}`,
+              pathname: `/store/${data.userId}`,
               query: {
-                myData: data.store
+                myData: JSON.stringify(data.userId)
                }})
            } className='mt-2 text-base md:text-lg text-purple-900 cursor-pointer'>{data.store}</p>
 

@@ -44,21 +44,11 @@ function Store() {
 
 
   useEffect(() => {
-    if (myData) setData(JSON.parse(myData));
+    if (myData) setData(myData);
+
+    console.log("product data: ",myData)
   }, [router.query]);
   
-
-  useEffect(() => {
-    const getListings = async () => {
-      const ref = collection(db, "listings")
-      
-      onSnapshot(ref, (snapshot) => {
-       setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-      })
-    }
-
-    return getListings()
-  },[])
 
   useEffect(() => {
     const getListings = async () => {
@@ -67,56 +57,37 @@ function Store() {
       onSnapshot(q, (snapshot) => {
        setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     })
+
   }
     return getListings() 
   },[])
 
 
   return (
-    <div className="h-full w-full flex flex-col bg-gray-50">
+    <div className="h-full w-full flex flex-col">
       <Head>
         <title>Typhoon</title>
       </Head>
 
-      <div className="relative w-full h-56 sm:h-80 md:h-80 lg:h-80">
-       <div className='relative w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
+      <h1>Merchant</h1>
 
-        <div className='hidden lg:flex lg:w-1/4 lg:px-2'>
-         <Categories /> 
+      <div className='w-full bg-gray-800'>
+        <div className='w-full h-full md:flex md:w-10/12 lg:w-8/12 p-2 mx-auto'>
+          <div className="w-full h-full lg:w-3/5 transform overflow-hidden pt-16 px-2 text-left align-middle">
+           <div className='w-10/12 md:w-9/12 lg:w-8/12 mx-auto'>
+            <p className='font-semibold text-white text-4xl'>Retro Football</p>
+
+            <p className='font-semibold text-white text-4xl'>An old school style football from the 80's era.</p>
+           </div> 
+          </div>
+          <div className="w-full h-full lg:w-2/5 transform overflow-hidden pt-16 px-2 text-left align-middle bg-black">
+           <div className='w-8/12 aspect-square md:w-9/12 lg:w-8/12 mx-auto'>
+            <img alt='product' className='w-full h-full' src='https://firebasestorage.googleapis.com/v0/b/jobberbwapp.appspot.com/o/Y9Xxs6cWXdWWEMP1ygPxxT4JNMB3%2Flistings%2Fimages.jpg?alt=media&token=6e795be3-ad24-4a08-a009-7f95dcbca413' />
+           </div> 
+          </div>
         </div>
-
-        {/*-------------------Banner---------------------*/}
-        <div className='w-full flex flex-col sm:w-full md:w-full lg:w-2/4'>
-
-         <div className="w-full h-full sm:h-full md:h-full lg:w-10/12 lg:h-3/5">
-          <Banner />
-         </div>  
-
-        </div>
-        {/*----------------------------------------------*/}
-
-        <div className='hidden lg:flex flex-col lg:w-1/4 lg:p-2'>
-         <img className='w-full h-auto' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/Small-Business-Web-Design-600x540.jpg'} /> 
-        </div>
-
-       </div>  
       </div>
-
-      <div className="relative w-full bg-gray-200">
-       <main className="relative flex flex-col w-full lg:flex lg:w-10/12 max-w-screen-2xl mx-auto">
-
-        <div className='relative w-full lg:w-1/4'>
-         
-        </div>
-
-        <div className='relative w-full lg:w-3/4'>
-         <ProductFeed products={listings} />
-        </div>
-        
-       </main> 
-      </div>
-      
-    </div>
+    </div>  
   );
 }
 

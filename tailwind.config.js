@@ -23,6 +23,7 @@ module.exports = {
       },
       aspectRatio: {
         '3/4': '4 / 5',
+        'banner': '16 / 5'
       },
       height: {
         custom: {

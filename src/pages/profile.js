@@ -1,8 +1,6 @@
 import React, { useState, useEffect, Fragment, useContext } from "react";
+import Image from 'next/image'
 import { Dialog } from '@headlessui/react'
-import { UserIcon, FolderAddIcon } from '@heroicons/react/outline'
-import OrderItem from "../components/OrderItem";
-import AccountUpdate from "../components/AccountUpdate";
 import { AuthContext } from "../context/AuthContext";
 import { withProtected } from "../components/protected-route";
 import {
@@ -133,42 +131,20 @@ function Profile({ children }) {
 
 
   return (
-    <>
-     <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
-      <div className="relative w-20 h-20 mx-auto mt-60 z-50">
-        <ThreeCircles
-          height="80"
-          width="80"
-          color="#131921"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-          ariaLabel="three-circles-rotating"
-          outerCircleColor=""
-          innerCircleColor=""
-          middleCircleColor=""
-        />
-      </div> 
-     </div>
-      <div className='w-full h-screen bg-white overflow-hidden'>
         
-        <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
+      <main className='w-full h-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
 
-        <div className='w-full h-full mt-32 px-1 pb-2 animate-pulse'>
-          
-        <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+        <div className="w-full h-full lg:flex items-center justify-center p-4 text-center">
               
-                <Dialog.Panel className="w-full max-w-md h-96 transform overflow-hidden rounded-2xl bg-gray-50 pt-6 px-2 text-left align-middle shadow-xl transition-all">
+                <div className="w-full h-full lg:w-2/5 transform overflow-hidden pt-16 px-2 text-left align-middle">
                   <div className='w-full h-6 flex px-2'>
                     
                    <div className='w-10/12'>
-                    <Dialog.Title
-                        as="h3"
+                    <h3
                         className="text-lg font-medium leading-6 text-gray-900"
                     >
                         Profile Update
-                    </Dialog.Title>
+                    </h3>
                    </div>
                    
                   </div>  
@@ -195,17 +171,14 @@ function Profile({ children }) {
                    <button onClick={createPicUpload} className='w-full h-full mt-2 rounded-md text-xs text-gray-50 bg-amazon_blue'>Upload Picture</button>
                   </div>
                   
-                </Dialog.Panel>
+                </div>
+
+                <div className="w-full h-96 lg:w-3/5 transform overflow-hidden bg-black pt-6 px-2 text-left"></div>
 
             </div>
-          </div>
 
-        </div> 
+      </main>
 
-        </main>
-      </div>
-
-</> 
   );
 }
 

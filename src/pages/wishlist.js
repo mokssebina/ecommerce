@@ -32,7 +32,7 @@ function wishlist() {
 
 
   return (
-    <div className="relative w-full">
+    <div className="relative h-full w-full">
       <main className="w-full lg:w-9/12 max-w-screen-2xl mx-auto pt-4">
 
         <p className=' text-2xl font-semibold ml-2'>Wishlist</p>
