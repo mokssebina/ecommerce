@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from "next/head";
 import Header from "../components/AppLayout";
 import Banner from "../components/Banner";
 import ProductFeed from "../components/ProductFeed";
 import Categories from '../components/Categories';
-import Footer from "../components/Footer";
+import { AuthContext } from '../context/AuthContext';
 import FilterFeed from '../components/FilterFeed';
 import { baseUrl, fetchApi } from "../utils/fetchApi";
 import { useSession } from 'next-auth/client';
@@ -24,6 +24,9 @@ function Home({products}) {
     console.log("There is a session")
   }
   */
+
+  const { user } = useContext(AuthContext)
+
 
   document.body.style.backgroundColor = "#e5e7eb";
 
@@ -77,6 +80,7 @@ function Home({products}) {
 
 
   return (
+    
     <div className="h-full w-full flex flex-col bg-gray-50">
       <Head>
         <title>Typhoon</title>
@@ -125,8 +129,9 @@ function Home({products}) {
        </main> 
       </div>
       
-    </div>
-  );
+    </div>    
+    
+  )
 }
 
 export async function getServerSideProps(context) {
