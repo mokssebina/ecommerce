@@ -173,7 +173,7 @@ function Profile({ children }) {
                   
                 </div>
 
-                <div className="w-full h-96 lg:w-3/5 transform overflow-hidden bg-black pt-6 px-2 text-left"></div>
+                <div className="w-full h-96 lg:w-3/5 transform overflow-hidden bg-white pt-6 px-2 text-left"></div>
 
             </div>
 

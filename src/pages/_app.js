@@ -56,7 +56,6 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
         referrerPolicy="no-referrer"
       />
       </Head>
-      <ThemeProvider theme={theme}>  
        <Provider store={store}>
         <PageLayout>
           <ChakraProvider>
@@ -64,7 +63,6 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps}) =
           </ChakraProvider>  
         </PageLayout>
        </Provider>
-      </ThemeProvider>
      </AuthContextProvider>
     </AnimatePresence>  
   )

@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
-function WishlistProduct({id, title, price, description, category, image, productId, brandName}) {
+function WishlistProduct({id, title, price, description, category, image, store, productId, brandName, userId}) {
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -42,7 +42,7 @@ function WishlistProduct({id, title, price, description, category, image, produc
 
     const goToDetails = () => {
 
-      const product = {id, title, price, description, category, image, productId}
+      const product = {id, title, price, description, category, image, productId, store, userId}
 
       router.push({
       pathname: `/product/${id}`,
@@ -53,31 +53,21 @@ function WishlistProduct({id, title, price, description, category, image, produc
 
 
   return (
-    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-sm shadow-sm hover:shadow-lg'>
-     <div onClick={goToDetails} className='w-full mx-auto my-5 animate-pulse flex flex-col'>
+    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-lg'>
+     <div onClick={goToDetails} className='w-full mx-auto flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
-      <div className='w-8/12 aspect-square mx-auto'>
+      <div className='w-9/12 aspect-square mx-auto mb-2'>
        {image &&
         <img className='w-full h-full mx-auto' src={image} objectFit='cover' />
        } 
       </div>
 
-      <div className='w-full p-2'>
+      <div className='w-full h-1 bg-red-600'></div>
+
+      <div className='w-full p-1'>
        <h4 className='my-1 line-clamp-1'>{title}</h4>
-        {/*
-        <div className='flex'>
-
-        {Array(rating)
-          .fill()
-          .map((_,i) => (
-            <StarIcon key={i} className='h-5 text-yellow-500' />
-          ))}
-
-        </div>
-
-        <p className='text-xs my-2 line-clamp-2'>{description}</p> 
-        */}
+        
        <div className='mt-2'>
 
         <Currency quantity={price} currency="BWP" />  
@@ -85,22 +75,17 @@ function WishlistProduct({id, title, price, description, category, image, produc
        </div>
         
       </div>
-
-      {/*hasPrime && (
-        <div className='flex items-center space-x-2 -mt-5'>
-          <img className='w-12' src="https://links.papareact.com/fdw" alt="" />  
-          <p className='text-xs text-gray-500'>Free delivery within Gaborone</p>
-        </div>
-      )*/}
-
-      {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
+      
      </div>
-      <button onClick={""} className='w-full h-9 flex md:h-11 text-white lg:h-12 bg-purple-900 mt-4 hover:bg-purple-700'>
+      <button onClick={() => deleteDoc(doc(db ,'wishlist', productId))} className='w-full h-9 flex text-white bg-red-600 mt-2 hover:bg-red-400'>
        <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
         <p className='text-sm'>Remove from Wishlist</p> 
        </div>
       </button>
       <p className='hidden'>{productId}</p>
+      <p className='hidden'>{brandName}</p>
+      <p className='hidden'>{store}</p>
+      <p className='hidden'>{userId}</p>
     </div>
   )
 }

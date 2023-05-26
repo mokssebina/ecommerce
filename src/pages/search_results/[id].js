@@ -55,57 +55,37 @@ const SearchPage = ({ products }) => {
 
 
     return (
-        <div className="h-full w-full flex flex-col bg-gray-50">
-      <Head>
-        <title>Jobber</title>
-      </Head>
+      <div className="h-full w-full flex flex-col ">
 
       <div className="relative w-full h-56 sm:h-80 md:h-[28rem] lg:h-[32rem]">
        <div className='w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
 
-        <div className='hidden lg:flex lg:w-1/4 lg:px-2'>
-         <Categories /> 
-        </div>
 
         {/*-------------------Banner---------------------*/}
-        <div className='w-full flex flex-col sm:w-full md:w-full lg:w-2/4'>
+        <div className='w-full flex flex-col sm:w-full md:w-full mx-auto'>
 
-         <div className="w-full h-full sm:h-full md:h-full lg:max-h-3/5">
+         <div className="w-full h-full">
           <Banner />
          </div>  
-
-         <div className='hidden sm:flex w-full lg:max-h-2/5 lg:p-2'></div>
 
         </div>
         {/*----------------------------------------------*/}
 
-        <div className='hidden lg:flex flex-col lg:w-1/4 lg:p-2'>
-         <img className='w-full h-auto' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/Small-Business-Web-Design-600x540.jpg'} /> 
-        </div>
-
        </div>  
       </div>
 
-      <div className="w-full bg-gray-200">
+      <div className="w-full h-full">
 
-      {listings > 0 && 
-        <div className="relative w-full lg:w-10/12 max-w-screen-2xl mx-auto">
-          <p className='text-lg md:text-3xl lg:text-5xl font-semibold'>Search Results</p>
-        </div> 
-      }
+      <div className="relative w-full lg:w-10/12 max-w-screen-2xl mt-5 mx-auto p-1">
+        <p className='text-lg md:text-3xl lg:text-3xl font-semibold'>Search Results</p>
+      </div> 
        
 
-       <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
+       <main className="relative flex flex-grow w-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto">
         {listings.length > 0 ?
          <>
-          <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'>
-
-           <img className='w-full h-auto' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/small-business-marketing-on-instagram.png'} /> 
-
-           <img className='w-full h-auto mt-10' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/creating-online-ads-guide.png'} /> 
-
-          </div>
-          <div className='relative w-full lg:w-3/4'>
+          
+          <div className='relative w-full mt-5 mx-auto'>
           <SearchResults
            products={listings}
            searchTerm={data}          

@@ -27,7 +27,7 @@ export const PasswordInput = ({	label, name, type, formOptions,	errors }) => {
 						className={`ring:0 focus:ring-0 focus:outline-none text-gray-500 text-normal h-full py-1 px-2 text-sm w-full flex items-center`}
 					/>
                     
-					<div onClick={() => setShow(!show)} className="text-gray-700 bg-slate-700 h-6 w-6 p-1">
+					<div onClick={() => setShow(!show)} className="text-gray-700 h-6 w-6 p-1">
                      {show?   
                       <EyeOffIcon className='w-4 h-4' />
                       :

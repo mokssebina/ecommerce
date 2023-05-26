@@ -30,7 +30,7 @@ function Product({id, title, price, description, category, image, store, product
 
     const goToDetails = () => {
 
-      const product = {id, title, price, description, category, image, productId, store, userId}
+      const product = {id, title, price, description, category, image, productId, store, brandName, userId}
 
       router.push({
       pathname: `/product/${id}`,
@@ -40,51 +40,35 @@ function Product({id, title, price, description, category, image, store, product
     }
 
   return (
-    <div onClick={goToDetails} className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-sm shadow-sm hover:shadow-lg'>
-     <div className='w-full mx-auto my-5 flex flex-coltoast'>
+    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-lg'>
+     <div onClick={goToDetails} className='w-full mx-auto flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
-      <div className='w-8/12 aspect-square mx-auto bg-gray-100'>
+      <div className='w-9/12 aspect-square mx-auto mb-2'>
        {image &&
         <img className='w-full h-full mx-auto' src={image} objectFit='cover' />
        } 
       </div>
 
-      <div className='absolute w-full bottom-0 py-2'>
+      <div className='w-full h-1 bg-red-600'></div>
+
+      <div className='w-full p-1'>
        <h4 className='my-1 line-clamp-1'>{title}</h4>
-        {/*
-        <div className='flex'>
-
-        {Array(rating)
-          .fill()
-          .map((_,i) => (
-            <StarIcon key={i} className='h-5 text-yellow-500' />
-          ))}
-
-        </div>
-
-        <p className='text-xs my-2 line-clamp-2'>{description}</p> 
-        */}
+        
        <div className='mt-2'>
 
         <Currency quantity={price} currency="BWP" />  
 
        </div>
+        
       </div>
-
-      {/*hasPrime && (
-        <div className='flex items-center space-x-2 -mt-5'>
-          <img className='w-12' src="https://links.papareact.com/fdw" alt="" />  
-          <p className='text-xs text-gray-500'>Free delivery within Gaborone</p>
-        </div>
-      )*/}
-
-      {/*<button onClick={addItemToBasket} className='mt-auto button bg-yellow-700 text-white'>Add to Basket</button>*/}
+      
+     </div>
+      
       <p className='hidden'>{productId}</p>
       <p className='hidden'>{brandName}</p>
       <p className='hidden'>{store}</p>
       <p className='hidden'>{userId}</p>
-     </div>
     </div>
   )
 }

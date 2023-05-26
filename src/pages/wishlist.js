@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import ProductFeed from '../components/ProductFeed';
+import WishListFeed from '../components/Wishlist';
 import {
     query, 
     where,
@@ -13,7 +13,7 @@ import { AuthContext } from '../context/AuthContext';
 
 function wishlist() {
 
-    document.body.style.backgroundColor = "#e5e7eb";
+    document.body.style.backgroundColor = "#f8fafc";
 
     const [wishlist, setWishlist] = useState([{}])
 
@@ -32,12 +32,12 @@ function wishlist() {
 
 
   return (
-    <div className="relative h-full w-full">
-      <main className="w-full lg:w-9/12 max-w-screen-2xl mx-auto pt-4">
+    <div className="relative w-full h-full">
+      <main className="w-full h-full lg:w-9/12 max-w-screen-2xl mx-auto pt-4">
 
         <p className=' text-2xl font-semibold ml-2'>Wishlist</p>
 
-         <ProductFeed products={wishlist} />
+         <WishListFeed products={wishlist} />
 
       </main> 
     </div>   

@@ -33,7 +33,7 @@ function TopBar({ showNav, setShowNav }) {
           logOut()
         }
 
-        router.push(LOGIN)
+        router.push(HOME)
       }
       catch{
         console.log("users logged out")
@@ -79,9 +79,9 @@ function TopBar({ showNav, setShowNav }) {
         </div>*/}
       </div>  
 
-      <div className='hidden w-1/4 sm:flex items-center h-10 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-purple-900 hover:bg-purple-500'>
+      <div className='hidden w-1/4 sm:flex items-center h-9 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-red-600 hover:bg-red-800'>
        <input
-        className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4`" type="text"
+        className="p-2 h-full w-11/12 flex-grow flex-shrink rounded-l-md text-black focus:outline-none px-4`" type="text"
         placeholder="Search"
         value={searchField}
         onChange={(e) => setSearchField(e.target.value)}
@@ -92,7 +92,7 @@ function TopBar({ showNav, setShowNav }) {
       <div className="flex items-center md:pr-16 text-gray-50">
          <Popover as="div" className="relative">
           <Popover.Button onClick={() => router.push(CHECKOUT)} className="outline-none mr-5 md:mr-8 cursor-pointer flex item-center">
-            <span className='md:right-10 max-h-4 w-4 bg-purple-900 text-center rounded-full text-white text-xs font-bold'>
+            <span className='md:right-10 max-h-4 w-4 bg-red-600 text-center rounded-full text-white text-xs font-bold'>
              {items.length}
             </span>
             <ShoppingCartIcon className="max-h-6 w-6" />
@@ -157,8 +157,8 @@ function TopBar({ showNav, setShowNav }) {
 
     <div className='w-full mx-auto flex items-center space-x-3 pl-4 pr-4 pt-2 pb-2 sm:hidden text-white bg-amazon_blue text-sm'>
 
-      <div className='flex items-center h-10 w-full rounded-md cursor-pointer bg-purple-900 hover:bg-purple-500'>
-        <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type="text"
+      <div className='flex items-center h-9 w-full rounded-md cursor-pointer bg-red-600 hover:bg-red-400'>
+        <input className='p-2 h-full w-11/12 flex-grow flex-shrink rounded-l-md text-black focus:outline-none px-4' type="text"
          placeholder="Search"
          value={searchField}
          onChange={(e) => setSearchField(e.target.value)}        

@@ -1,17 +1,31 @@
 import { forwardRef, useContext } from "react";
 import Link from "next/link";
-import { HomeIcon, OfficeBuildingIcon, CreditCardIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, CollectionIcon, HeartIcon } from "@heroicons/react/outline";
+import { HomeIcon, OfficeBuildingIcon, LogoutIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, CollectionIcon, HeartIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
+import { HOME } from "../utils/constant/routesConstants";
 import { db } from "../config/firebase";
 
 
 const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
 
-  const { user } = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext)
 
   const router = useRouter();
+
+  const signOut = () => {
+    try {
+      if(user){
+        logOut()
+      }
+
+      router.push(HOME)
+    }
+    catch{
+      console.log("users logged out")
+    }
+  }
 
 
   return (
@@ -61,6 +75,8 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
+        {user &&
+        <>
         <Link href="/profile">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
@@ -93,6 +109,8 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
             </div>
           </div>
         </Link>
+        </>
+        }
         <Link href="/real-estate">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
@@ -137,10 +155,28 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
               <ArchiveIcon className="max-h-5 w-5" />
             </div>
             <div>
-              <p>Tenders</p>
+              <p>Leads</p>
             </div>
           </div>
         </Link>
+        {!user?
+        null
+        :
+        <div onClick={signOut}
+         className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+           router.pathname == "/real-estate"
+            ? "bg-black text-gray-50"
+            : "text-gray-50 hover:bg-gray-800"
+         }`}
+        >
+          <div className="mr-2">
+            <LogoutIcon className="max-h-5 w-5" />
+          </div>
+          <div>
+            <p>Logout</p>
+          </div>
+        </div>
+        }
       </div>
     </div>
   );

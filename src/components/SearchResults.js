@@ -43,7 +43,7 @@ function SearchResults({ products, searchTerm }) {
           return val;
         }
       })
-      .map(({productId, item, price, description, category, photoURL, brandName}) => (
+      .map(({productId, item, price, description, category, photoURL, brandName, userId, store}) => (
        <SearchProduct
         //key={id} 
         id={productId}
@@ -54,6 +54,8 @@ function SearchResults({ products, searchTerm }) {
         image={photoURL}
         productId={productId}
         brandName={brandName}
+        userId={userId}
+        store={store}
        />
       ))}
 
@@ -85,7 +87,7 @@ function SearchResults({ products, searchTerm }) {
           return val;
         }
       }) 
-      .map(({productId, item, price, description, category, photoURL, brandName}) => (
+      .map(({productId, item, price, description, category, photoURL, brandName, userId, store}) => (
        <SearchProduct
         //key={id} 
         id={productId}
@@ -96,6 +98,8 @@ function SearchResults({ products, searchTerm }) {
         image={photoURL}
         productId={productId}
         brandName={brandName}
+        userId={userId}
+        store={store}
         />
       ))}
 
@@ -125,7 +129,7 @@ function SearchResults({ products, searchTerm }) {
           return val;
         }
       })
-      .map(({productId, item, price, description, category, photoURL, brandName}) => (
+      .map(({productId, item, price, description, category, photoURL, brandName, userId, store}) => (
        <SearchProduct
         //key={id} 
         id={productId}
@@ -136,6 +140,8 @@ function SearchResults({ products, searchTerm }) {
         image={photoURL}
         productId={productId}
         brandName={brandName}
+        userId={userId}
+        store={store}
         />
       ))}
 
