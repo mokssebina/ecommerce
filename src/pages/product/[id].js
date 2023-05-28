@@ -59,7 +59,7 @@ const ProductDetails = () => {
     const [hasPrime] = useState(Math.random() < 0.5)
 
     useEffect(() => {
-        const getDetails = async() => {
+        const getDetails = () => {
           if (myData) setData(JSON.parse(myData));
 
           console.log("product data: ",myData)
@@ -122,13 +122,13 @@ const ProductDetails = () => {
        <div className='w-full h-full bg-white sm:flex md:flex lg:flex p-4'>
 
         <div className='relative w-full md:w-2/4 lg:w-2/4'>
-          <div className='w-9/12 mx-auto aspect-square bg-gray-200 hover:bg-red-600 rounded-lg md:space-x-2'>
+          <div className='w-9/12 mx-auto aspect-square bg-gray-200 hover:bg-purple-700 rounded-lg md:space-x-2'>
             {data.image &&
               <img className='w-full h-full mx-auto' src={data.image} objectFit='cover' />
             }
           </div>
           <div className='w-full p-2'>
-            <div className='w-1/6 mt-2 aspect-square hover:bg-red-600 rounded-lg md:space-x-2'>
+            <div className='w-1/6 mt-2 aspect-square hover:bg-purple-700 rounded-lg md:space-x-2'>
               {data.image &&
                 <img className='w-full h-full' src={data.image} objectFit='cover' />
               }
@@ -147,7 +147,7 @@ const ProductDetails = () => {
               query: {
                 myData: JSON.stringify(data.userId)
                }})
-           } className='mt-2 text-base md:text-lg text-red-600 cursor-pointer mb-4'>{data.store}</p>
+           } className='mt-2 text-base md:text-lg text-purple-700 cursor-pointer mb-4'>{data.store}</p>
 
           <p className='mt-2 text-sm md:text-base text-gray-700'>{data.category}</p>
 
@@ -174,17 +174,17 @@ const ProductDetails = () => {
           <div className='w-full p-2'>
 
             <div className='relative w-full my-5 flex flex-col p-3'>
-              <h3 className='font-bold text-2xl md:text-3xl text-red-600'>{`P${data.price}`}</h3> 
+              <h3 className='font-bold text-2xl md:text-3xl text-purple-700'>{`P${data.price}`}</h3> 
             </div> 
             <div className='w-full h-9 flex p-1 space-x-2'>
-              <button onClick={addItemToBasket} disabled={user? false: true} className='w-2/4 h-9 flex text-red-600 hover:text-white border border-red-600 hover:bg-red-600'>
+              <button onClick={addItemToBasket} disabled={user? false: true} className='w-2/4 h-9 flex text-purple-700 hover:text-white border border-red-600 hover:bg-red-600'>
                 <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
                   <PlusIcon className="h-4 w-4" /> 
                   <ShoppingCartIcon className="h-4 w-4" />
                   <p className='text-sm'>Add to Cart</p> 
                 </div>
               </button>
-              <button  onClick={addToWishlist} disabled={user? false: true} className='w-2/4 h-9 flex text-white bg-red-600 hover:bg-red-800'>
+              <button  onClick={addToWishlist} disabled={user? false: true} className='w-2/4 h-9 flex text-white bg-purple-700 hover:bg-purple-700'>
                 <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
                   <HeartIcon className="h-4 w-4" />
                   <p className='text-sm'>Add to WishList</p> 

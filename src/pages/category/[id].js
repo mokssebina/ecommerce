@@ -41,7 +41,7 @@ const CategoryPage = ({ products }) => {
     }, [router.query]);
 
     useEffect(() => {
-      const getListings = async () => {
+      const getListings = () => {
         const ref = collection(db, "listings")
         const q = query(ref, where("category", "==", `${data}`))
         onSnapshot(q, (snapshot) => {

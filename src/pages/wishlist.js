@@ -20,7 +20,7 @@ function wishlist() {
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        const getWishlist = async () => {
+        const getWishlist = () => {
           const ref = collection(db, `wishlist`)
           onSnapshot(ref, (snapshot) => {
            setWishlist(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))

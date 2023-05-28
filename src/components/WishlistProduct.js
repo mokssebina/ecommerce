@@ -63,7 +63,7 @@ function WishlistProduct({id, title, price, description, category, image, store,
        } 
       </div>
 
-      <div className='w-full h-1 bg-red-600'></div>
+      <div className='w-full h-1 bg-purple-700'></div>
 
       <div className='w-full p-1'>
        <h4 className='my-1 line-clamp-1'>{title}</h4>
@@ -77,7 +77,7 @@ function WishlistProduct({id, title, price, description, category, image, store,
       </div>
       
      </div>
-      <button onClick={() => deleteDoc(doc(db ,'wishlist', productId))} className='w-full h-9 flex text-white bg-red-600 mt-2 hover:bg-red-400'>
+      <button onClick={() => deleteDoc(doc(db ,'wishlist', productId))} className='w-full h-9 flex text-white bg-purple-700 mt-2 hover:bg-purple-900'>
        <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
         <p className='text-sm'>Remove from Wishlist</p> 
        </div>

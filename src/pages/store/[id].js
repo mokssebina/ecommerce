@@ -51,7 +51,7 @@ function Store() {
   
 
   useEffect(() => {
-    const getListings = async () => {
+    const getListings = () => {
       const ref = collection(db, "listings")
       const q = query(ref, where("userId", "==", `${data.userId}`))
       onSnapshot(q, (snapshot) => {

@@ -42,7 +42,7 @@ const SearchPage = ({ products }) => {
     }, [router.query]);
 
     useEffect(() => {
-      const getListings = async () => {
+      const getListings = () => {
         const ref = collection(db, "listings")
         const q = query(ref, where("inStock", "==", "yes"))
         onSnapshot(q, (snapshot) => {

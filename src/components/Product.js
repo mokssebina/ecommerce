@@ -50,7 +50,7 @@ function Product({id, title, price, description, category, image, store, product
        } 
       </div>
 
-      <div className='w-full h-1 bg-red-600'></div>
+      <div className='w-full h-1 bg-purple-700'></div>
 
       <div className='w-full p-1'>
        <h4 className='my-1 line-clamp-1'>{title}</h4>

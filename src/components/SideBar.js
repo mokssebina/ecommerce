@@ -96,7 +96,7 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         <Link href="/wishlist">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center hover:bg-gray-800 cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/listings"
+              router.pathname == "/wishlist"
                 ? "bg-black text-gray-50"
                 : "text-gray-50 hover:bg-gray-800"
             }`}

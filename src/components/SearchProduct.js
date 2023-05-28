@@ -89,7 +89,7 @@ function SearchProduct({id, title, price, description, category, image, store, p
        } 
       </div>
 
-      <div className='w-full h-1 bg-red-600'></div>
+      <div className='w-full h-1 bg-purple-700'></div>
 
       <div className='w-full p-1'>
        <h4 className='my-1 line-clamp-1'>{title}</h4>
@@ -115,7 +115,7 @@ function SearchProduct({id, title, price, description, category, image, store, p
       </div>
       
      </div>
-      <button onClick={addItemWishlist} disabled={user? false: true} className='w-full h-9 flex text-white bg-red-600 mt-4 hover:bg-red-400'>
+      <button onClick={addItemWishlist} disabled={user? false: true} className='w-full h-9 flex text-white bg-purple-700 mt-4 hover:bg-purple-900'>
        <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
         <HeartIcon className="h-4 w-4" />
         <p className='text-sm'>Add to Wishlist</p> 
