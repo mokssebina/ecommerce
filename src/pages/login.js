@@ -9,7 +9,6 @@ import SubmitButton from '../components/form-components/SubmitButton';
 import { AuthContext } from '../context/AuthContext';
 import { HOME, SIGN_UP, FORGOT_PASSWORD } from '../utils/constant/routesConstants';
 import { loginSchema } from '../validation/loginValidation';
-import { toast } from "react-hot-toast";
 import { withPublic } from '../components/protected-route';
 import { ThreeCircles } from  'react-loader-spinner'
 

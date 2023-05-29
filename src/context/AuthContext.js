@@ -14,8 +14,9 @@ import {
   serverTimestamp,
   setDoc
 } from "firebase/firestore";
+import { toast } from "react-hot-toast";
 import { auth, db } from "../config/firebase";
-import { HOME } from "../utils/constant/routesConstants";
+import { HOME, LOGIN } from "../utils/constant/routesConstants";
 
 
 const AuthContext = createContext({});
@@ -60,7 +61,10 @@ const AuthContextProvider = ({ children }) => {
               displayPicture: userRef.data()?.displayPicture,
               account: userRef.data()?.account,
               status: userRef.data()?.status,
-              createdDate: userRef.data()?.createdDate
+              createdDate: userRef.data()?.createdDate,
+              featuredProductPic: userRef.data()?.featuredProductPic,
+              featuredProductTitle: userRef.data()?.featuredProductTitle,
+              featuredProductText: userRef.data()?.featuredProductText
             });
            } else {
             setUser({
@@ -148,7 +152,10 @@ const AuthContextProvider = ({ children }) => {
         displayPicture: "", 
         account: account, 
         status: status,
-        createdDate: serverTimestamp()
+        createdDate: serverTimestamp(),
+        featuredProductPic: "",
+        featuredProductTitle: "",
+        featuredProductText: ""
       }).then()
 
       await router.push(HOME);
@@ -163,10 +170,13 @@ const AuthContextProvider = ({ children }) => {
 
   const logIn = async (email, password) => {
     try {
-     const { user } = signInWithEmailAndPassword(auth, email, password)
 
-      setUser(user)
+      const { user } = signInWithEmailAndPassword(auth, email, password)
 
+      if(user.account === "customer"){
+        setUser(user)
+      }
+      
       await router.push(HOME);
       
     } catch (error) {

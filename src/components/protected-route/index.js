@@ -9,7 +9,7 @@ export const withPublic = (Component) => {
           const router = useRouter();
           const { auth, user } = useContext(AuthContext);
           
-          if (user) {
+          if ((user && user.account === "service-provider") || (user && user.account === "admin")) {
             router.replace(HOME);
 
             return <div className="relative w-20 h-20 mx-auto mt-60">
@@ -41,6 +41,7 @@ export const withProtected = (Component) => {
           const { auth, user } = useContext(AuthContext);
           
           if (!user) {
+
                router.replace(LOGIN);
    
                return <div className="relative w-20 h-20 mx-auto mt-60">
