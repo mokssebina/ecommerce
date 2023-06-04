@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import Header from '../components/AppLayout'
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { selectItems, selectTotal } from '../slices/basketSlice';

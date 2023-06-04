@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from "next/head";
-import Header from "../../components/AppLayout";
 import Banner from "../../components/Banner";
 import ProductFeed from "../../components/ProductFeed";
 import Categories from '../../components/Categories';

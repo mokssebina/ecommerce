@@ -177,7 +177,7 @@ const ProductDetails = () => {
               <h3 className='font-bold text-2xl md:text-3xl text-purple-700'>{`P${data.price}`}</h3> 
             </div> 
             <div className='w-full h-9 flex p-1 space-x-2'>
-              <button onClick={addItemToBasket} disabled={user? false: true} className='w-2/4 h-9 flex text-purple-700 hover:text-white border border-red-600 hover:bg-red-600'>
+              <button onClick={addItemToBasket} disabled={user? false: true} className='w-2/4 h-9 flex text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-700'>
                 <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
                   <PlusIcon className="h-4 w-4" /> 
                   <ShoppingCartIcon className="h-4 w-4" />

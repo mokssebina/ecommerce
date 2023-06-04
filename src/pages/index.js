@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Head from "next/head";
-import Header from "../components/AppLayout";
 import Banner from "../components/Banner";
 import ProductFeed from "../components/ProductFeed";
 import Categories from '../components/Categories';
@@ -60,7 +59,7 @@ function Home({products}) {
   }, []);
 
   useEffect(() => {
-    const getListings = async () => {
+    const getListings = () => {
       const ref = collection(db, "listings")
       
       onSnapshot(ref, (snapshot) => {

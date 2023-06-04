@@ -142,7 +142,7 @@ function Users() {
 
 
   useEffect(() => {
-    const getUsers = async () => {
+    const getUsers = () => {
       const ref = collection(db, "users")
       const q = query(ref, where(("account", "==", `customer` || ("account", "==", `merchant`))))
       onSnapshot(q, (snapshot) => {

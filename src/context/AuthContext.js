@@ -30,7 +30,7 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
 
-    const getUser = async () => {
+    const getUser = () => {
 
      onAuthStateChanged(auth, async (user) => {
          if (user) {
