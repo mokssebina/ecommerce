@@ -145,7 +145,7 @@ const ProductDetails = () => {
             router.push({
               pathname: `/store/${data.userId}`,
               query: {
-                myData: JSON.stringify(data.userId)
+                myData: data.userId
                }})
            } className='mt-2 text-base md:text-lg text-purple-700 cursor-pointer mb-4'>{data.store}</p>
 
@@ -184,7 +184,7 @@ const ProductDetails = () => {
                   <p className='text-sm'>Add to Cart</p> 
                 </div>
               </button>
-              <button  onClick={addToWishlist} disabled={user? false: true} className='w-2/4 h-9 flex text-white bg-purple-700 hover:bg-purple-700'>
+              <button  onClick={addToWishlist} disabled={user? false: true} className='w-2/4 h-9 flex text-white bg-purple-700 hover:bg-purple-900'>
                 <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
                   <HeartIcon className="h-4 w-4" />
                   <p className='text-sm'>Add to WishList</p> 

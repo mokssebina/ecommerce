@@ -50,12 +50,12 @@ function Product({id, title, price, description, category, image, store, product
        } 
       </div>
 
-      <div className='w-full h-1 bg-purple-700'></div>
+      <div className='w-full h-1 mt-3 bg-purple-700'></div>
 
-      <div className='w-full p-1'>
-       <h4 className='my-1 line-clamp-1'>{title}</h4>
+      <div className='absolute bottom-0 w-full p-1'>
+       <h4 className='my-1 line-clamp-1 font-semibold'>{title}</h4>
         
-       <div className='mt-2'>
+       <div className='mt-2 text-base font-semibold'>
 
         <Currency quantity={price} currency="BWP" />  
 

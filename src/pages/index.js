@@ -86,24 +86,25 @@ function Home({products}) {
         <title>Typhoon</title>
       </Head>
 
-      <div className="relative w-full h-56 sm:h-80 md:h-full lg:h-full">
-       <div className='w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
-
+      <div className="relative w-full h-60 sm:h-full md:h-full lg:h-full">
+       <div className='w-full h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto p-2'>
 
         {/*-------------------Banner---------------------*/}
-        <div className='w-full flex flex-col sm:w-full md:w-full mx-auto'>
-
-         <div className="w-full h-full">
+        <div className='w-full lg:flex lg:flex-row sm:w-full md:w-full mx-auto'>
+         <div className='hidden lg:flex lg:w-1/4 h-full'>
+          <Categories />
+         </div>
+         <div className='w-full lg:w-2/4 h-full'>
           <Banner />
-         </div>  
-
+         </div>
+         <div className='hidden lg:flex lgw-1/4 h-full'></div>
         </div>
         {/*----------------------------------------------*/}
 
        </div>  
       </div>
 
-      <div className="relative w-full ">
+      <div className="relative w-full">
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
 
         <div className='relative w-full lg:w-3/4'>

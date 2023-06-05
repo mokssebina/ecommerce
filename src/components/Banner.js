@@ -4,7 +4,7 @@ import { Carousel } from "react-responsive-carousel"
 
 function Banner() {
   return (
-    <div className='relative w-full h-full md:h-full lg:h-3/5'>
+    <div className='relative w-full h-full md:h-full lg:h-96'>
      
      <Carousel
       autoPlay
@@ -15,15 +15,15 @@ function Banner() {
       interval={5000}
      >
         <div>
-         <img loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/46847014_749257868793600_389873852408135680_n.jpg" alt="" />   
+         <img loading='lazy' className='object-cover' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/46847014_749257868793600_389873852408135680_n.jpg" alt="" />   
         </div>
 
         <div>
-         <img loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc2.png" alt="" />   
+         <img loading='lazy' className='object-cover' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc2.png" alt="" />   
         </div>
 
         <div>
-         <img loading='lazy' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc3.jpg" alt="" />   
+         <img loading='lazy' className='object-cover' src="https://raw.githubusercontent.com/mokssebina/MMNT/master/ppc3.jpg" alt="" />   
         </div>
 
      </Carousel>  
