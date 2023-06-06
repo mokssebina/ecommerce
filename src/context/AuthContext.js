@@ -53,6 +53,7 @@ const AuthContextProvider = ({ children }) => {
            } else if (user?.account === "service-provider"){
             setUser({
               ...user,
+              
               displayName: userRef.data()?.displayName || null,
               companyName: userRef.data()?.displayName || null,
               email: userRef.data()?.email,
