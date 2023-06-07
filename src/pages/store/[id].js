@@ -50,13 +50,17 @@ function Store() {
   }, [router.query]);
 
   useEffect(() => {
-    const getData = () => {
-      const userRef = getDoc(doc(db, `users/${myData}`));
+    const getData = async () => {
 
     try {
-        
+      
+      if(myData){
+        const userDoc = doc(db, `users/${myData}`)  
+        const userRef = await getDoc(userDoc);
+        console.log("user ref: ",userRef)
+  
         setUserData({
-          ...userData,
+          displayName: userRef.data()?.displayName || null,
           companyName: userRef.data()?.displayName || null,
           email: userRef.data()?.email,
           service: userRef.data()?.service,
@@ -65,12 +69,18 @@ function Store() {
           account: userRef.data()?.account,
           status: userRef.data()?.status,
           createdDate: userRef.data()?.createdDate,
-          featuredProductPic: userRef.data()?.featuredProductPic,
-          featuredProductTitle: userRef.data()?.featuredProductTitle,
-          featuredProductText: userRef.data()?.featuredProductText})
+          featureProductPic: userRef.data()?.featureProductPic,
+          featureProductTitle: userRef.data()?.featureProductTitle,
+          featureProductText: userRef.data()?.featureProductText
+        })
+  
+        }
+        
     } catch(error) {
         console.log(error)
     }
+
+    console.log("store front data: ",userData)
     }
 
     return getData()
@@ -96,27 +106,35 @@ function Store() {
       </Head>
 
       <div className='w-full bg-gray-800'>
-        <div className='w-full h-full md:flex md:w-10/12 lg:w-8/12 p-2 mx-auto'>
-          <div className="w-full h-full lg:w-3/5 transform overflow-hidden pt-16 px-2 text-left align-middle">
-           <div className='w-10/12 md:w-9/12 lg:w-8/12 mx-auto'>
-            <p className='font-semibold text-white text-4xl'>Retro Football</p>
+        <div className='w-full h-full md:flex md:w-10/12 lg:w-8/12 p-10 mx-auto'>
+          <div className="w-full h-full lg:w-3/5 transform overflow-hidden pt-3 px-2 text-left align-middle">
+           <div className='w-10/12 md:w-10/12 lg:w-10/12 mx-auto'>
+            <p className='font-bold text-white text-2xl lg:text-4xl'>{userData.featureProductTitle}</p>
 
-            <p className='font-semibold text-white text-4xl'>An old school style football from the 80's era.</p>
+            <p className='font-semibold text-white text-xl lg:text-3xl mt-6 line-clamp-4'>{userData.featureProductText}</p>
            </div> 
           </div>
-          <div className="w-full h-full lg:w-2/5 transform overflow-hidden pt-16 px-2 text-left align-middle">
-           <div className='w-8/12 aspect-square md:w-9/12 lg:w-8/12 mx-auto mb-5'>
-            <img alt='product' className='w-full h-full' src='https://firebasestorage.googleapis.com/v0/b/jobberbwapp.appspot.com/o/Y9Xxs6cWXdWWEMP1ygPxxT4JNMB3%2Flistings%2Fiphone13.png?alt=media&token=560468c1-1e07-4d03-9445-e00e59cfac88' />
+          <div className="w-full h-full lg:w-2/5 transform overflow-hidden pt-8 px-2 text-left align-middle">
+           <div className='w-11/12 aspect-square md:w-10/12 lg:w-10/12 mx-auto mb-5'>
+            <img alt='product' className='w-full h-full' src={userData.featureProductPic} />
            </div> 
           </div>
         </div>
       </div>
 
-      {listings.length > 0 &&
-        <h1>{userData.companyName}</h1>
-      }
+      <div className="relative w-full mt-20">
 
-      <div className="relative w-full">
+       <div className='w-full mt-10 mb-10 border-b-8 border-amazon_blue'>
+        <div className='w-full h-full lg:w-3/4 flex flex-row mx-auto'>
+          <div className='w-20 lg:w-64 aspect-square rounded-full ml-3 border-4 border-amazon_blue'>
+            <img alt='avatar' className='w-full h-full rounded-full' src={userData.displayPicture} /> 
+          </div>
+          <div className='h-full pt-12'>
+            <p className='ml-5 text-2xl md:text-4xl align-middle mt-8'>{userData.companyName}</p>
+          </div>
+        </div>
+       </div>
+
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
 
         <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'>

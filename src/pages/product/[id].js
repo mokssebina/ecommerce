@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { AuthContext } from '../../context/AuthContext';
 import { addDoc, updateDoc, doc, collection } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { toast, Toaster } from "react-hot-toast";
+
 
 
 const ProductDetails = () => {
@@ -91,26 +93,37 @@ const ProductDetails = () => {
 
       const dbRef = collection(db, `wishlist`)
               
-      await addDoc(dbRef, {
-        item: data.title,
-        photoURL: data.image,
-        price: data.price,
-        category: data.category,
-        description: data.description,
-        userId: user?.uid,
-        store: data.store,
-        inStock: "yes",
-        productId: data.productId,
-        brandName: data.brandName
-      })
-      .then(async (docRef) => {
-        console.log("product ID: ",docRef.id)
-        const listingRef =  doc(db, "wishlist", `${docRef.id}`)
+      try {
 
-        await updateDoc(listingRef, {
-          productId: docRef.id
+        await addDoc(dbRef, {
+          item: data.title,
+          photoURL: data.image,
+          price: data.price,
+          category: data.category,
+          description: data.description,
+          userId: user?.uid,
+          store: data.store,
+          inStock: "yes",
+          productId: data.productId,
+          brandName: data.brandName
+        })
+        .then(async (docRef) => {
+          console.log("product ID: ",docRef.id)
+          const listingRef =  doc(db, "wishlist", `${docRef.id}`)
+  
+          await updateDoc(listingRef, {
+            productId: docRef.id
+          });
+
+        toast.success("Item added to wishlist!");
+
         });
-      });
+        
+      } catch (error) {
+
+        toast.error("Item could not be added to wishlist");
+        
+      }
 
     }
 

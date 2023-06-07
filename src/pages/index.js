@@ -27,7 +27,7 @@ function Home({products}) {
   const { user } = useContext(AuthContext)
 
 
-  document.body.style.backgroundColor = "#fffff";
+  document.body.style.backgroundColor = "#e5e7eb";
 
   const [listings, setListings] = useState([{}]);
   const [category, setCategory] = useState('')
@@ -86,7 +86,7 @@ function Home({products}) {
         <title>Typhoon</title>
       </Head>
 
-      <div className="relative w-full h-60 sm:h-full md:h-full lg:h-full">
+      <div className="relative w-full h-60 sm:h-full md:h-full lg:h-full bg-white">
        <div className='w-full h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto p-2'>
 
         {/*-------------------Banner---------------------*/}

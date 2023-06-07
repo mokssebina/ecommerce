@@ -13,7 +13,7 @@ import { AuthContext } from '../context/AuthContext';
 
 function wishlist() {
 
-    document.body.style.backgroundColor = "#f8fafc";
+    document.body.style.backgroundColor = "#e5e7eb";
 
     const [wishlist, setWishlist] = useState([{}])
 

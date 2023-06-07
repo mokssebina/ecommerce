@@ -37,7 +37,6 @@ const AuthContextProvider = ({ children }) => {
 
            const userRef = await getDoc(doc(db, `users/${user?.uid}`));
 
-           if(user?.account === "customer"){
             setUser({
               ...user,
               displayName: userRef.data()?.firstName || null,
@@ -50,35 +49,6 @@ const AuthContextProvider = ({ children }) => {
               status: userRef.data()?.status,
               createdDate: userRef.data()?.createdDate
             });
-           } else if (user?.account === "service-provider"){
-            setUser({
-              ...user,
-              
-              displayName: userRef.data()?.displayName || null,
-              companyName: userRef.data()?.displayName || null,
-              email: userRef.data()?.email,
-              service: userRef.data()?.service,
-              uid: userRef.data()?.userId,
-              displayPicture: userRef.data()?.displayPicture,
-              account: userRef.data()?.account,
-              status: userRef.data()?.status,
-              createdDate: userRef.data()?.createdDate,
-              featuredProductPic: userRef.data()?.featuredProductPic,
-              featuredProductTitle: userRef.data()?.featuredProductTitle,
-              featuredProductText: userRef.data()?.featuredProductText
-            });
-           } else {
-            setUser({
-              ...user,
-              displayName: userRef.data()?.displayName || null,
-              email: userRef.data()?.email,
-              uid: userRef.data()?.userId,
-              displayPicture: userRef.data()?.displayPicture,
-              account: userRef.data()?.account,
-              status: userRef.data()?.status,
-              createdDate: userRef.data()?.createdDate
-            });
-           }
 
            setLoading(false);
            console.log("user account active")
@@ -156,7 +126,8 @@ const AuthContextProvider = ({ children }) => {
         createdDate: serverTimestamp(),
         featuredProductPic: "",
         featuredProductTitle: "",
-        featuredProductText: ""
+        featuredProductText: "",
+        bio: ""
       }).then()
 
       await router.push(HOME);
@@ -174,9 +145,7 @@ const AuthContextProvider = ({ children }) => {
 
       const { user } = signInWithEmailAndPassword(auth, email, password)
 
-      if(user.account === "customer"){
-        setUser(user)
-      }
+      setUser(user)
       
       await router.push(HOME);
       
