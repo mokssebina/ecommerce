@@ -1,54 +1,104 @@
-import React from 'react';
-//import { Select, Option } from "@material-tailwind/react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
+import { UserIcon, FolderAddIcon, TrashIcon, ArrowsExpandIcon } from '@heroicons/react/outline'
+import { AuthContext } from "../context/AuthContext";
+import { useRouter } from 'next/router';
+import {
+  collection,
+  onSnapshot,
+  query,
+  where
+} from "firebase/firestore";
+import { db, storage } from '../config/firebase'
+import toast, { Toaster } from 'react-hot-toast';
+import { uploadPicture } from '../../services/firebase';
+import { ThreeCircles } from  'react-loader-spinner'
+import ServiceFeed from "../components/ServiceFeed";
+import DataTable, { ExpanderComponentProps } from 'react-data-table-component';
+
 
 function Services() {
+  
+  const [isOpen, setIsOpen] = useState(false)
+  const [image, setImage] = useState('');
+  const [pic, setPic] = useState('');
+  const [services, setServices] = useState([])
+  const [hideLoading, setHideLoading] = useState(true);
+  const [filterText, setFilterText] = useState('');
 
-    const services = [
-        {key:1, value: "agriculture", item: "Agricultural Services"},
-        {key:2, value: "construction", item: "Construction"},
-        {key:3, value: "engineering", item: "Engineering"},
-        {key:4, value: "farming", item: "Farming"},
-        {key:5, value: "food", item: "Food/Produce"},
-        {key:6, value: "ict", item: "IT Services"},
-        {key:7, value: "medical", item: "Medical Services"},
-        {key:8, value: "retail", item: "Retail"},
-        {key:9, value: "supplier", item: "Supplier"},
-      ];
+
+  const { user } = useContext(AuthContext)
+
+
+  const filteredItems = services.filter(
+	item => item.service && item.service.toLowerCase().includes(filterText.toLowerCase())
+    ||
+    item.companyName && item.companyName.toLowerCase().includes(filterText.toLowerCase()),
+  );
+
+  useEffect(() => {
+    const getLeads = () => {
+      const ref = collection(db, "users")
+      const q = query(ref, where("account", "==", "service-provider"))
+
+      onSnapshot(q, (snapshot) => {
+       setServices(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      })
+    }
+
+    return getLeads()
+  },[])
+
 
   return (
-    <div className='w-full h-screen bg-white overflow-hidden'>
+    <>
+     <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
+      <div className="relative w-20 h-20 mx-auto mt-60 z-50">
+        <ThreeCircles
+          height="80"
+          width="80"
+          color="#131921"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="three-circles-rotating"
+          outerCircleColor=""
+          innerCircleColor=""
+          middleCircleColor=""
+        />
+      </div> 
+     </div>
         
-     <header className='fixed w-full h-24 shadow-md z-20 px-2 bg-white'>
-      <div className="w-full md:w-7/12 lg:w-6/12 mt-6 mx-auto mb-4">
-	   <div className="flex items-center justify-between">
-	    <label htmlFor="" className="block mb-2 font-sans text-sm text-gray-900">
-		 Available Services
-		</label>
-	   </div>
-		<>
-         <select 
-          className={`border border-solid rounded-sm ring:0 focus:ring-0 focus:outline-none border-gray-700 text-gray-500 text-normal py-1 h-8 px-2 text-sm w-full flex items-center`}
-         >
-          {services.map((service) => (
-           <option className="text-sm text-gray-900" value={service.value}>{service.item}</option>
-          ))}                          
-         </select>
-		</>
-	   </div>  
-     </header>
-        
-     <main className='w-full lg:w-9/12 max-w-screen-2xl mx-auto bg-white'>
+      <main className='w-full h-screen lg:w-10/12 max-w-screen-2xl mx-auto bg-white'>
 
-     <div className='w-full h-full mt-32 px-2 pb-2'>
-      <p className='text-md text-gray-700'>
-        There are no services available at the moment.
-      </p>
-     </div>  
+        <header className='w-full bg-white mt-10'>
+          <div className='w-full lg:w-full bg-white'>
+            <div className='w-full h-12 flex mt-2'>
+              <div className='w-9/12 h-full px-2 py-2'>
+              <input 
+                placeholder='Search' 
+                className='w-11/12 ml-1 h-full bg-gray-200 rounded-md md:w-2/4 lg:w-6/12 px-2 border-0'
+                value={filterText}
+                onChange={e => setFilterText(e.target.value)}             
+              />
+              </div> 
+              <div className='w-3/12 p-2'>
+              
+              </div> 
+            </div> 
+          </div>  
+          
+        </header>
 
-     </main>
+        <div className='w-full h-full mt-5 px-1 pb-2'>
+          
+          <ServiceFeed services={filteredItems === ""? services: filteredItems} />     
 
-    </div>
-  )
+        </div> 
+
+        </main>
+     
+    </> 
+  );
 }
 
 export default Services

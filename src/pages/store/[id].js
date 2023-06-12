@@ -25,7 +25,9 @@ function Store() {
   }
   */
 
-  document.body.style.backgroundColor = "#e5e7eb";
+  document.body.style.backgroundColor = "#f1f5f9";
+
+  //document.body.style.backgroundColor = "#e5e7eb";
 
   
   const router = useRouter();
@@ -49,9 +51,7 @@ function Store() {
     console.log("product data: ",myData)
   }, [router.query]);
 
-  useEffect(() => {
-    const getData = async () => {
-
+  const getStoreDetails = async () => {
     try {
       
       if(myData){
@@ -59,28 +59,34 @@ function Store() {
         const userRef = await getDoc(userDoc);
         console.log("user ref: ",userRef)
   
-        setUserData({
-          displayName: userRef.data()?.displayName || null,
-          companyName: userRef.data()?.displayName || null,
-          email: userRef.data()?.email,
-          service: userRef.data()?.service,
-          uid: userRef.data()?.userId,
-          displayPicture: userRef.data()?.displayPicture,
-          account: userRef.data()?.account,
-          status: userRef.data()?.status,
-          createdDate: userRef.data()?.createdDate,
-          featureProductPic: userRef.data()?.featureProductPic,
-          featureProductTitle: userRef.data()?.featureProductTitle,
-          featureProductText: userRef.data()?.featureProductText
-        })
+          setUserData({
+            displayName: userRef.data()?.displayName || null,
+            companyName: userRef.data()?.displayName || null,
+            email: userRef.data()?.email,
+            service: userRef.data()?.service,
+            uid: userRef.data()?.userId,
+            displayPicture: userRef.data()?.displayPicture,
+            account: userRef.data()?.account,
+            status: userRef.data()?.status,
+            createdDate: userRef.data()?.createdDate,
+            featureProductPic: userRef.data()?.featureProductPic,
+            featureProductTitle: userRef.data()?.featureProductTitle,
+            featureProductText: userRef.data()?.featureProductText
+          })
   
         }
         
     } catch(error) {
         console.log(error)
     }
+  }
 
-    console.log("store front data: ",userData)
+  useEffect(() => {
+    const getData = () => {
+
+      getStoreDetails()
+
+      console.log("store front data: ",userData)
     }
 
     return getData()
@@ -122,22 +128,22 @@ function Store() {
         </div>
       </div>
 
-      <div className="relative w-full mt-20">
+      <div className="relative w-full my-8">
 
-       <div className='w-full mt-10 mb-10 border-b-8 border-amazon_blue'>
-        <div className='w-full h-full lg:w-3/4 flex flex-row mx-auto'>
-          <div className='w-20 lg:w-64 aspect-square rounded-full ml-3 border-4 border-amazon_blue'>
+       <div className='w-full border-b-2 py-3 border-amazon_blue'>
+        <div className='w-full lg:w-3/4 flex flex-row mx-auto'>
+          <div className='w-16 h-16 md:w-24 md:h-24 lg:w-36 lg:h-36 aspect-square rounded-full ml-3 border-2 border-amazon_blue'>
             <img alt='avatar' className='w-full h-full rounded-full' src={userData.displayPicture} /> 
           </div>
-          <div className='h-full pt-12'>
-            <p className='ml-5 text-2xl md:text-4xl align-middle mt-8'>{userData.companyName}</p>
+          <div className='h-full pt-1 lg:pt-6'>
+            <p className='ml-2 text-xl md:text-4xl md:ml-5 align-middle mt-2'>{userData.companyName}</p>
           </div>
         </div>
        </div>
 
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
 
-        <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'>
+        <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full pt-8'>
 
           <img className='w-full h-auto' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/small-business-marketing-on-instagram.png'} /> 
 
@@ -145,7 +151,7 @@ function Store() {
 
         </div>
 
-        <div className='relative w-full lg:w-3/4'>
+        <div className='relative w-full lg:w-3/4 pt-8'>
          <ProductFeed products={listings} />
         </div>
         

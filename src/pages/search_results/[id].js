@@ -25,9 +25,13 @@ import { baseUrl, fetchApi } from "../../utils/fetchApi";
 import { useSession } from 'next-auth/client';
 import { withPublic } from '../../components/protected-route';
 import { array } from 'prop-types';
+import { toast, Toaster } from "react-hot-toast";
+
 
 
 const SearchPage = ({ products }) => {
+
+    document.body.style.backgroundColor = "#ffffff";
 
     const router = useRouter();
     const { myData } = router.query;
@@ -55,26 +59,14 @@ const SearchPage = ({ products }) => {
 
 
     return (
-      <div className="h-full w-full flex flex-col ">
-
-      <div className="relative w-full h-56 sm:h-80 md:h-[28rem] lg:h-[32rem]">
-       <div className='w-full max-h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto flex flex-grow p-2'>
-
-
-        {/*-------------------Banner---------------------*/}
-        <div className='w-full flex flex-col sm:w-full md:w-full mx-auto'>
-
-         <div className="w-full h-full">
-          <Banner />
-         </div>  
-
-        </div>
-        {/*----------------------------------------------*/}
-
-       </div>  
+      <>
+      <div>
+        <Toaster
+         position="top-center"
+         reverseOrder={false}
+        /> 
       </div>
-
-      <div className="w-full h-full">
+      <div className="h-full w-full flex flex-col ">
 
       <div className="relative w-full lg:w-10/12 max-w-screen-2xl mt-5 mx-auto p-1">
         <p className='text-lg md:text-3xl lg:text-3xl font-semibold'>Search Results</p>
@@ -97,10 +89,11 @@ const SearchPage = ({ products }) => {
         <p className='text-lg md:text-3xl lg:text-5xl font-semibold'>Not Found</p>
         }
        </main> 
-      </div>
       
       {/*<Footer goToTop={goToTop} />*/}
     </div>
+    </>
+
     )
 }
 /*

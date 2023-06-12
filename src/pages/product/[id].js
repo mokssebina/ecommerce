@@ -24,15 +24,7 @@ const ProductDetails = () => {
     const { myData } = router.query;
     const [data, setData] = useState({})
     const [hidden, setHidden] = useState(true)
-    const [counter, setCounter] = useState(1)
-
-    const decrease = () => {
-      setCounter(counter-1)
-    }
-
-    const increase = () => {
-      setCounter(counter+1)
-    }
+    
 
     function handleResize() {
       if (innerWidth > 1024) {
@@ -115,24 +107,31 @@ const ProductDetails = () => {
             productId: docRef.id
           });
 
-        toast.success("Item added to wishlist!");
+        toast.success("Item added to Wishlist!");
 
         });
         
       } catch (error) {
 
-        toast.error("Item could not be added to wishlist");
+        toast.error("Item could not be added to wishlist.");
         
       }
 
     }
 
   return (
+    <>
+    <div>
+      <Toaster
+       position="top-center"
+       reverseOrder={false}
+      /> 
+    </div>
     <div className="h-full w-full flex flex-col">
      <main className="relative w-full lg:flex lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto pt-5 mb-5">
       <div className='relative w-full md:full lg:w-11/12 pt-1 px-3'>
 
-       <div className='w-full h-full bg-white sm:flex md:flex lg:flex p-4'>
+       <div className='w-full h-full bg-white sm:flex md:flex lg:flex p-4 border border-purple-700 rounded-lg'>
 
         <div className='relative w-full md:w-2/4 lg:w-2/4'>
           <div className='w-9/12 mx-auto aspect-square bg-gray-200 hover:bg-purple-700 rounded-lg md:space-x-2'>
@@ -160,28 +159,13 @@ const ProductDetails = () => {
               query: {
                 myData: data.userId
                }})
-           } className='mt-2 text-base md:text-lg text-purple-700 cursor-pointer mb-4'>{data.store}</p>
+           } className='mt-2 text-base md:text-lg text-purple-700 cursor-pointer mb-4 hover:underline'>{data.store}</p>
 
           <p className='mt-2 text-sm md:text-base text-gray-700'>{data.category}</p>
 
 
           <div className='flex mt-2'>
 
-          </div>
-
-          <div className='w-full flex h-12 p-1 mt-2'>
-           <p className='font-semibold text-gray-800 text-base md:text-base mb-4'>Quantity:</p>
-           <div className='h-full w-32 ml-3 flex border border-gray-900'>
-            <button disabled={counter === 1? true: false} onClick={decrease} className='w-2/6 h-full cursor-pointer border-r border-gray-900'>
-             <p className='text-2xl text-red-600'>-</p> 
-            </button>
-            <div className='w-2/6 h-full text-center pt-2'>
-              <p className='text-sm'>{counter}</p>
-            </div>
-            <button onClick={increase} className='w-2/6 h-full cursor-pointer border-l border-gray-900'>
-             <p className='text-2xl text-green-700'>+</p> 
-            </button>
-           </div>
           </div>
 
           <div className='w-full p-2'>
@@ -211,9 +195,9 @@ const ProductDetails = () => {
       </div>
 
      </main>   
-     <main className="relative w-full lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
+     <main className="relative w-full lg:w-10/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
      {data.description && 
-      <div className='w-full sm:w-full md:w-full lg:w-full py-1 bg-white mt-10'>
+      <div className='w-full sm:w-full md:w-full lg:w-full py-1 bg-white mt-10 border border-purple-700 rounded-lg'>
        <div className='w-full h-12 md:h-10 p-2 mb-4 border-gray-400 border-b'>
         <p className='font-semibold text-lg text-gray-800'>Description</p> 
        </div>
@@ -226,6 +210,8 @@ const ProductDetails = () => {
      <p className='hidden'>{data.userId}</p>
      </main>
     </div>
+    </>
+
   )
 }
 

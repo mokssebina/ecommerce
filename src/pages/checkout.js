@@ -14,6 +14,15 @@ function Checkout() {
   const imageurl = 'https://raw.githubusercontent.com/mokssebina/MMNT/master/13-134808-paypal-credit-card-logo-png-paypal-visa-mastercard.jpg'
   const items = useSelector(selectItems)
   const total = useSelector(selectTotal)
+  const [counter, setCounter] = useState(1)
+
+    const decrease = () => {
+      setCounter(counter-1)
+    }
+
+    const increase = () => {
+      setCounter(counter+1)
+    }
 
   const { user } = useContext(AuthContext)
 
@@ -41,10 +50,13 @@ function Checkout() {
                 key={i}
                 id={item.id}
                 title={item.title}
-                price={item.price}
+                price={item.price * counter}
                 description={item.description}
                 category={item.category}
                 image={item.image}
+                counter={counter}
+                increase={increase}
+                decrease={decrease}
               />
           ))}
 

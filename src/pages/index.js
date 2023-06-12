@@ -27,7 +27,9 @@ function Home({products}) {
   const { user } = useContext(AuthContext)
 
 
-  document.body.style.backgroundColor = "#e5e7eb";
+  document.body.style.backgroundColor = "#ffffff";
+
+  //document.body.style.backgroundColor = "#e5e7eb";
 
   const [listings, setListings] = useState([{}]);
   const [category, setCategory] = useState('')

@@ -53,6 +53,7 @@ function Profile({ children }) {
   const [hideLoading, setHideLoading] = useState(true);
   const [filterText, setFilterText] = useState('');
 
+  document.body.style.backgroundColor = "#ffffff";
 
   const { user } = useContext(AuthContext)
 

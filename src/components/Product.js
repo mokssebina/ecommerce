@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import StarIcon from '@heroicons/react/solid/StarIcon'
 import Currency from 'react-currency-formatter';
 import { addToBasket } from '../slices/basketSlice';
+import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 function Product({id, title, price, description, category, image, store, productId, brandName, userId}) {
@@ -40,7 +41,8 @@ function Product({id, title, price, description, category, image, store, product
     }
 
   return (
-    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-lg'>
+     
+    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-lg border border-purple-700'>
      <div onClick={goToDetails} className='w-full mx-auto flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
@@ -70,6 +72,7 @@ function Product({id, title, price, description, category, image, store, product
       <p className='hidden'>{store}</p>
       <p className='hidden'>{userId}</p>
     </div>
+    
   )
 }
 
