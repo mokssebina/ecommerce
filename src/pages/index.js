@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/client';
 import { withPublic } from '../components/protected-route';
 import { collection, getDoc, query, where, onSnapshot, getDocsFromServer } from "firebase/firestore";
 import { db } from '../config/firebase';
+import CategoriesDropdown from '../components/CategoriesDropdown';
 
 
 function Home({products}) {
@@ -107,6 +108,11 @@ function Home({products}) {
       </div>
 
       <div className="relative w-full">
+      {/*
+       <div className='w-full h-20 py-4 px-2 lg:hidden'>
+        <CategoriesDropdown />
+       </div>
+      */}
        <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
 
         <div className='relative w-full lg:w-3/4'>

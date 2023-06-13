@@ -99,7 +99,7 @@ function LeadsTable() {
               companyName: data.organisation,
               companyEmail: data.email,
               title: data.title,
-              tenderNo: data.tenderNo,
+              tenderNo: data.tenderNumber,
               supportDoc: data.supportDoc,
               description: data.description,
               category: data.category,
@@ -113,7 +113,9 @@ function LeadsTable() {
   };
 
   const filteredItems = leads.filter(
-	  item => item.item && item.item.toLowerCase().includes(filterText.toLowerCase())
+	  item => item.title && item.title.toLowerCase().includes(filterText.toLowerCase())
+    ||
+    item.organisation && item.organisation.toLowerCase().includes(filterText.toLowerCase())
     ||
     item.category && item.category.toLowerCase().includes(filterText.toLowerCase()),
   );

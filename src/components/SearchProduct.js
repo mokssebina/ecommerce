@@ -90,7 +90,7 @@ function SearchProduct({id, title, price, description, category, image, store, p
 
   return (
       
-    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-lg border border-purple-700'>
+    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-xl border border-purple-700'>
      <div onClick={goToDetails} className='w-full mx-auto flex flex-col'>
      {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 

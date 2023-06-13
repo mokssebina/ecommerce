@@ -32,7 +32,7 @@ function Tenders() {
           <header className='w-full bg-white mt-10'>
             <div className='w-full lg:w-full bg-white'>
               <div className='w-full h-12 flex mt-2'>
-                <div className='w-9/12 h-full px-2 py-2'>
+                <div className='w-9/12 h-full px-2 py-2 text-xl font-semibold'>
                   <p>Preview</p>
                 </div> 
                 <div className='w-3/12 p-2'>

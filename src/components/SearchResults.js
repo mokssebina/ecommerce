@@ -3,7 +3,7 @@ import SearchProduct from './SearchProduct';
 
 function SearchResults({ products, searchTerm }) {
   return (
-    <div className='w-full relative grid grid-flow-row-dense grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 mx-auto'>
+    <div className='w-full relative grid grid-flow-row-dense grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 mx-auto py-6'>
 
        {/*products.products.map(({id, title, price, description, category, thumbnail}) => (
         <Product

@@ -129,9 +129,10 @@ const ProductDetails = () => {
     </div>
     <div className="h-full w-full flex flex-col">
      <main className="relative w-full lg:flex lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto pt-5 mb-5">
-      <div className='relative w-full md:full lg:w-11/12 pt-1 px-3'>
 
-       <div className='w-full h-full bg-white sm:flex md:flex lg:flex p-4 border border-purple-700 rounded-lg'>
+      <div className='relative w-full md:full lg:w-11/12 mx-auto pt-1 px-3'>
+
+       <div className='w-full h-full bg-white sm:flex md:flex lg:flex p-4 border border-purple-700 rounded-lg shadow-xl'>
 
         <div className='relative w-full md:w-2/4 lg:w-2/4'>
           <div className='w-9/12 mx-auto aspect-square bg-gray-200 hover:bg-purple-700 rounded-lg md:space-x-2'>
@@ -195,9 +196,9 @@ const ProductDetails = () => {
       </div>
 
      </main>   
-     <main className="relative w-full lg:w-10/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
+     <main className="relative w-full lg:w-11/12 xl:w-9/12 max-w-screen-2xl mx-auto p-4">
      {data.description && 
-      <div className='w-full sm:w-full md:w-full lg:w-full py-1 bg-white mt-10 border border-purple-700 rounded-lg'>
+      <div className='w-full md:full lg:w-11/12 py-1 bg-white mt-10 mb-16 mx-auto border border-purple-700 rounded-lg shadow-xl'>
        <div className='w-full h-12 md:h-10 p-2 mb-4 border-gray-400 border-b'>
         <p className='font-semibold text-lg text-gray-800'>Description</p> 
        </div>

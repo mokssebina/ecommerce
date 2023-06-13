@@ -1,16 +1,20 @@
-import { forwardRef, useContext } from "react";
+import { forwardRef, useContext, useState, useEffect } from "react";
 import Link from "next/link";
-import { HomeIcon, OfficeBuildingIcon, LogoutIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, CollectionIcon, HeartIcon } from "@heroicons/react/outline";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+import { HomeIcon, OfficeBuildingIcon, LogoutIcon, UserIcon, ArchiveIcon, SwitchHorizontalIcon, XIcon, ChevronRightIcon, ChevronLeftIcon, HeartIcon } from "@heroicons/react/outline";
 import { AuthContext } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { HOME } from "../utils/constant/routesConstants";
 import { db } from "../config/firebase";
+import categories from "../data/categories";
 
 
 const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
 
   const { user, logOut } = useContext(AuthContext)
+
+  const [searchField, setSearchField] = useState("");
+  const [openMenu, setOpenMenu] = useState(false)
 
   const router = useRouter();
 
@@ -26,6 +30,30 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
       console.log("users logged out")
     }
   }
+
+  const goToSearch = () => {
+    router.push({
+      pathname: `/search_results/${searchField}`,
+      query: {
+        myData: searchField
+    }})
+  }
+
+
+  useEffect(() => {
+    
+    if(searchField){
+      try {
+        goToSearch()
+        setSearchField("")
+        setOpenMenu(false)
+      } catch (error) {
+        setSearchField("")
+        setOpenMenu(false)
+      }
+    }
+    
+  },[searchField])
 
 
   return (
@@ -56,9 +84,21 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
       <div className="flex justify-center mt-6 mb-14">
         
       </div>
-
+      {!openMenu?
       <div className="flex flex-col">
         
+        <div className={`pl-6 py-3 mx-5 rounded lg:hidden text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            router.pathname == "/"
+            ? "text-gray-50"
+            : "text-gray-50 hover:bg-gray-800"
+          }`} onClick={() => setOpenMenu(true)}>
+          <div className="text-gray-50">
+            <p>Categories</p>
+          </div>
+          <div className="absolute right-0 mr-2 text-gray-50">
+            <ChevronRightIcon className="max-h-5 w-5" />
+          </div>
+        </div>
         <Link href="/">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
@@ -178,6 +218,26 @@ const SideBar = forwardRef(({ showNav, setShowNav }, ref) => {
         </div>
         }
       </div>
+      :
+      <div className="w-full overflow-y-auto bg-white">
+        <div className='w-full h-11 flex flex-row bg-amazon_blue text-gray-50 text-sm p-2 mb-1'>
+          <div className="mr-2" onClick={() => setOpenMenu(false)}>
+            <ChevronLeftIcon className="max-h-5 w-5" />
+          </div>
+          <p>Categories</p>
+        </div>  
+
+        {categories.map(data => (
+          <div key={data.index} 
+          className='w-full h-9 text-xs text-gray-900 cursor-pointer hover:bg-amazon_blue hover:text-gray-50 px-2 py-2'
+          onClick={() => setSearchField(data.item)}
+          >
+            <p>{data.item}</p>
+          </div>
+        ))}
+
+      </div>
+      }
     </div>
   );
 });
