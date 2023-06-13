@@ -11,6 +11,7 @@ import { HOME, SIGN_UP, FORGOT_PASSWORD } from '../utils/constant/routesConstant
 import { loginSchema } from '../validation/loginValidation';
 import { withPublic } from '../components/protected-route';
 import { ThreeCircles } from  'react-loader-spinner'
+import { collection, getDoc, query, where, onSnapshot, doc } from "firebase/firestore";
 import { toast, Toaster } from "react-hot-toast";
 
 
@@ -33,24 +34,57 @@ function Login() {
     formState: { errors },
   } = methods;
   
-  const onSubmit = async (data) => {
-    const toastId = toast.loading("Logging in...");
+  
+  const getAccountDetails = async (data) => {
+
     setHideLoading(false)
-    try {
 
-        console.log("login in started")
-      
-        await logIn(data.email, data.password);
-        toast.success("Successfully logged in!", { id: toastId });
-        setHideLoading(true)
-        await router.push(HOME);
+    console.log("log in commences")
 
-    } catch (error) {
-        toast.error(error.message, { id: toastId });
-        console.log("login error: ",error.message)
-        setHideLoading(true)
+    console.log("user email: ",data.email)
+
+    const userDoc = query(collection(db, `users`), where("email", "==", `${data.email}`))
+    const userRefSnapshot = await getDocs(userDoc);
+
+    userRefSnapshot.forEach((doc) => {
+
+      userData = {user: doc.data()}
+      /*
+      setUserData(userData => ({
+        ...userData,
+        ...updatedValue
+      }))
+      */
+
+      console.log("doc data: ",doc.data())
+    })
+
+    console.log("user data doc: ",userData)
+
+    
+    if(userData.user.account === "customer"){
+      const toastId = toast.loading("Logging in...");
+      try {
+  
+          console.log("login in started")
+        
+          await logIn(data.email, data.password);
+          await router.push(HOME);
+          setHideLoading(true)
+          toast.success("Successfully logged in!", { id: toastId });
+  
+      } catch (error) {
+  
+          toast.error(error, { id: toastId });
+          console.log("login error: ",error.message)
+          setHideLoading(true)
+      }
+    }else{
+      setHideLoading(true)
+      toast.error("Log in as service provider")
     }
-  };
+
+  }
 
   return (
     <>
@@ -79,7 +113,7 @@ function Login() {
             <form
               action=""
               className="w-11/12 mx-auto pb-6"
-              onSubmit={handleSubmit(onSubmit)}>
+              onSubmit={handleSubmit(getAccountDetails)}>
 
                 <FormInput
                 label="Email"

@@ -110,7 +110,7 @@ function Store() {
       <Head>
         <title>Typhoon</title>
       </Head>
-
+      {(userData.featureProductTitle && userData.featureProductText && userData.featureProductPic) &&
       <div className='w-full bg-gray-800'>
         <div className='w-full h-full md:flex md:w-10/12 lg:w-8/12 p-10 mx-auto'>
           <div className="w-full h-full lg:w-3/5 transform overflow-hidden pt-3 px-2 text-left align-middle">
@@ -127,7 +127,7 @@ function Store() {
           </div>
         </div>
       </div>
-
+      }
       <div className="relative w-full my-8">
 
        <div className='w-full border-b-2 py-3 border-amazon_blue'>

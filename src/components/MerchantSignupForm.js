@@ -58,7 +58,7 @@ function MerchantSignupForm(props) {
       
         console.log("Merchant user is created")
         props.hideSignUpLoader
-        toast.success("Successfully signed up!", { id: toastId });
+        toast.success("Service provider account created!", { id: toastId });
       
     } catch (error) {
       toast.error(error.message, { id: toastId });
