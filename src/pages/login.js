@@ -81,7 +81,7 @@ function Login() {
       }
     }else{
       setHideLoading(true)
-      toast.error("Log in as service provider")
+      toast.error("Log in as customer")
     }
 
   }
