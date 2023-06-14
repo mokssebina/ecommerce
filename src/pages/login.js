@@ -11,7 +11,8 @@ import { HOME, SIGN_UP, FORGOT_PASSWORD } from '../utils/constant/routesConstant
 import { loginSchema } from '../validation/loginValidation';
 import { withPublic } from '../components/protected-route';
 import { ThreeCircles } from  'react-loader-spinner'
-import { collection, getDoc, query, where, onSnapshot, doc } from "firebase/firestore";
+import { collection, getDocs, query, where, onSnapshot, doc } from "firebase/firestore";
+import { db } from '../config/firebase';
 import { toast, Toaster } from "react-hot-toast";
 
 
@@ -22,6 +23,7 @@ function Login() {
 
 
   const [hideLoading, setHideLoading] = useState(true);
+  let userData = {}
 
   const { user, logIn } = useContext(AuthContext);
   const router = useRouter();  
