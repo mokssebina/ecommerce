@@ -5,7 +5,8 @@ import { Tab } from '@headlessui/react'
 import SignupForm from "../components/SignupForm";
 import MerchantSignupForm from "../components/MerchantSignupForm";
 import { withPublic } from "../components/protected-route";
-import { ThreeCircles } from  'react-loader-spinner'
+import { Oval } from  'react-loader-spinner'
+import { toast, Toaster } from "react-hot-toast";
 
 
 
@@ -39,22 +40,20 @@ function Signup() {
   return (
   
     <>
-     <div hidden={hideLoading} className="fixed w-11/12 h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
-      <div className="relative w-20 h-20 mx-auto mt-60 z-50">
-       <ThreeCircles
-        height="80"
-        width="80"
-        color="#131921"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-        ariaLabel="three-circles-rotating"
-        outerCircleColor=""
-        innerCircleColor=""
-        middleCircleColor=""
-        />
-       </div> 
-      </div>
+    <div hidden={hideLoading} className="relative w-20 h-20 mx-auto my-4">
+      <Oval
+       height={80}
+       width={80}
+       color="#7e22ce"
+       wrapperStyle={{}}
+       wrapperClass=""
+       visible={true}
+       ariaLabel='oval-loading'
+       secondaryColor="#7e22ce"
+       strokeWidth={2}
+       strokeWidthSecondary={2}
+      />
+    </div> 
     <div className='w-full h-screen bg-white pt-14 overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden'>
      <h2 className="px-12 mt-4 mb-6 text-center text-2xl font-semibold text-amazon_blue">Sign Up</h2>
      <main className='grid grid-flow-row-dense md:grid-cols-2 w-11/12 mx-auto bg-white'> 

@@ -11,6 +11,8 @@ import { withPublic } from '../components/protected-route';
 import { collection, getDoc, query, where, onSnapshot, getDocsFromServer } from "firebase/firestore";
 import { db } from '../config/firebase';
 import CategoriesDropdown from '../components/CategoriesDropdown';
+import { toast, Toaster } from "react-hot-toast";
+
 
 
 function Home({products}) {
@@ -83,7 +85,11 @@ function Home({products}) {
 
 
   return (
-    
+    <>
+    <Toaster
+      position="top-center"
+      reverseOrder={false}
+    />
     <div className="h-full w-full flex flex-col">
       <Head>
         <title>Typhoon</title>
@@ -130,7 +136,7 @@ function Home({products}) {
       </div>
       
     </div>    
-    
+    </>
   )
 }
 

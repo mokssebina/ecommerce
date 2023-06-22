@@ -10,7 +10,7 @@ import { AuthContext } from '../context/AuthContext';
 import { HOME, SIGN_UP, FORGOT_PASSWORD } from '../utils/constant/routesConstants';
 import { loginSchema } from '../validation/loginValidation';
 import { withPublic } from '../components/protected-route';
-import { ThreeCircles } from  'react-loader-spinner'
+import { Oval } from  'react-loader-spinner'
 import { collection, getDocs, query, where, onSnapshot, doc } from "firebase/firestore";
 import { db } from '../config/firebase';
 import { toast, Toaster } from "react-hot-toast";
@@ -90,22 +90,24 @@ function Login() {
 
   return (
     <>
-    <div hidden={hideLoading} className="fixed w-screen h-screen z-50 md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden">
-    <div className="relative w-20 h-20 mx-auto mt-60 z-50">
-     <ThreeCircles
-      height="80"
-      width="80"
-      color="#131921"
-      wrapperStyle={{}}
-      wrapperClass=""
-      visible={true}
-      ariaLabel="three-circles-rotating"
-      outerCircleColor=""
-      innerCircleColor=""
-      middleCircleColor=""
-     />
+    <Toaster
+      position="top-center"
+      reverseOrder={false}
+    />
+    <div hidden={hideLoading} className="relative w-20 h-20 mx-auto my-4">
+      <Oval
+       height={80}
+       width={80}
+       color="#7e22ce"
+       wrapperStyle={{}}
+       wrapperClass=""
+       visible={true}
+       ariaLabel='oval-loading'
+       secondaryColor="#7e22ce"
+       strokeWidth={2}
+       strokeWidthSecondary={2}
+      />
     </div> 
-    </div>
     <div className='w-full bg-white pt-14 overflow-y-hidden md:overflow-y-hidden lg:overflow-y-hidden xl:overflow-y-hidden'>
      <h2 className="px-12 mt-4 mb-6 text-center text-2xl font-semibold text-amazon_blue">Log In</h2>
      <main className='grid grid-flow-row-dense md:grid-cols-2 w-11/12 mx-auto bg-white'>
