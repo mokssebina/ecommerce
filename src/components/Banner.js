@@ -4,8 +4,9 @@ import { Carousel } from "react-responsive-carousel"
 
 function Banner() {
   return (
-    <div className='relative w-full h-full md:h-full lg:h-96'>
+    <div className='relative w-full h-full'>
      
+    {/*     
      <Carousel
       autoPlay
       infiniteLoop
@@ -27,7 +28,7 @@ function Banner() {
         </div>
 
      </Carousel>  
-     
+    */} 
     </div>
   )
 }

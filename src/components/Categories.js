@@ -42,7 +42,7 @@ const Categories = () => {
        className='w-full h-8 text-xs text-gray-900 cursor-pointer hover:bg-amazon_blue hover:text-gray-50 px-2 py-2'
        onClick={() => setSearchField(data.item)}
       >
-        <p>{data.item}</p>
+        <p className='align-middle'>{data.item}</p>
       </div>
      ))}
         

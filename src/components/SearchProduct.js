@@ -90,54 +90,52 @@ function SearchProduct({id, title, price, description, category, image, store, p
 
   return (
       
-    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white p-3 rounded-md shadow-sm hover:shadow-xl border border-purple-700'>
-     <div onClick={goToDetails} className='w-full mx-auto flex flex-col'>
-     {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
+    <div className='relative w-11/12 aspect-[3/4] mx-auto my-2 bg-white rounded-lg hover:shadow-xl'>
+      
+      <div onClick={goToDetails} className='w-full mx-auto flex flex-col'>
+        {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
-      <div className='w-9/12 aspect-square mx-auto mb-2'>
-       {image &&
-        <img className='w-full h-full mx-auto' src={image} objectFit='cover' />
-       } 
-      </div>
+        <div className='relative w-11/12 aspect-square mx-auto my-2 rounded-lg bg-slate-200'>
+          <div className='absolute w-1/6 top-1 right-1 aspect-square rounded-full bg-white shadow-md hover:shadow-xl z-10 p-1 cursor-pointer'>
+            <HeartIcon />
+          </div>
+          {image &&
+            <img className='relative w-10/12 h-10/12 mx-auto my-3' src={image} objectFit='cover' />
+          }
+        </div>
 
-      <div className='w-full h-1 mt-3 bg-purple-700'></div>
+        <div className='w-11/12 mx-auto flex'>
 
-      <div className='absolute bottom-0 w-full p-1'>
-       <h4 className='my-1 line-clamp-1 font-semibold'>{title}</h4>
-       
-        {/*
-        <div className='flex'>
+          <div className='my-1 w-1/2'>
+            <h4 className='text-xs line-clamp-1 font-semibold'>{title}</h4>
+          </div>
 
-        {Array(rating)
-          .fill()
-          .map((_,i) => (
-            <StarIcon key={i} className='h-5 text-yellow-500' />
-          ))}
+          <div className='my-1 text-xs font-bold text-right w-1/2'>
+
+            <Currency quantity={price} currency="BWP" />
+
+          </div>
 
         </div>
 
-        <p className='text-xs my-2 line-clamp-2'>{description}</p> 
-        */}
-       <div className='mt-2 text-base font-semibold'>
+        <div className='w-11/12 mb-2 mx-auto'>
+            <p className='line-clamp-1 text-xs'>{description}</p>
+        </div>
 
-        <Currency quantity={price} currency="BWP" />  
+        <div className='w-11/12 my-2 mx-auto'>
+          <button className='w-3/5 h-8 border border-purple-700 rounded-full hover:bg-purple-700 hover:text-white'>
+            <p className=' text-xs'>Add To Cart</p>
+          </button>
+        </div>
 
-       </div>
-        
+
       </div>
-      
-     </div>
-      {/*
-      <button onClick={addItemWishlist} disabled={user? false: true} className='w-full h-9 flex text-white bg-purple-700 mt-4 hover:bg-purple-900'>
-       <div className='flex h-6 mx-auto my-auto py-1 space-x-1'>
-        <HeartIcon className="h-4 w-4" />
-        <p className='text-sm'>Add to Wishlist</p> 
-       </div>
-      </button>*/}
+
       <p className='hidden'>{productId}</p>
       <p className='hidden'>{brandName}</p>
       <p className='hidden'>{store}</p>
       <p className='hidden'>{userId}</p>
+
     </div>
     
   )

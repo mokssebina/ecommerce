@@ -15,7 +15,7 @@ import { toast, Toaster } from "react-hot-toast";
 
 
 
-function Home({products}) {
+function Home({ products }) {
   /*
   const [session] = useSession();
 
@@ -34,12 +34,14 @@ function Home({products}) {
 
   //document.body.style.backgroundColor = "#e5e7eb";
 
-  const [listings, setListings] = useState([{}]);
+  const [listings, setListings] = useState([{}])
   const [category, setCategory] = useState('')
   const [filtered, setFiltered] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [menu, setMenu] = useState(true)
   const [hidden, setHidden] = useState(true)
+  const [searchField, setSearchField] = useState("")
+
 
   //console.log("listings: ",entries)
 
@@ -51,7 +53,7 @@ function Home({products}) {
       setHidden(false);
     }
   }
-  
+
 
   useEffect(() => {
     if (typeof window != undefined) {
@@ -66,76 +68,89 @@ function Home({products}) {
   useEffect(() => {
     const getListings = () => {
       const ref = collection(db, "listings")
-      
+
       onSnapshot(ref, (snapshot) => {
-       setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        setListings(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       })
     }
 
     return getListings()
 
-  },[])
+  }, [])
 
 
   useEffect(() => {
-    if(listings.includes("Cement", 0)){
+    if (listings.includes("Cement", 0)) {
       console.log("it includes")
     }
-  },[])
+  }, [])
 
+  const filteredItems = listings.filter(
+	  item => item.category && item.category.toLowerCase().includes(searchField.toLowerCase())
+    /*
+    ||
+    item.organisation && item.organisation.toLowerCase().includes(filterText.toLowerCase())
+    ||
+    item.category && item.category.toLowerCase().includes(filterText.toLowerCase()),
+    */
+  );
 
   return (
     <>
-    <Toaster
-      position="top-center"
-      reverseOrder={false}
-    />
-    <div className="h-full w-full flex flex-col">
-      <Head>
-        <title>Typhoon</title>
-      </Head>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
+      <div className="h-full w-full flex flex-col">
+        <Head>
+          <title>Typhoon</title>
+        </Head>
 
-      <div className="relative w-full h-60 sm:h-full md:h-full lg:h-full bg-white">
-       <div className='w-full h-full md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto p-2'>
+        <div className="relative w-full h-60 sm:h-72 md:h-96 bg-cover bg-no-repeat bg-[url('https://raw.githubusercontent.com/mokssebina/MMNT/master/46847014_749257868793600_389873852408135680_n.jpg')]">
 
-        {/*-------------------Banner---------------------*/}
-        <div className='w-full lg:flex lg:flex-row sm:w-full md:w-full mx-auto'>
-         <div className='hidden lg:flex lg:w-1/4 h-full'>
-          <Categories />
-         </div>
-         <div className='w-full lg:w-2/4 h-full'>
-          <Banner />
-         </div>
-         <div className='hidden lg:flex lgw-1/4 h-full'></div>
+          <div className='w-full h-full mt-8 md:w-10/12 lg:w-10/12 max-w-screen-2xl mx-auto'>
+
+            {/*-------------------Banner---------------------*/}
+            {/*
+            <div className='w-full lg:flex lg:flex-row sm:w-full md:w-full mx-auto'>
+              
+              <div className='w-full h-full'>
+                <Banner />
+              </div>
+              
+            </div>
+            */}
+            {/*----------------------------------------------*/}
+
+          </div>
         </div>
-        {/*----------------------------------------------*/}
 
-       </div>  
-      </div>
-
-      <div className="relative w-full">
-      {/*
+        <div className="relative w-full">
+          {/*
        <div className='w-full h-20 py-4 px-2 lg:hidden'>
         <CategoriesDropdown />
        </div>
       */}
-       <main className="relative flex flex-grow w-full lg:w-10/12 max-w-screen-2xl mx-auto">
+          <main className="relative h-full mt-4 flex flex-col lg:flex-row w-full lg:w-10/12 max-w-screen-2xl mx-auto pb-12">
 
-        <div className='relative w-full lg:w-3/4'>
-         <ProductFeed products={listings} />
+            <div className='relative w-full flex flex-col space-x-0 sm:flex-row sm:space-x-2 lg:flex-col lg:space-x-0 lg:w-1/4 max-h-full p-2'>
+
+              <CategoriesDropdown searchField={searchField} setSearchField={setSearchField} />
+
+              {searchField &&
+                <button className='w-full sm:w-2/4 lg:w-3/4 h-10 border border-gray-800 rounded-md mt-4' onClick={() => setSearchField("")}>Clear Filter</button>
+              }
+
+            </div>
+
+            <div className='relative w-full lg:w-3/4'>
+              <ProductFeed products={filteredItems} />
+            </div>
+
+          </main>
         </div>
-        
-        <div className='relative hidden lg:flex flex-col lg:w-1/4 max-h-full p-2'>
 
-         <img className='w-full h-auto' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/small-business-marketing-on-instagram.png'} /> 
-
-         <img className='w-full h-auto mt-10' src={'https://raw.githubusercontent.com/mokssebina/MMNT/master/creating-online-ads-guide.png'} /> 
-
-        </div>
-       </main> 
       </div>
-      
-    </div>    
     </>
   )
 }
@@ -143,7 +158,7 @@ function Home({products}) {
 export async function getServerSideProps(context) {
 
   const products = await fetch('https://raw.githubusercontent.com/mokssebina/MMNT/master/project.json')
-  .then((res) => res.json())
+    .then((res) => res.json())
   //.then((json) => console.log(json));
 
   //console.log("products: ",products)
@@ -151,12 +166,13 @@ export async function getServerSideProps(context) {
   //const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale`)
 
   //console.log("listings: ",entries)
- 
-  return { props: {
-    products
-    //propertiesForSale: propertyForSale?.hits,
-  },
- }
+
+  return {
+    props: {
+      products
+      //propertiesForSale: propertyForSale?.hits,
+    },
+  }
 }
 
 //https://fakestoreapi.com/products

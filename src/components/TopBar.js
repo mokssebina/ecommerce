@@ -79,15 +79,18 @@ function TopBar({ showNav, setShowNav }) {
         </div>*/}
       </div>  
 
-      <div className='hidden w-1/4 sm:flex items-center h-9 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-purple-700 hover:bg-purple-900'>
+      <> 
+      <div className='hidden w-3/4 sm:flex items-center h-9 ml-10 mr-10 rounded-md flex-grow cursor-pointer bg-purple-700 hover:bg-purple-900'>
        <input
-        className="p-2 h-full w-11/12 flex-grow flex-shrink rounded-l-md text-black focus:outline-none px-4`" type="text"
+        className="p-2 h-full w-9/12 flex-grow flex-shrink rounded-l-md text-black focus:outline-none px-4`" type="text"
         placeholder="Search"
         value={searchField}
         onChange={(e) => setSearchField(e.target.value)}
        />
+       {/*<div className=" absolute w-5/12 flex-grow flex-shrink h-52 bg-white mt rounded-lg top-14 z-50"></div>*/}
        <SearchIcon onClick={goToSearch} className='h-12 p-4 text-white' />  
       </div>
+      </>
 
       <div className="flex items-center md:pr-16 text-gray-50">
          <Popover as="div" className="relative">
@@ -123,7 +126,7 @@ function TopBar({ showNav, setShowNav }) {
             leaveFrom="transform scale-100"
             leaveTo="transform scale-95"
           >
-            <Popover.Panel className="absolute right-0 sm:right-1 z-50 mt-2 bg-amazon_blue shadow-sm rounded max-w-xs sm:max-w-sm w-48">
+            <Popover.Panel className="absolute right-0 sm:right-1 z-30 mt-2 bg-amazon_blue shadow-sm rounded max-w-xs sm:max-w-sm w-48">
               <div className="relative p-3">
                 <div className="mt-4 grid gap-4 grid-cols-1 overflow-hidden">
                   <div onClick={() => router.push(ACCOUNT)} className="flex cursor-pointer hover:bg-amazon_blue-light rounded-lg">

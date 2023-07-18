@@ -239,3 +239,6 @@ function Profile({ children }) {
 }
 
 export default withProtected(Profile)
+
+
+() => deleteDoc(doc(db ,'wishlist', productId))
