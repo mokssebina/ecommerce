@@ -52,7 +52,7 @@ function Product({ id, title, price, description, category, image, store, produc
       <div className='w-full mx-auto flex flex-col'>
         {/*<p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>*/}
 
-        <div className='relative w-11/12 aspect-square mx-auto my-2 rounded-lg bg-slate-200'>
+        <div onClick={goToDetails} className='relative w-11/12 aspect-square mx-auto my-2 rounded-lg bg-slate-200'>
           {image &&
             <img className='relative w-10/12 h-10/12 mx-auto my-3' src={image} objectFit='cover' />
           }
