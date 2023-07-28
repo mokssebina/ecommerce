@@ -173,7 +173,7 @@ const ProductDetails = () => {
                 </div>
 
                 <div className='w-full flex mt-4'>
-                  <div className='w-2/4 h-10 sm:w-1/3 md:w-2/5 flex bg-gray-400 border border-gray-500 rounded-full'>
+                  <div className='w-2/4 h-10 sm:w-1/3 md:w-2/5 flex bg-gray-200 border border-gray-500 rounded-full'>
                     <div className='w-1/3 h-full border-r-2 border-gray-500'>
                       <button className='w-full h-full'>
                         <p className='text-red-600 text-lg'>-</p>
